@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bespoke CV — Geetha Aripaka</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --surface: #f7f7f5;
+      --border: #e8e8e4;
+      --text: #1a1a1a;
+      --muted: #787774;
+      --accent: #2f6feb;
+      --accent-soft: #eef3fd;
+      --radius: 8px;
+      --max: 720px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 52px;
+    }
+    .nav-logo {
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 14px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── Layout ── */
+    main {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    /* ── Back link ── */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: var(--muted);
+      text-decoration: none;
+      margin-top: 36px;
+      margin-bottom: 40px;
+      transition: color 0.15s;
+    }
+    .back-link:hover { color: var(--text); }
+
+    /* ── Hero ── */
+    .cs-hero { margin-bottom: 56px; }
+    .cs-title {
+      font-size: clamp(1.75rem, 5vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+    .cs-subtitle {
+      font-size: 17px;
+      color: var(--muted);
+      margin-bottom: 20px;
+      max-width: 600px;
+    }
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tag {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .tag-blue   { background: #dbeafe; color: #1d4ed8; }
+    .tag-green  { background: #dcfce7; color: #15803d; }
+    .tag-violet { background: #ede9fe; color: #5b21b6; }
+    .tag-amber  { background: #fef3c7; color: #92400e; }
+    .tag-slate  { background: #f1f5f9; color: #475569; }
+
+    /* ── Divider ── */
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0 0 52px; }
+
+    /* ── Section ── */
+    .cs-section { margin-bottom: 52px; }
+    .cs-section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .cs-section-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 20px;
+    }
+    .cs-body {
+      font-size: 15px;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .cs-body p + p { margin-top: 14px; }
+
+    /* ── Problem callouts ── */
+    .problem-grid {
+      display: grid;
+      gap: 12px;
+    }
+    .problem-card {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 18px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .problem-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .problem-text { font-size: 14px; color: var(--text); line-height: 1.6; }
+    .problem-text strong { font-weight: 600; display: block; margin-bottom: 2px; }
+
+    /* ── Solution list ── */
+    .solution-list {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+    .solution-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+    .solution-list li::before {
+      content: "→";
+      color: var(--accent);
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    /* ── Steps ── */
+    .steps { display: grid; gap: 40px; }
+    .step { }
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .step-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--text);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-title {
+      font-size: 15px;
+      font-weight: 600;
+    }
+    .step-desc {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 16px;
+      padding-left: 38px;
+    }
+    .screenshot {
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      background: var(--surface);
+    }
+    .screenshot img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .screenshot-placeholder {
+      width: 100%;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: var(--muted);
+      background: var(--surface);
+    }
+
+    /* ── Design decisions ── */
+    .decisions { display: grid; gap: 12px; }
+    .decision {
+      display: flex;
+      gap: 14px;
+      padding: 18px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .decision-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      margin-top: 8px;
+    }
+    .decision-body { font-size: 14px; line-height: 1.6; }
+    .decision-body strong { font-weight: 600; }
+
+    /* ── Tech stack chips ── */
+    .chip-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .chip {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 5px 13px;
+      border-radius: 20px;
+    }
+
+    /* ── What's next ── */
+    .next-list {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+    }
+    .next-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      font-size: 15px;
+      color: var(--muted);
+    }
+    .next-list li::before {
+      content: "·";
+      font-size: 20px;
+      color: var(--border);
+      flex-shrink: 0;
+      line-height: 1;
+    }
+
+    /* ── CTA ── */
+    .cta-block {
+      margin-top: 56px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .cta-text { font-size: 15px; color: var(--muted); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: opacity 0.15s;
+    }
+    .btn-primary { background: var(--text); color: #fff; }
+    .btn-primary:hover { opacity: 0.82; }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 24px;
+      text-align: center;
+      font-size: 12px;
+      color: #999;
+    }
+
+    @media (max-width: 600px) {
+      .cta-block { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="/">Geetha Aripaka</a>
+    <ul class="nav-links">
+      <li><a href="/#projects">Projects</a></li>
+      <li><a href="/#teardowns">Teardowns</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+
+  <a class="back-link" href="/">← Back</a>
+
+  <!-- ── Hero ── -->
+  <div class="cs-hero">
+    <h1 class="cs-title">Bespoke CV</h1>
+    <p class="cs-subtitle">Agentic AI tool that rewrites your CV for every job — surgically, not generically</p>
+    <div class="tag-row">
+      <span class="tag tag-slate">Python</span>
+      <span class="tag tag-slate">Streamlit</span>
+      <span class="tag tag-violet">Gemini 2.5 Flash</span>
+      <span class="tag tag-blue">0→1</span>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- ── The Problem ── -->
+  <div class="cs-section">
+    <p class="cs-section-label">Context</p>
+    <h2 class="cs-section-title">The Problem</h2>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <span class="problem-icon">⏳</span>
+        <div class="problem-text">
+          <strong>Manual rewriting is exhausting</strong>
+          Job seekers spend 20–40 minutes per application tailoring their CV to each role — most of that time on guesswork about what to change.
+        </div>
+      </div>
+      <div class="problem-card">
+        <span class="problem-icon">🤖</span>
+        <div class="problem-text">
+          <strong>Generic AI tools destroy formatting</strong>
+          Existing AI rewriters regenerate the entire CV from scratch, losing carefully crafted structure, bullet hierarchy, and Word formatting that recruiters expect.
+        </div>
+      </div>
+      <div class="problem-card">
+        <span class="problem-icon">🚫</span>
+        <div class="problem-text">
+          <strong>ATS systems reject missing keywords</strong>
+          Applicant Tracking Systems silently filter out CVs that don't mirror the exact language of the job description — even when the candidate is qualified.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── The Solution ── -->
+  <div class="cs-section">
+    <p class="cs-section-label">Product</p>
+    <h2 class="cs-section-title">The Solution</h2>
+    <ul class="solution-list">
+      <li>Upload your CV and paste a job URL — Bespoke CV scrapes and parses the full job description automatically.</li>
+      <li>Gemini 2.5 Flash identifies only the weak or misaligned bullets, leaving strong ones untouched.</li>
+      <li>A side-by-side diff shows every proposed change — you accept or reject each edit individually.</li>
+      <li>A live ATS score and JD match score update in real time as you accept changes.</li>
+      <li>Downloads as a <code>.docx</code> with your original formatting, fonts, and structure fully preserved.</li>
+    </ul>
+  </div>
+
+  <!-- ── How It Works ── -->
+  <div class="cs-section">
+    <p class="cs-section-label">Walkthrough</p>
+    <h2 class="cs-section-title">How It Works</h2>
+    <div class="steps">
+
+      <div class="step">
+        <div class="step-header">
+          <span class="step-num">1</span>
+          <span class="step-title">Input your CV and job URL</span>
+        </div>
+        <p class="step-desc">Upload a PDF or DOCX and paste the job listing URL. BeautifulSoup scrapes the JD; pdfplumber extracts your CV text.</p>
+        <div class="screenshot">
+          <img src="../assets/bespoke/inputfilled.png" alt="Input screen with CV and job URL filled" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+          <div class="screenshot-placeholder" style="display:none;">assets/bespoke/inputfilled.png</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <span class="step-num">2</span>
+          <span class="step-title">Analysis in progress</span>
+        </div>
+        <p class="step-desc">Gemini 2.5 Flash reads both documents and identifies which bullets to rewrite — with temperature=0 for deterministic, consistent output every time.</p>
+        <div class="screenshot">
+          <img src="../assets/bespoke/analyzing.png" alt="Analysis in progress" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+          <div class="screenshot-placeholder" style="display:none;">assets/bespoke/analyzing.png</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <span class="step-num">3</span>
+          <span class="step-title">Score dashboard</span>
+        </div>
+        <p class="step-desc">An ATS keyword score and JD match percentage surface immediately. Both update live as you accept or reject suggested edits.</p>
+        <div class="screenshot">
+          <img src="../assets/bespoke/scores.png" alt="Score dashboard" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+          <div class="screenshot-placeholder" style="display:none;">assets/bespoke/scores.png</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <span class="step-num">4</span>
+          <span class="step-title">Diff view — accept or reject each change</span>
+        </div>
+        <p class="step-desc">Review every proposed rewrite in a before/after diff. Accept what fits, reject what doesn't. The ATS and JD match scores update with each decision.</p>
+        <div class="screenshot">
+          <img src="../assets/bespoke/diffview.png" alt="Diff view" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+          <div class="screenshot-placeholder" style="display:none;">assets/bespoke/diffview.png</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <span class="step-num">5</span>
+          <span class="step-title">Download your tailored CV</span>
+        </div>
+        <p class="step-desc">Export as <code>.docx</code> with your original formatting, fonts, and structure fully intact — ready to submit, no cleanup needed.</p>
+        <div class="screenshot">
+          <img src="../assets/bespoke/download.png" alt="Download screen" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+          <div class="screenshot-placeholder" style="display:none;">assets/bespoke/download.png</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── Design Decisions ── -->
+  <div class="cs-section">
+    <p class="cs-section-label">Thinking</p>
+    <h2 class="cs-section-title">Key Design Decisions</h2>
+    <div class="decisions">
+      <div class="decision">
+        <div class="decision-dot"></div>
+        <div class="decision-body">
+          <strong>temperature=0 for consistency.</strong> Job applications are high-stakes. Randomness in output undermines trust — users need to know the same CV + JD pair produces the same suggestions every time, so they can compare runs and share results.
+        </div>
+      </div>
+      <div class="decision">
+        <div class="decision-dot"></div>
+        <div class="decision-body">
+          <strong>Surgical edits, not full rewrites.</strong> The model is explicitly instructed to only touch weak or misaligned bullets — not rewrite the entire CV. This preserves the user's voice and avoids the uncanny-valley problem of AI-sounding language replacing authentic experience.
+        </div>
+      </div>
+      <div class="decision">
+        <div class="decision-dot"></div>
+        <div class="decision-body">
+          <strong>Word output to preserve formatting.</strong> Recruiters receive and screen CVs in Word. Exporting as <code>.docx</code> via <code>python-docx</code>, with layout reconstructed from the original file, means no reformatting work for the user after download.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Tech Stack ── -->
+  <div class="cs-section">
+    <p class="cs-section-label">Built with</p>
+    <h2 class="cs-section-title">Tech Stack</h2>
+    <div class="chip-grid">
+      <span class="chip">Python</span>
+      <span class="chip">Streamlit</span>
+      <span class="chip">Gemini 2.5 Flash API</span>
+      <span class="chip">pdfplumber</span>
+      <span class="chip">python-docx</span>
+      <span class="chip">BeautifulSoup</span>
+    </div>
+  </div>
+
+  <!-- ── What's Next ── -->
+  <div class="cs-section">
+    <p class="cs-section-label">Roadmap</p>
+    <h2 class="cs-section-title">What's Next</h2>
+    <ul class="next-list">
+      <li>Support for Indeed job listings</li>
+      <li>Support for Instahyre and Wellfound</li>
+      <li>Direct parsing of company career pages</li>
+      <li>Cover letter generation aligned with the same JD</li>
+    </ul>
+  </div>
+
+  <!-- ── CTA ── -->
+  <div class="cta-block">
+    <p class="cta-text">Open source · built end-to-end by Geetha Aripaka</p>
+    <a class="btn btn-primary" href="https://github.com/geethaaripaka/bespoke-cv" target="_blank" rel="noopener">
+      View on GitHub →
+    </a>
+  </div>
+
+</main>
+
+<footer>
+  Built by Geetha Aripaka · 2026
+</footer>
+
+</body>
+</html>

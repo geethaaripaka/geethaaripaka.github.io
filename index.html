@@ -80,6 +80,11 @@
     .hero { padding-top: 88px; padding-bottom: 72px; }
     .hero-inner {
       display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .hero-row {
+      display: flex;
       align-items: flex-start;
       gap: 48px;
     }
@@ -88,9 +93,9 @@
       flex-shrink: 0;
       width: 168px;
       height: 168px;
-      border-radius: 14px;
+      border-radius: 50%;
       overflow: hidden;
-      border: 1px solid var(--border);
+      border: 2px solid var(--border);
       margin-top: 4px;
     }
     .hero-photo-wrap img {
@@ -131,8 +136,8 @@
       margin-top: 28px;
     }
     @media (max-width: 560px) {
-      .hero-inner { flex-direction: column-reverse; gap: 28px; }
-      .hero-photo-wrap { width: 120px; height: 120px; }
+      .hero-row { flex-direction: column-reverse; gap: 24px; }
+      .hero-photo-wrap { width: 110px; height: 110px; }
     }
     .btn {
       display: inline-flex;
@@ -339,28 +344,30 @@
   <!-- ── Hero ── -->
   <section class="hero" id="about">
     <div class="hero-inner">
-      <div class="hero-text">
-        <span class="hero-eyebrow">Product Manager</span>
-        <h1>Geetha Aripaka</h1>
-        <p class="hero-bio">
-          PM with an engineer's instinct and a strategist's lens. MBA from IIM Kozhikode (2024),
-          B.E. in Electronics & Communications — with pre-MBA roots as a Software Engineer at
-          Deloitte USI and a Product Strategy Intern at Optum, both in US healthcare.
-        </p>
-        <p class="hero-bio">
-          At HSBC Technology, I'm independently driving AI transformation for a Pega-based
-          payment investigations platform across 50+ markets, and previously led multi-country
-          rollouts in Global Trade Solutions. Drawn to consumer-facing fintech problems where
-          infrastructure complexity meets user trust.
-        </p>
-        <div class="hero-links">
-          <a class="btn btn-primary" href="#projects">View my work</a>
-          <a class="btn btn-ghost" href="#contact">Get in touch</a>
+      <div class="hero-row">
+        <div class="hero-text">
+          <span class="hero-eyebrow">Product Manager</span>
+          <h1>Geetha Aripaka</h1>
+          <p class="hero-bio">
+            PM with an engineer's instinct and a strategist's lens. MBA from IIM Kozhikode (2024),
+            B.E. in Electronics & Communications — with pre-MBA roots as a Software Engineer at
+            Deloitte USI and a Product Strategy Intern at Optum, both in US healthcare.
+          </p>
+          <div class="hero-links">
+            <a class="btn btn-primary" href="#projects">View my work</a>
+            <a class="btn btn-ghost" href="#contact">Get in touch</a>
+          </div>
+        </div>
+        <div class="hero-photo-wrap">
+          <img src="geetha.jpg" alt="Geetha Aripaka" />
         </div>
       </div>
-      <div class="hero-photo-wrap">
-        <img src="geetha.jpg" alt="Geetha Aripaka" />
-      </div>
+      <p class="hero-bio">
+        At HSBC Technology, I'm independently driving AI transformation for a Pega-based
+        payment investigations platform across 50+ markets, and previously led multi-country
+        rollouts in Global Trade Solutions. Drawn to consumer-facing fintech problems where
+        infrastructure complexity meets user trust.
+      </p>
     </div>
   </section>
 
@@ -465,9 +472,9 @@
         <div class="contact-icon" style="background:#f3f4f6;">⌨️</div>
         GitHub
       </a>
-      <a class="contact-link" href="https://github.com/geethaaripaka/bespoke-cv" target="_blank" rel="noopener">
+      <a class="contact-link" href="projects/bespoke-cv.html">
         <div class="contact-icon" style="background:#ede9fe;">📄</div>
-        Resume / CV
+        Bespoke CV
       </a>
     </div>
   </section>
