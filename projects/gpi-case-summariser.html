@@ -259,15 +259,22 @@
       <div class="problem-card">
         <span class="problem-icon">🗂️</span>
         <div class="problem-text">
-          <strong>Manual reads, every time</strong>
-          Investigators use the History button in Pega to find resolved case precedents — but this opens raw, unstructured archival records. Reading and interpreting a single case takes 5 to 15 minutes.
+          <strong>Case history is unstructured and slow to read</strong>
+          When reopening a case or looking for similar precedents, investigators must manually dig through raw, unstructured archival records. Reading and interpreting a single case takes 5 to 15 minutes.
+        </div>
+      </div>
+      <div class="problem-card">
+        <span class="problem-icon">🌍</span>
+        <div class="problem-text">
+          <strong>No consistent format across markets</strong>
+          Case records from different markets are entered differently — no standard structure, no shared summary format. Comparing or learning from cases across regions is impractical.
         </div>
       </div>
       <div class="problem-card">
         <span class="problem-icon">🧠</span>
         <div class="problem-text">
-          <strong>Knowledge held in individual memory</strong>
-          Precedent and resolution logic isn't documented or searchable — it lives with individual investigators. Knowledge is lost on rotation and slow to transfer during onboarding.
+          <strong>Precedent held in individual memory</strong>
+          Resolution logic and similar-case knowledge lives with individual investigators, not in the system. It's lost on rotation and hard to transfer.
         </div>
       </div>
     </div>
@@ -277,11 +284,11 @@
     <p class="cs-section-label">Product</p>
     <h2 class="cs-section-title">The Solution</h2>
     <ul class="solution-list">
-      <li>A <strong>Summarise</strong> button added directly to the existing History screen in Pega — zero workflow disruption.</li>
-      <li>Investigator enters a Case ID and clicks Summarise. No new interface to learn.</li>
-      <li>AI retrieves unstructured case data — case notes, SWIFT messages, exception fields, resolution details — from the archival table.</li>
-      <li>Returns a structured 7-field plain-English summary in under 60 seconds.</li>
+      <li>A <strong>Summarise</strong> button on the Pega home screen — accessible without navigating away from the main workspace.</li>
+      <li>Investigator enters a Case ID and clicks Summarise. The system retrieves the full case history for that ID.</li>
+      <li>AI reads unstructured case data — case notes, SWIFT messages, exception fields, resolution details — and returns a structured 7-field plain-English summary in under 60 seconds.</li>
       <li>Output fields: case overview, parties involved, exception type, actions taken, resolution, time-to-resolve, reference numbers.</li>
+      <li>Useful for <strong>case reopens</strong> (quickly reconstruct what happened), <strong>finding similar cases</strong> (scan precedents without manual reading), and <strong>cross-market consistency</strong> (standardised summary format regardless of how the original record was entered).</li>
     </ul>
   </div>
 
@@ -292,22 +299,22 @@
       <div class="step">
         <span class="step-num">1</span>
         <div class="step-body">
-          <p class="step-title">Investigator opens History in Pega</p>
-          <p class="step-desc">Standard workflow — no new screens or navigation changes. The Summarise button surfaces within the existing History panel.</p>
+          <p class="step-title">Investigator opens Pega home screen</p>
+          <p class="step-desc">The Summarise button is present on the home screen — no navigation required. Accessible from the main workspace at any point in the investigator's workflow.</p>
         </div>
       </div>
       <div class="step">
         <span class="step-num">2</span>
         <div class="step-body">
           <p class="step-title">Enters Case ID and clicks Summarise</p>
-          <p class="step-desc">Single input. Investigator enters the Case ID of any resolved case they want to reference or use as precedent.</p>
+          <p class="step-desc">Single input. Investigator enters the Case ID of any case — active, resolved, or archived — that they want to review or reference.</p>
         </div>
       </div>
       <div class="step">
         <span class="step-num">3</span>
         <div class="step-body">
-          <p class="step-title">AI retrieves unstructured case data</p>
-          <p class="step-desc">The system pulls case notes, SWIFT message fields, exception metadata, and resolution details from the archival table — no manual copy-paste required.</p>
+          <p class="step-title">System retrieves full case history</p>
+          <p class="step-desc">The system pulls the complete case history for that ID — case notes, SWIFT message fields, exception metadata, and resolution details — directly from the archival table. No manual copy-paste.</p>
         </div>
       </div>
       <div class="step">
@@ -321,7 +328,7 @@
         <span class="step-num">5</span>
         <div class="step-body">
           <p class="step-title">Investigator reviews and acts</p>
-          <p class="step-desc">Summary is advisory only — it does not override Pega workflow or auto-populate any fields. The investigator retains full decision authority.</p>
+          <p class="step-desc">Summary is advisory — it doesn't override Pega workflow or auto-populate fields. Used for case reopens (reconstruct what happened), finding similar cases (scan precedents fast), or cross-market consistency (same structured format regardless of how the original record was entered).</p>
         </div>
       </div>
     </div>

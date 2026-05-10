@@ -308,31 +308,31 @@
       <div class="pipeline-step">
         <span class="pipeline-arrow">01</span>
         <div class="pipeline-text">
-          <strong>Ingest 15–20 HSBC GPI PDFs and procedure documents</strong> using pdfplumber — circulars, corridor guidelines, SLA rules, escalation procedures.
+          <strong>Ingest 40 PDF user guides</strong> — GPI circulars, corridor guidelines, SLA rules, and escalation procedures extracted using pdfplumber.
         </div>
       </div>
       <div class="pipeline-step">
         <span class="pipeline-arrow">02</span>
         <div class="pipeline-text">
-          <strong>Index into a structured knowledge base</strong> — documents are chunked, embedded, and stored for fast semantic retrieval.
+          <strong>Build the RAG pipeline</strong> — ingested documents are chunked, embedded, and indexed into a structured knowledge base ready for semantic retrieval.
         </div>
       </div>
       <div class="pipeline-step">
         <span class="pipeline-arrow">03</span>
         <div class="pipeline-text">
-          <strong>Investigator asks a plain-English question</strong> via the Q&amp;A interface — no query syntax, no keyword matching required.
+          <strong>Chatroom opens for Q&amp;A</strong> — once the pipeline is built, investigators interact through a chat interface. Plain-English questions only; no query syntax required.
         </div>
       </div>
       <div class="pipeline-step">
         <span class="pipeline-arrow">04</span>
         <div class="pipeline-text">
-          <strong>System searches against indexed documents</strong> using semantic similarity — retrieves the most relevant chunks across all ingested sources.
+          <strong>Question is matched against the indexed knowledge base</strong> — semantic search retrieves the most relevant chunks across all 40 ingested documents.
         </div>
       </div>
       <div class="pipeline-step">
         <span class="pipeline-arrow">05</span>
         <div class="pipeline-text">
-          <strong>LLM synthesises a cited answer</strong> — response includes the answer and the source document(s) it was drawn from. No external vendor dependency, no new infrastructure.
+          <strong>LLM synthesises a cited answer</strong> — response includes the answer and the source document(s) it was drawn from. No external vendor dependency, no new infrastructure required.
         </div>
       </div>
     </div>
