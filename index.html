@@ -207,6 +207,12 @@
       gap: 16px;
       margin-bottom: 10px;
     }
+    .card-metric {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
     .card-title {
       font-size: 16px;
       font-weight: 600;
@@ -353,10 +359,6 @@
             B.E. in Electronics & Communications — with pre-MBA roots as a Software Engineer at
             Deloitte USI and a Product Strategy Intern at Optum, both in US healthcare.
           </p>
-          <div class="hero-links">
-            <a class="btn btn-primary" href="#projects">View my work</a>
-            <a class="btn btn-ghost" href="#contact">Get in touch</a>
-          </div>
         </div>
         <div class="hero-photo-wrap">
           <img src="geetha.jpg" alt="Geetha Aripaka" />
@@ -368,6 +370,10 @@
         rollouts in Global Trade Solutions. Drawn to consumer-facing fintech problems where
         infrastructure complexity meets user trust.
       </p>
+      <div class="hero-links">
+        <a class="btn btn-primary" href="#projects">View my work</a>
+        <a class="btn btn-ghost" href="#contact">Get in touch</a>
+      </div>
     </div>
   </section>
 
@@ -377,53 +383,39 @@
     <h2 class="section-title">Selected Projects</h2>
     <div class="card-grid">
 
-      <a class="card" href="#">
+      <a class="card" href="projects/bespoke-cv.html">
         <div class="card-top">
-          <span class="card-title">Onboarding Redesign</span>
+          <span class="card-title">Bespoke CV</span>
           <span class="tag tag-blue">0→1</span>
         </div>
+        <p class="card-metric">Surgical AI rewrites + live ATS score</p>
         <p class="card-desc">
-          Redesigned the new-user onboarding flow, reducing time-to-value from
-          14 days to 4. Drove a 22% lift in 30-day retention across all cohorts.
+          Agentic AI tool that takes a job URL + CV, rewrites only weak bullets using Gemini 2.5 Flash,
+          and shows a side-by-side diff with live JD match and ATS scores. Downloads as .docx with
+          formatting preserved.
         </p>
         <div class="card-meta">
-          <span class="chip">User Research</span>
-          <span class="chip">A/B Testing</span>
-          <span class="chip">Activation</span>
+          <span class="chip">Python</span>
+          <span class="chip">Streamlit</span>
+          <span class="chip">Gemini API</span>
         </div>
       </a>
 
       <a class="card" href="#">
         <div class="card-top">
-          <span class="card-title">Self-Serve Billing Platform</span>
-          <span class="tag tag-green">Growth</span>
-        </div>
-        <p class="card-desc">
-          Led end-to-end launch of a self-serve upgrade path, eliminating
-          sales-touch for SMB tier. Resulted in a 38% increase in monthly
-          conversion from free to paid.
-        </p>
-        <div class="card-meta">
-          <span class="chip">Payments</span>
-          <span class="chip">Monetization</span>
-          <span class="chip">Cross-functional</span>
-        </div>
-      </a>
-
-      <a class="card" href="#">
-        <div class="card-top">
-          <span class="card-title">Search & Discovery Overhaul</span>
+          <span class="card-title">GPI AI Strategy</span>
           <span class="tag tag-violet">Platform</span>
         </div>
+        <p class="card-metric">4 POC workstreams across 50+ markets</p>
         <p class="card-desc">
-          Rebuilt the core search experience with intent-based ranking,
-          cutting zero-result sessions by 41% and improving task-completion
-          rates measured via session replay analysis.
+          Designed AI &amp; automation roadmap for HSBC's Global Payment Investigations — Case Summariser,
+          RAG Knowledge Assistant, and Intelligent Duplicate Detection on GCP.
         </p>
         <div class="card-meta">
-          <span class="chip">Information Architecture</span>
-          <span class="chip">ML collaboration</span>
-          <span class="chip">Analytics</span>
+          <span class="chip">RAG</span>
+          <span class="chip">ISO 20022</span>
+          <span class="chip">SWIFT GPI</span>
+          <span class="chip">Pega</span>
         </div>
       </a>
 
@@ -471,10 +463,6 @@
       <a class="contact-link" href="https://github.com/geethaaripaka" target="_blank" rel="noopener">
         <div class="contact-icon" style="background:#f3f4f6;">⌨️</div>
         GitHub
-      </a>
-      <a class="contact-link" href="projects/bespoke-cv.html">
-        <div class="contact-icon" style="background:#ede9fe;">📄</div>
-        Bespoke CV
       </a>
     </div>
   </section>
