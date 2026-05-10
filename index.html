@@ -78,6 +78,28 @@
 
     /* ── Hero ── */
     .hero { padding-top: 88px; padding-bottom: 72px; }
+    .hero-inner {
+      display: flex;
+      align-items: flex-start;
+      gap: 48px;
+    }
+    .hero-text { flex: 1; min-width: 0; }
+    .hero-photo-wrap {
+      flex-shrink: 0;
+      width: 168px;
+      height: 168px;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      margin-top: 4px;
+    }
+    .hero-photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 12%;
+      display: block;
+    }
     .hero-eyebrow {
       display: inline-block;
       font-size: 13px;
@@ -98,15 +120,19 @@
       margin-bottom: 20px;
     }
     .hero-bio {
-      font-size: 17px;
+      font-size: 16px;
       color: var(--muted);
-      max-width: 540px;
-      margin-bottom: 32px;
+      margin-bottom: 16px;
     }
     .hero-links {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
+      margin-top: 28px;
+    }
+    @media (max-width: 560px) {
+      .hero-inner { flex-direction: column-reverse; gap: 28px; }
+      .hero-photo-wrap { width: 120px; height: 120px; }
     }
     .btn {
       display: inline-flex;
@@ -312,16 +338,29 @@
 
   <!-- ── Hero ── -->
   <section class="hero" id="about">
-    <span class="hero-eyebrow">Product Manager</span>
-    <h1>Geetha Aripaka</h1>
-    <p class="hero-bio">
-      I build products at the intersection of user insight and business impact.
-      Focused on turning ambiguous problems into clear, shipped solutions —
-      from 0→1 builds to growth and platform work.
-    </p>
-    <div class="hero-links">
-      <a class="btn btn-primary" href="#projects">View my work</a>
-      <a class="btn btn-ghost" href="#contact">Get in touch</a>
+    <div class="hero-inner">
+      <div class="hero-text">
+        <span class="hero-eyebrow">Product Manager</span>
+        <h1>Geetha Aripaka</h1>
+        <p class="hero-bio">
+          PM with an engineer's instinct and a strategist's lens. MBA from IIM Kozhikode (2024),
+          B.E. in Electronics & Communications — with pre-MBA roots as a Software Engineer at
+          Deloitte USI and a Product Strategy Intern at Optum, both in US healthcare.
+        </p>
+        <p class="hero-bio">
+          At HSBC Technology, I'm independently driving AI transformation for a Pega-based
+          payment investigations platform across 50+ markets, and previously led multi-country
+          rollouts in Global Trade Solutions. Drawn to consumer-facing fintech problems where
+          infrastructure complexity meets user trust.
+        </p>
+        <div class="hero-links">
+          <a class="btn btn-primary" href="#projects">View my work</a>
+          <a class="btn btn-ghost" href="#contact">Get in touch</a>
+        </div>
+      </div>
+      <div class="hero-photo-wrap">
+        <img src="geetha.jpg" alt="Geetha Aripaka" />
+      </div>
     </div>
   </section>
 
@@ -418,7 +457,7 @@
         <div class="contact-icon" style="background:#fef3c7;">✉️</div>
         geethas26@iimklive.com
       </a>
-      <a class="contact-link" href="https://linkedin.com/in/geethaaripaka" target="_blank" rel="noopener">
+      <a class="contact-link" href="https://www.linkedin.com/in/aripaka-geetha-sushma/" target="_blank" rel="noopener">
         <div class="contact-icon" style="background:#dbeafe;">💼</div>
         LinkedIn
       </a>
