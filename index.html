@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Geetha Aripaka — Product Manager</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --surface: #f7f7f5;
+      --border: #e8e8e4;
+      --text: #1a1a1a;
+      --muted: #787774;
+      --accent: #2f6feb;
+      --accent-soft: #eef3fd;
+      --radius: 8px;
+      --max: 720px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 52px;
+    }
+    .nav-logo {
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 14px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── Layout ── */
+    main {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section { padding: 72px 0; }
+    section + section { border-top: 1px solid var(--border); }
+
+    /* ── Hero ── */
+    .hero { padding-top: 88px; padding-bottom: 72px; }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 3px 10px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 2.75rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .hero-bio {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 540px;
+      margin-bottom: 32px;
+    }
+    .hero-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 9px 18px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: opacity 0.15s, background 0.15s;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--text);
+      color: #fff;
+    }
+    .btn-primary:hover { opacity: 0.82; }
+    .btn-ghost {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { background: var(--border); }
+
+    /* ── Section header ── */
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 40px;
+    }
+
+    /* ── Cards ── */
+    .card-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .card:hover {
+      border-color: #c5c5c2;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 10px;
+    }
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+    .tag {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 2px 9px;
+      border-radius: 4px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .tag-blue  { background: #dbeafe; color: #1d4ed8; }
+    .tag-green { background: #dcfce7; color: #15803d; }
+    .tag-amber { background: #fef3c7; color: #92400e; }
+    .tag-rose  { background: #ffe4e6; color: #9f1239; }
+    .tag-violet { background: #ede9fe; color: #5b21b6; }
+
+    .card-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .chip {
+      font-size: 12px;
+      color: var(--muted);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 2px 9px;
+      border-radius: 20px;
+    }
+
+    /* ── Teardowns ── */
+    .teardown-list { display: grid; gap: 12px; }
+    .teardown-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.15s;
+    }
+    .teardown-item:hover { border-color: #c5c5c2; }
+    .teardown-icon {
+      font-size: 24px;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .teardown-body { flex: 1; min-width: 0; }
+    .teardown-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .teardown-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+    .teardown-arrow { color: var(--muted); align-self: center; flex-shrink: 0; }
+
+    /* ── Contact ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 520px) { .contact-grid { grid-template-columns: 1fr; } }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 18px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      text-decoration: none;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 500;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .contact-link:hover { background: var(--bg); border-color: #c5c5c2; }
+    .contact-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 24px;
+      text-align: center;
+      font-size: 12px;
+      color: #999;
+    }
+
+    @media (max-width: 600px) {
+      section { padding: 52px 0; }
+      .hero { padding-top: 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Navigation ── -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">Geetha Aripaka</a>
+    <ul class="nav-links">
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#teardowns">Teardowns</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ── Hero ── -->
+  <section class="hero" id="about">
+    <span class="hero-eyebrow">Product Manager</span>
+    <h1>Geetha Aripaka</h1>
+    <p class="hero-bio">
+      I build products at the intersection of user insight and business impact.
+      Focused on turning ambiguous problems into clear, shipped solutions —
+      from 0→1 builds to growth and platform work.
+    </p>
+    <div class="hero-links">
+      <a class="btn btn-primary" href="#projects">View my work</a>
+      <a class="btn btn-ghost" href="#contact">Get in touch</a>
+    </div>
+  </section>
+
+  <!-- ── Projects ── -->
+  <section id="projects">
+    <p class="section-label">Work</p>
+    <h2 class="section-title">Selected Projects</h2>
+    <div class="card-grid">
+
+      <a class="card" href="#">
+        <div class="card-top">
+          <span class="card-title">Onboarding Redesign</span>
+          <span class="tag tag-blue">0→1</span>
+        </div>
+        <p class="card-desc">
+          Redesigned the new-user onboarding flow, reducing time-to-value from
+          14 days to 4. Drove a 22% lift in 30-day retention across all cohorts.
+        </p>
+        <div class="card-meta">
+          <span class="chip">User Research</span>
+          <span class="chip">A/B Testing</span>
+          <span class="chip">Activation</span>
+        </div>
+      </a>
+
+      <a class="card" href="#">
+        <div class="card-top">
+          <span class="card-title">Self-Serve Billing Platform</span>
+          <span class="tag tag-green">Growth</span>
+        </div>
+        <p class="card-desc">
+          Led end-to-end launch of a self-serve upgrade path, eliminating
+          sales-touch for SMB tier. Resulted in a 38% increase in monthly
+          conversion from free to paid.
+        </p>
+        <div class="card-meta">
+          <span class="chip">Payments</span>
+          <span class="chip">Monetization</span>
+          <span class="chip">Cross-functional</span>
+        </div>
+      </a>
+
+      <a class="card" href="#">
+        <div class="card-top">
+          <span class="card-title">Search & Discovery Overhaul</span>
+          <span class="tag tag-violet">Platform</span>
+        </div>
+        <p class="card-desc">
+          Rebuilt the core search experience with intent-based ranking,
+          cutting zero-result sessions by 41% and improving task-completion
+          rates measured via session replay analysis.
+        </p>
+        <div class="card-meta">
+          <span class="chip">Information Architecture</span>
+          <span class="chip">ML collaboration</span>
+          <span class="chip">Analytics</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── Teardowns ── -->
+  <section id="teardowns">
+    <p class="section-label">Analysis</p>
+    <h2 class="section-title">Product Teardowns</h2>
+    <div class="teardown-list">
+
+      <a class="teardown-item" href="teardowns/upi-circle.html">
+        <span class="teardown-icon">💸</span>
+        <div class="teardown-body">
+          <p class="teardown-title">UPI Circle</p>
+          <p class="teardown-desc">
+            A teardown of UPI Circle — NPCI's delegated payment feature —
+            examining trust design, permission flows, and adoption friction.
+          </p>
+        </div>
+        <span class="teardown-arrow">→</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── Contact ── -->
+  <section id="contact">
+    <p class="section-label">Get in touch</p>
+    <h2 class="section-title">Let's connect</h2>
+    <p style="color:var(--muted); font-size:15px; margin-bottom:32px; max-width:460px;">
+      Open to new opportunities, collaborations, and conversations about product.
+      Reach out — I reply to every message.
+    </p>
+    <div class="contact-grid">
+      <a class="contact-link" href="mailto:geethas26@iimklive.com">
+        <div class="contact-icon" style="background:#fef3c7;">✉️</div>
+        geethas26@iimklive.com
+      </a>
+      <a class="contact-link" href="https://linkedin.com/in/geethaaripaka" target="_blank" rel="noopener">
+        <div class="contact-icon" style="background:#dbeafe;">💼</div>
+        LinkedIn
+      </a>
+      <a class="contact-link" href="https://github.com/geethaaripaka" target="_blank" rel="noopener">
+        <div class="contact-icon" style="background:#f3f4f6;">⌨️</div>
+        GitHub
+      </a>
+      <a class="contact-link" href="https://github.com/geethaaripaka/bespoke-cv" target="_blank" rel="noopener">
+        <div class="contact-icon" style="background:#ede9fe;">📄</div>
+        Resume / CV
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Built by Geetha Aripaka · 2026
+</footer>
+
+</body>
+</html>
