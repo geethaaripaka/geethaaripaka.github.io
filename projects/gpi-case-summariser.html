@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GPI Case Summariser — Geetha Aripaka</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --surface: #f7f7f5;
+      --border: #e8e8e4;
+      --text: #1a1a1a;
+      --muted: #787774;
+      --accent: #2f6feb;
+      --accent-soft: #eef3fd;
+      --radius: 8px;
+      --max: 720px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 52px;
+    }
+    .nav-logo { font-weight: 600; font-size: 15px; color: var(--text); text-decoration: none; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 14px; color: var(--muted); text-decoration: none; transition: color 0.15s; }
+    .nav-links a:hover { color: var(--text); }
+
+    main {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: var(--muted);
+      text-decoration: none;
+      margin-top: 36px;
+      margin-bottom: 40px;
+      transition: color 0.15s;
+    }
+    .back-link:hover { color: var(--text); }
+
+    .cs-hero { margin-bottom: 52px; }
+    .cs-title {
+      font-size: clamp(1.75rem, 5vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+    .cs-subtitle {
+      font-size: 17px;
+      color: var(--muted);
+      margin-bottom: 20px;
+      max-width: 600px;
+    }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .tag-violet { background: #ede9fe; color: #5b21b6; }
+    .tag-slate  { background: #f1f5f9; color: #475569; }
+
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0 0 48px; }
+
+    .cs-section { margin-bottom: 48px; }
+    .cs-section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .cs-section-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 18px;
+    }
+
+    .cs-body { font-size: 15px; line-height: 1.75; }
+    .cs-body p + p { margin-top: 12px; }
+
+    .problem-grid { display: grid; gap: 10px; }
+    .problem-card {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 16px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .problem-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+    .problem-text { font-size: 14px; line-height: 1.6; }
+    .problem-text strong { font-weight: 600; display: block; margin-bottom: 2px; }
+
+    .solution-list { list-style: none; display: grid; gap: 10px; }
+    .solution-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+    .solution-list li::before { content: "→"; color: var(--accent); font-weight: 600; flex-shrink: 0; }
+
+    .steps { display: grid; gap: 20px; }
+    .step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 18px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .step-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--text);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .step-body { flex: 1; }
+    .step-title { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+    .step-desc { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+    .chip-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 5px 13px;
+      border-radius: 20px;
+    }
+
+    .highlight-box {
+      background: var(--accent-soft);
+      border: 1px solid #c7d9f9;
+      border-radius: var(--radius);
+      padding: 20px 24px;
+    }
+    .highlight-box ul { list-style: none; display: grid; gap: 8px; }
+    .highlight-box ul li {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .highlight-box ul li::before { content: "✓"; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+
+    .role-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--text);
+    }
+
+    .internal-note {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 24px;
+      text-align: center;
+      font-size: 12px;
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="/">Geetha Aripaka</a>
+    <ul class="nav-links">
+      <li><a href="/#projects">Projects</a></li>
+      <li><a href="/#teardowns">Teardowns</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+
+  <a class="back-link" href="/">← Back</a>
+
+  <div class="cs-hero">
+    <h1 class="cs-title">GPI Case Summariser</h1>
+    <p class="cs-subtitle">AI-generated summaries of resolved payment investigation cases — from 15-minute manual reads to 60-second structured output</p>
+    <div class="tag-row">
+      <span class="tag tag-violet">Platform</span>
+      <span class="tag tag-slate">HSBC Technology</span>
+      <span class="tag tag-slate">2025–2026</span>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <div class="cs-section">
+    <p class="cs-section-label">Context</p>
+    <h2 class="cs-section-title">The Problem</h2>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <span class="problem-icon">🗂️</span>
+        <div class="problem-text">
+          <strong>Manual reads, every time</strong>
+          Investigators use the History button in Pega to find resolved case precedents — but this opens raw, unstructured archival records. Reading and interpreting a single case takes 5 to 15 minutes.
+        </div>
+      </div>
+      <div class="problem-card">
+        <span class="problem-icon">🧠</span>
+        <div class="problem-text">
+          <strong>Knowledge held in individual memory</strong>
+          Precedent and resolution logic isn't documented or searchable — it lives with individual investigators. Knowledge is lost on rotation and slow to transfer during onboarding.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-section">
+    <p class="cs-section-label">Product</p>
+    <h2 class="cs-section-title">The Solution</h2>
+    <ul class="solution-list">
+      <li>A <strong>Summarise</strong> button added directly to the existing History screen in Pega — zero workflow disruption.</li>
+      <li>Investigator enters a Case ID and clicks Summarise. No new interface to learn.</li>
+      <li>AI retrieves unstructured case data — case notes, SWIFT messages, exception fields, resolution details — from the archival table.</li>
+      <li>Returns a structured 7-field plain-English summary in under 60 seconds.</li>
+      <li>Output fields: case overview, parties involved, exception type, actions taken, resolution, time-to-resolve, reference numbers.</li>
+    </ul>
+  </div>
+
+  <div class="cs-section">
+    <p class="cs-section-label">Walkthrough</p>
+    <h2 class="cs-section-title">How It Works</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">1</span>
+        <div class="step-body">
+          <p class="step-title">Investigator opens History in Pega</p>
+          <p class="step-desc">Standard workflow — no new screens or navigation changes. The Summarise button surfaces within the existing History panel.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <div class="step-body">
+          <p class="step-title">Enters Case ID and clicks Summarise</p>
+          <p class="step-desc">Single input. Investigator enters the Case ID of any resolved case they want to reference or use as precedent.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <div class="step-body">
+          <p class="step-title">AI retrieves unstructured case data</p>
+          <p class="step-desc">The system pulls case notes, SWIFT message fields, exception metadata, and resolution details from the archival table — no manual copy-paste required.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">4</span>
+        <div class="step-body">
+          <p class="step-title">AI generates a structured 7-field summary</p>
+          <p class="step-desc">Output: case overview, parties, exception type, actions taken, resolution, time-to-resolve, and reference numbers — plain English, consistently formatted.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">5</span>
+        <div class="step-body">
+          <p class="step-title">Investigator reviews and acts</p>
+          <p class="step-desc">Summary is advisory only — it does not override Pega workflow or auto-populate any fields. The investigator retains full decision authority.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-section">
+    <p class="cs-section-label">Built with</p>
+    <h2 class="cs-section-title">Tech Stack</h2>
+    <div class="chip-grid">
+      <span class="chip">Python</span>
+      <span class="chip">pdfplumber</span>
+      <span class="chip">GitHub Copilot</span>
+      <span class="chip">Pega Smart Investigate 25</span>
+    </div>
+  </div>
+
+  <div class="cs-section">
+    <p class="cs-section-label">Validation</p>
+    <h2 class="cs-section-title">Success Criteria</h2>
+    <div class="highlight-box">
+      <ul>
+        <li>Summary generated in under 60 seconds</li>
+        <li>Accuracy rated 4/5 or above by investigators across 15 test cases</li>
+        <li>All 7 output fields present in 90% of summaries</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="cs-section">
+    <p class="cs-section-label">Ownership</p>
+    <h2 class="cs-section-title">My Role</h2>
+    <div class="role-box">
+      Independently scoped and built as Management Trainee PM — from problem identification and success criteria definition through build and investigator validation. No engineering resource assigned; end-to-end ownership of the POC.
+    </div>
+  </div>
+
+  <p class="internal-note">Internal HSBC project — shared for portfolio purposes only.</p>
+
+</main>
+
+<footer>
+  Built by Geetha Aripaka · 2026
+</footer>
+
+</body>
+</html>

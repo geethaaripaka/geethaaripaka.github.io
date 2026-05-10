@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GPI Knowledge Assistant — Geetha Aripaka</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --surface: #f7f7f5;
+      --border: #e8e8e4;
+      --text: #1a1a1a;
+      --muted: #787774;
+      --accent: #2f6feb;
+      --accent-soft: #eef3fd;
+      --radius: 8px;
+      --max: 720px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 52px;
+    }
+    .nav-logo { font-weight: 600; font-size: 15px; color: var(--text); text-decoration: none; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 14px; color: var(--muted); text-decoration: none; transition: color 0.15s; }
+    .nav-links a:hover { color: var(--text); }
+
+    main {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: var(--muted);
+      text-decoration: none;
+      margin-top: 36px;
+      margin-bottom: 40px;
+      transition: color 0.15s;
+    }
+    .back-link:hover { color: var(--text); }
+
+    .cs-hero { margin-bottom: 52px; }
+    .cs-title {
+      font-size: clamp(1.75rem, 5vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+    .cs-subtitle {
+      font-size: 17px;
+      color: var(--muted);
+      margin-bottom: 20px;
+      max-width: 600px;
+    }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .tag-violet { background: #ede9fe; color: #5b21b6; }
+    .tag-slate  { background: #f1f5f9; color: #475569; }
+
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0 0 48px; }
+
+    .cs-section { margin-bottom: 48px; }
+    .cs-section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .cs-section-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 18px;
+    }
+
+    .problem-grid { display: grid; gap: 10px; }
+    .problem-card {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 16px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .problem-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+    .problem-text { font-size: 14px; line-height: 1.6; }
+    .problem-text strong { font-weight: 600; display: block; margin-bottom: 2px; }
+
+    .solution-list { list-style: none; display: grid; gap: 10px; }
+    .solution-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+    .solution-list li::before { content: "→"; color: var(--accent); font-weight: 600; flex-shrink: 0; }
+
+    .query-examples {
+      margin-top: 16px;
+      display: grid;
+      gap: 8px;
+    }
+    .query-example {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 10px 16px;
+      font-size: 13px;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .pipeline-steps { display: grid; gap: 0; }
+    .pipeline-step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .pipeline-step:last-child { border-bottom: none; }
+    .pipeline-arrow {
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+      min-width: 24px;
+      padding-top: 2px;
+    }
+    .pipeline-text { font-size: 14px; line-height: 1.6; }
+    .pipeline-text strong { font-weight: 600; }
+
+    .chip-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 5px 13px;
+      border-radius: 20px;
+    }
+
+    .highlight-box {
+      background: var(--accent-soft);
+      border: 1px solid #c7d9f9;
+      border-radius: var(--radius);
+      padding: 20px 24px;
+    }
+    .highlight-box ul { list-style: none; display: grid; gap: 8px; }
+    .highlight-box ul li {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .highlight-box ul li::before { content: "✓"; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+
+    .role-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .internal-note {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 24px;
+      text-align: center;
+      font-size: 12px;
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="/">Geetha Aripaka</a>
+    <ul class="nav-links">
+      <li><a href="/#projects">Projects</a></li>
+      <li><a href="/#teardowns">Teardowns</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+
+  <a class="back-link" href="/">← Back</a>
+
+  <div class="cs-hero">
+    <h1 class="cs-title">GPI Knowledge Assistant</h1>
+    <p class="cs-subtitle">RAG-based Q&amp;A over HSBC's internal GPI documentation — institutional knowledge made self-serve</p>
+    <div class="tag-row">
+      <span class="tag tag-violet">Platform</span>
+      <span class="tag tag-slate">HSBC Technology</span>
+      <span class="tag tag-slate">2025–2026</span>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <div class="cs-section">
+    <p class="cs-section-label">Context</p>
+    <h2 class="cs-section-title">The Problem</h2>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <span class="problem-icon">📁</span>
+        <div class="problem-text">
+          <strong>Documentation spread across multiple repositories</strong>
+          HSBC-specific GPI rules, procedures, and circulars are stored in disconnected systems. There's no single place to search across all of them.
+        </div>
+      </div>
+      <div class="problem-card">
+        <span class="problem-icon">🧠</span>
+        <div class="problem-text">
+          <strong>Resolution logic held in individual memory</strong>
+          Experienced investigators carry corridor-specific rules and escalation paths in their heads. This knowledge is not searchable and not transferable.
+        </div>
+      </div>
+      <div class="problem-card">
+        <span class="problem-icon">🔄</span>
+        <div class="problem-text">
+          <strong>Knowledge lost on rotation, slow onboarding</strong>
+          When investigators rotate out, the team loses institutional memory. New investigators spend weeks learning rules that should be instantly accessible.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-section">
+    <p class="cs-section-label">Product</p>
+    <h2 class="cs-section-title">The Solution</h2>
+    <ul class="solution-list">
+      <li>An AI-powered Q&amp;A interface where investigators ask plain-English questions and receive accurate, cited answers.</li>
+      <li>Answers drawn exclusively from HSBC-specific GPI documentation — procedures, circulars, SLA rules, corridor guidelines.</li>
+      <li>Every answer includes source citations so investigators can verify and trust the output.</li>
+      <li>Out-of-scope questions return a clear not-found response — no hallucination, no guessing.</li>
+    </ul>
+
+    <div class="query-examples">
+      <div class="query-example">"What is the SLA for a GPI recall in the USD/INR corridor?"</div>
+      <div class="query-example">"What are the grounds for rejecting a gCov payment at HSBC?"</div>
+      <div class="query-example">"What is HSBC's escalation path if a beneficiary bank doesn't respond within 5 business days?"</div>
+    </div>
+  </div>
+
+  <div class="cs-section">
+    <p class="cs-section-label">Walkthrough</p>
+    <h2 class="cs-section-title">How It Works</h2>
+    <div class="pipeline-steps">
+      <div class="pipeline-step">
+        <span class="pipeline-arrow">01</span>
+        <div class="pipeline-text">
+          <strong>Ingest 15–20 HSBC GPI PDFs and procedure documents</strong> using pdfplumber — circulars, corridor guidelines, SLA rules, escalation procedures.
+        </div>
+      </div>
+      <div class="pipeline-step">
+        <span class="pipeline-arrow">02</span>
+        <div class="pipeline-text">
+          <strong>Index into a structured knowledge base</strong> — documents are chunked, embedded, and stored for fast semantic retrieval.
+        </div>
+      </div>
+      <div class="pipeline-step">
+        <span class="pipeline-arrow">03</span>
+        <div class="pipeline-text">
+          <strong>Investigator asks a plain-English question</strong> via the Q&amp;A interface — no query syntax, no keyword matching required.
+        </div>
+      </div>
+      <div class="pipeline-step">
+        <span class="pipeline-arrow">04</span>
+        <div class="pipeline-text">
+          <strong>System searches against indexed documents</strong> using semantic similarity — retrieves the most relevant chunks across all ingested sources.
+        </div>
+      </div>
+      <div class="pipeline-step">
+        <span class="pipeline-arrow">05</span>
+        <div class="pipeline-text">
+          <strong>LLM synthesises a cited answer</strong> — response includes the answer and the source document(s) it was drawn from. No external vendor dependency, no new infrastructure.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-section">
+    <p class="cs-section-label">Built with</p>
+    <h2 class="cs-section-title">Tech Stack</h2>
+    <div class="chip-grid">
+      <span class="chip">Python</span>
+      <span class="chip">RAG</span>
+      <span class="chip">pdfplumber</span>
+      <span class="chip">GitHub Copilot</span>
+    </div>
+  </div>
+
+  <div class="cs-section">
+    <p class="cs-section-label">Validation</p>
+    <h2 class="cs-section-title">Success Criteria</h2>
+    <div class="highlight-box">
+      <ul>
+        <li>85% of 20 test questions answered correctly</li>
+        <li>Every answer includes at least one source citation</li>
+        <li>Tool returns a clear not-found response for out-of-scope questions rather than hallucinating</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="cs-section">
+    <p class="cs-section-label">Ownership</p>
+    <h2 class="cs-section-title">My Role</h2>
+    <div class="role-box">
+      Independently scoped and built as Management Trainee PM — knowledge base design, document ingestion pipeline, Q&amp;A accuracy testing, and investigator validation. No engineering resource assigned; end-to-end ownership of the POC.
+    </div>
+  </div>
+
+  <p class="internal-note">Internal HSBC project — shared for portfolio purposes only.</p>
+
+</main>
+
+<footer>
+  Built by Geetha Aripaka · 2026
+</footer>
+
+</body>
+</html>

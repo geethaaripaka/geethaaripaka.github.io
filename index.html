@@ -106,16 +106,14 @@
       display: block;
     }
     .hero-eyebrow {
-      display: inline-block;
-      font-size: 13px;
+      display: block;
+      text-align: center;
+      font-size: 11px;
       font-weight: 500;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: var(--accent);
-      background: var(--accent-soft);
-      padding: 3px 10px;
-      border-radius: 4px;
-      margin-bottom: 20px;
+      color: var(--muted);
+      margin-top: 10px;
     }
     .hero h1 {
       font-size: clamp(2rem, 5vw, 2.75rem);
@@ -352,23 +350,28 @@
     <div class="hero-inner">
       <div class="hero-row">
         <div class="hero-text">
-          <span class="hero-eyebrow">Product Manager</span>
           <h1>Geetha Aripaka</h1>
           <p class="hero-bio">
-            PM with an engineer's instinct and a strategist's lens. MBA from IIM Kozhikode (2024),
-            B.E. in Electronics & Communications — with pre-MBA roots as a Software Engineer at
-            Deloitte USI and a Product Strategy Intern at Optum, both in US healthcare.
+            I'm a Product Manager with an engineer's instinct and a strategist's lens — MBA from IIM Kozhikode (2024),
+            B.E. in Electronics & Communications, and pre-MBA experience as a Software Engineer at Deloitte USI
+            (US healthcare eligibility platform) and a Product Strategy Intern at Optum (clinical decision support,
+            US healthcare market).
           </p>
         </div>
         <div class="hero-photo-wrap">
           <img src="geetha.jpg" alt="Geetha Aripaka" />
+          <span class="hero-eyebrow">Product Manager</span>
         </div>
       </div>
       <p class="hero-bio">
-        At HSBC Technology, I'm independently driving AI transformation for a Pega-based
-        payment investigations platform across 50+ markets, and previously led multi-country
-        rollouts in Global Trade Solutions. Drawn to consumer-facing fintech problems where
-        infrastructure complexity meets user trust.
+        At HSBC Technology, I've worked across two product domains. In Global Payment Investigations, I'm
+        independently driving AI transformation for a Pega-based platform serving 50+ markets — spanning
+        case summarisation, RAG-based knowledge management, and infrastructure cost optimisation. Previously
+        in Global Trade Solutions, I led multi-country rollouts of the Asset Distribution Engine, coordinating
+        business, IT, and architecture teams to deliver on time.
+      </p>
+      <p class="hero-bio">
+        I'm drawn to consumer-facing fintech problems where infrastructure complexity meets user trust.
       </p>
       <div class="hero-links">
         <a class="btn btn-primary" href="#projects">View my work</a>
@@ -379,7 +382,6 @@
 
   <!-- ── Projects ── -->
   <section id="projects">
-    <p class="section-label">Work</p>
     <h2 class="section-title">Selected Projects</h2>
     <div class="card-grid">
 
@@ -401,21 +403,39 @@
         </div>
       </a>
 
-      <a class="card" href="#">
+      <a class="card" href="projects/gpi-case-summariser.html">
         <div class="card-top">
-          <span class="card-title">GPI AI Strategy</span>
+          <span class="card-title">GPI Case Summariser</span>
           <span class="tag tag-violet">Platform</span>
         </div>
-        <p class="card-metric">4 POC workstreams across 50+ markets</p>
+        <p class="card-metric">5–15 min lookups → under 60 seconds</p>
         <p class="card-desc">
-          Designed AI &amp; automation roadmap for HSBC's Global Payment Investigations — Case Summariser,
-          RAG Knowledge Assistant, and Intelligent Duplicate Detection on GCP.
+          AI layer on HSBC's Pega-based payment investigations platform — investigators enter a Case ID and
+          get a structured plain-English summary of resolved cases in under 60 seconds, replacing manual
+          archival reading.
         </p>
         <div class="card-meta">
-          <span class="chip">RAG</span>
-          <span class="chip">ISO 20022</span>
-          <span class="chip">SWIFT GPI</span>
+          <span class="chip">Python</span>
           <span class="chip">Pega</span>
+          <span class="chip">GitHub Copilot</span>
+        </div>
+      </a>
+
+      <a class="card" href="projects/gpi-knowledge-assistant.html">
+        <div class="card-top">
+          <span class="card-title">GPI Knowledge Assistant</span>
+          <span class="tag tag-violet">Platform</span>
+        </div>
+        <p class="card-metric">Multi-system search → cited answer in seconds</p>
+        <p class="card-desc">
+          RAG-based Q&amp;A interface that lets investigators ask plain-English questions and get cited answers
+          from HSBC-specific GPI documentation — procedures, circulars, SLA rules, and corridor guidelines.
+        </p>
+        <div class="card-meta">
+          <span class="chip">Python</span>
+          <span class="chip">RAG</span>
+          <span class="chip">pdfplumber</span>
+          <span class="chip">GitHub Copilot</span>
         </div>
       </a>
 
@@ -424,7 +444,6 @@
 
   <!-- ── Teardowns ── -->
   <section id="teardowns">
-    <p class="section-label">Analysis</p>
     <h2 class="section-title">Product Teardowns</h2>
     <div class="teardown-list">
 
@@ -448,8 +467,7 @@
     <p class="section-label">Get in touch</p>
     <h2 class="section-title">Let's connect</h2>
     <p style="color:var(--muted); font-size:15px; margin-bottom:32px; max-width:460px;">
-      Open to new opportunities, collaborations, and conversations about product.
-      Reach out — I reply to every message.
+      Let's talk payments, product, or AI. Always happy to connect.
     </p>
     <div class="contact-grid">
       <a class="contact-link" href="mailto:geethas26@iimklive.com">
