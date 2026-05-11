@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UPI Circle — PM Teardown | Geetha Aripaka</title>
+  <title>UPI Circle: PM Teardown | Geetha Aripaka</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -435,8 +435,8 @@
   <div class="cs-hero">
     <span class="hero-emoji">💸</span>
     <span class="hero-label">PM Teardown #1</span>
-    <h1 class="cs-title">UPI Circle — A PM Teardown</h1>
-    <p class="cs-subtitle">How NPCI built digital pocket money for every Indian family — and why every design decision is more deliberate than it looks.</p>
+    <h1 class="cs-title">UPI Circle: A PM Teardown</h1>
+    <p class="cs-subtitle">How NPCI built digital pocket money for every Indian family, and why every design decision is more deliberate than it looks.</p>
     <div class="tag-row">
       <span class="tag tag-blue">UPI</span>
       <span class="tag tag-slate">NPCI</span>
@@ -453,7 +453,7 @@
   <div class="cs-section">
     <p class="cs-section-label">Problem</p>
     <h2 class="cs-section-title">The Problem</h2>
-    <p class="cs-intro">Financially dependent individuals — children, elderly parents, caregivers — have no way to transact digitally within a trusted relationship. This forces physical cash handovers, creating control risk for the guardian and loss of autonomy for the dependent.</p>
+    <p class="cs-intro">Financially dependent individuals (children, elderly parents, caregivers) have no way to transact digitally within a trusted relationship. This forces physical cash handovers, creating control risk for the guardian and loss of autonomy for the dependent.</p>
 
     <div class="persona-grid">
 
@@ -495,7 +495,7 @@
   <div class="cs-section">
     <p class="cs-section-label">Feature</p>
     <h2 class="cs-section-title">What Is UPI Circle</h2>
-    <p class="cs-intro">UPI Circle lets a primary user (account holder) delegate spending power to a secondary user — without giving them full account access. Think of it as digital pocket money, with controls cash never had.</p>
+    <p class="cs-intro">UPI Circle lets a primary user (account holder) delegate spending power to a secondary user, without giving them full account access. Think of it as digital pocket money, with controls cash never had.</p>
 
     <table class="feature-table">
       <thead>
@@ -528,30 +528,30 @@
     <h2 class="cs-section-title">Jobs to Be Done</h2>
 
     <div class="jtbd-framework">
-      People don't use features — they hire them to do a job. The JTBD framework asks: <em>when [situation], I want to [motivation], so I can [outcome].</em>
+      People don't use features, they hire them to do a job. The JTBD framework asks: <em>when [situation], I want to [motivation], so I can [outcome].</em>
     </div>
 
     <div class="jtbd-grid">
 
       <div class="jtbd-card">
         <div class="jtbd-persona">🧒 Child</div>
-        <p class="jtbd-quote">"When I'm at school and need to buy lunch, I want to pay independently — so my parents don't have to pick up a call mid-meeting."</p>
+        <p class="jtbd-quote">"When I'm at school and need to buy lunch, I want to pay independently, so my parents don't have to pick up a call mid-meeting."</p>
       </div>
 
       <div class="jtbd-card">
         <div class="jtbd-persona">👵 Elderly parent</div>
-        <p class="jtbd-quote">"When I need to pay at a pharmacy or clinic, I want to scan and pay within a preset limit — without needing to remember a PIN or call my son."</p>
+        <p class="jtbd-quote">"When I need to pay at a pharmacy or clinic, I want to scan and pay within a preset limit, without needing to remember a PIN or call my son."</p>
       </div>
 
       <div class="jtbd-card">
         <div class="jtbd-persona">🏠 Maid / caregiver</div>
-        <p class="jtbd-quote">"When I'm out with the child and need to buy something, I want to pay using the primary user's authorization — so I'm never out of pocket for someone else's needs."</p>
+        <p class="jtbd-quote">"When I'm out with the child and need to buy something, I want to pay using the primary user's authorization, so I'm never out of pocket for someone else's needs."</p>
       </div>
 
     </div>
 
     <div class="insight-box">
-      <strong>Key insight:</strong> The subject in every JTBD is the guardian, not the dependent — because UPI Circle is set up and controlled by the delegator. The feature's primary user is the person granting trust, not the person receiving it.
+      <strong>Key insight:</strong> The subject in every JTBD is the guardian, not the dependent, because UPI Circle is set up and controlled by the delegator. The feature's primary user is the person granting trust, not the person receiving it.
     </div>
   </div>
 
@@ -559,7 +559,7 @@
   <div class="cs-section">
     <p class="cs-section-label">Design Decisions</p>
     <h2 class="cs-section-title">Design Decisions</h2>
-    <p class="cs-intro">Five deliberate decisions — and the tradeoffs behind each one.</p>
+    <p class="cs-intro">Five deliberate decisions, and the tradeoffs behind each one.</p>
 
     <div class="decision-cards">
 
@@ -567,15 +567,15 @@
         <div class="decision-card-title">🔐 Biometric mandatory for secondary users</div>
         <div class="decision-row">
           <span class="d-label">Decision</span>
-          <span class="d-value">Biometric or app password is mandatory for every secondary user before any transaction — not equally enforced for primary users.</span>
+          <span class="d-value">Biometric or app password is mandatory for every secondary user before any transaction, not equally enforced for primary users.</span>
         </div>
         <div class="decision-row">
           <span class="d-label">Reason</span>
-          <span class="d-value">Primary users own their device and are trusted by default. Secondary users operate on devices the primary has no control over. Without biometric enforcement, anyone who picks up the secondary user's phone can transact freely — something regular UPI doesn't protect against in a delegated model.</span>
+          <span class="d-value">Primary users own their device and are trusted by default. Secondary users operate on devices the primary has no control over. Without biometric enforcement, anyone who picks up the secondary user's phone can transact freely, something regular UPI doesn't protect against in a delegated model.</span>
         </div>
         <div class="decision-row tradeoff">
           <span class="d-label">Tradeoff</span>
-          <span class="d-value">Elderly and low-income users — the exact personas UPI Circle is designed to include — are most likely to have older, non-biometric devices. Good security decision. Incomplete inclusivity solution.</span>
+          <span class="d-value">Elderly and low-income users (the exact personas UPI Circle is designed to include) are most likely to have older, non-biometric devices. Good security decision. Incomplete inclusivity solution.</span>
         </div>
       </div>
 
@@ -587,11 +587,11 @@
         </div>
         <div class="decision-row">
           <span class="d-label">Reason</span>
-          <span class="d-value">UPI Circle expands one bank account across up to 5 devices. Each additional device is a new attack surface. The cap limits the blast radius — the maximum financial damage possible if a secondary user's device is stolen or compromised.</span>
+          <span class="d-value">UPI Circle expands one bank account across up to 5 devices. Each additional device is a new attack surface. The cap limits the blast radius: the maximum financial damage possible if a secondary user's device is stolen or compromised.</span>
         </div>
         <div class="decision-row tradeoff">
           <span class="d-label">Tradeoff</span>
-          <span class="d-value">Elderly parents managing medical expenses and full-time caregivers handling household needs regularly exceed ₹15,000/month — forcing a cash fallback for the excess. The cap controls fraud but caps genuine utility.</span>
+          <span class="d-value">Elderly parents managing medical expenses and full-time caregivers handling household needs regularly exceed ₹15,000/month, forcing a cash fallback for the excess. The cap controls fraud but caps genuine utility.</span>
         </div>
       </div>
 
@@ -603,11 +603,11 @@
         </div>
         <div class="decision-row">
           <span class="d-label">Reason</span>
-          <span class="d-value">If a secondary user could be added to multiple circles simultaneously, there would be no clean way to determine which account was debited for a given transaction — making dispute resolution and liability assignment impossible.</span>
+          <span class="d-value">If a secondary user could be added to multiple circles simultaneously, there would be no clean way to determine which account was debited for a given transaction, making dispute resolution and liability assignment impossible.</span>
         </div>
         <div class="decision-row tradeoff">
           <span class="d-label">Tradeoff</span>
-          <span class="d-value">Multi-funder use cases — both parents independently supporting one child — are not natively supported. One parent must transfer money to the other first, adding friction to a legitimate use case.</span>
+          <span class="d-value">Multi-funder use cases (both parents independently supporting one child) are not natively supported. One parent must transfer money to the other first, adding friction to a legitimate use case.</span>
         </div>
       </div>
 
@@ -615,15 +615,15 @@
         <div class="decision-card-title">📋 Two trust gates at setup</div>
         <div class="decision-row">
           <span class="d-label">Decision</span>
-          <span class="d-value">Secondary users can only be added via the primary user's contact list or QR scan — never by manually typing a phone number. The primary user must enter their UPI PIN during the setup/linking process itself.</span>
+          <span class="d-value">Secondary users can only be added via the primary user's contact list or QR scan, never by manually typing a phone number. The primary user must enter their UPI PIN during the setup/linking process itself.</span>
         </div>
         <div class="decision-row">
           <span class="d-label">Reason</span>
-          <span class="d-value">The contact list requirement protects the secondary user — if anyone could type any number, a stranger could unknowingly be enrolled in someone's circle and potentially used as a mule account. The PIN at setup protects the primary user — it confirms the account holder is the one creating the circle, not someone who borrowed or stole their phone.</span>
+          <span class="d-value">The contact list requirement protects the secondary user. If anyone could type any number, a stranger could unknowingly be enrolled in someone's circle and potentially used as a mule account. The PIN at setup protects the primary user. It confirms the account holder is the one creating the circle, not someone who borrowed or stole their phone.</span>
         </div>
         <div class="decision-row tradeoff">
           <span class="d-label">Tradeoff</span>
-          <span class="d-value">Remote onboarding is impossible. Adding an elderly parent in another city requires them to generate and share a QR code in person — creating friction for the very use case the feature is designed for.</span>
+          <span class="d-value">Remote onboarding is impossible. Adding an elderly parent in another city requires them to generate and share a QR code in person, creating friction for the very use case the feature is designed for.</span>
         </div>
       </div>
 
@@ -635,11 +635,11 @@
         </div>
         <div class="decision-row">
           <span class="d-label">Reason</span>
-          <span class="d-value">The highest fraud risk in any delegated system is the moment of onboarding — before the primary user has observed the secondary user transact even once. The cool-off period buys time to catch a mistaken or fraudulent addition before it can be exploited at scale.</span>
+          <span class="d-value">The highest fraud risk in any delegated system is the moment of onboarding, before the primary user has observed the secondary user transact even once. The cool-off period buys time to catch a mistaken or fraudulent addition before it can be exploited at scale.</span>
         </div>
         <div class="decision-row tradeoff">
           <span class="d-label">Tradeoff</span>
-          <span class="d-value">Adding an elderly parent right before a hospital visit means they can only transact ₹5,000 in the first 24 hours — which may be insufficient for medical expenses. Security chosen deliberately over convenience at onboarding.</span>
+          <span class="d-value">Adding an elderly parent right before a hospital visit means they can only transact ₹5,000 in the first 24 hours, which may be insufficient for medical expenses. Security chosen deliberately over convenience at onboarding.</span>
         </div>
       </div>
 
@@ -656,7 +656,7 @@
       <div class="metric-card">
         <div class="metric-card-title">📈 Adoption</div>
         <ul class="metric-list">
-          <li>% of active UPI users with at least one UPI Circle set up — tracked weekly post launch</li>
+          <li>% of active UPI users with at least one UPI Circle set up, tracked weekly post launch</li>
         </ul>
       </div>
 
@@ -705,7 +705,7 @@
         </div>
         <div class="gap-row">
           <span class="g-label">Fix</span>
-          <span class="g-value">Replace PIN with face ID or fingerprint authentication for secondary users on biometric-capable devices — making the transaction flow scan-and-pay rather than scan-enter-PIN-pay.</span>
+          <span class="g-value">Replace PIN with face ID or fingerprint authentication for secondary users on biometric-capable devices, making the transaction flow scan-and-pay rather than scan-enter-PIN-pay.</span>
         </div>
         <div class="gap-row outcome">
           <span class="g-label">Outcome</span>
@@ -720,11 +720,11 @@
         </div>
         <div class="gap-row">
           <span class="g-label">Gap</span>
-          <span class="g-value">₹15,000/month is insufficient for caregivers managing real household expenses or elderly parents with recurring medical needs — forcing a cash fallback for the excess amount.</span>
+          <span class="g-value">₹15,000/month is insufficient for caregivers managing real household expenses or elderly parents with recurring medical needs, forcing a cash fallback for the excess amount.</span>
         </div>
         <div class="gap-row">
           <span class="g-label">Fix</span>
-          <span class="g-value">A high-trust tier for designated relationship types (parent, spouse) that unlocks higher limits — but only after periodic re-authorization from the primary user via biometric or UPI PIN. Limits auto-revert to the standard cap if re-authorization lapses, protecting against stolen devices and relationship breakdowns.</span>
+          <span class="g-value">A high-trust tier for designated relationship types (parent, spouse) that unlocks higher limits, but only after periodic re-authorization from the primary user via biometric or UPI PIN. Limits auto-revert to the standard cap if re-authorization lapses, protecting against stolen devices and relationship breakdowns.</span>
         </div>
         <div class="gap-row outcome">
           <span class="g-label">Outcome</span>
@@ -739,11 +739,11 @@
         </div>
         <div class="gap-row">
           <span class="g-label">Gap</span>
-          <span class="g-value">Caregivers cannot pay electricity bills or mobile recharges for dependents through UPI Circle — still falling back to cash for these needs, which partially defeats the feature's purpose.</span>
+          <span class="g-value">Caregivers cannot pay electricity bills or mobile recharges for dependents through UPI Circle, still falling back to cash for these needs, which partially defeats the feature's purpose.</span>
         </div>
         <div class="gap-row">
           <span class="g-label">Fix</span>
-          <span class="g-value">Introduce escrow-style settlement for irreversible payment types — funds held briefly before release — to safely enable bill payments without the fraud risk that comes with instant, irreversible transactions.</span>
+          <span class="g-value">Introduce escrow-style settlement for irreversible payment types, funds held briefly before release, to safely enable bill payments without the fraud risk that comes with instant, irreversible transactions.</span>
         </div>
         <div class="gap-row outcome">
           <span class="g-label">Outcome</span>
@@ -757,7 +757,7 @@
   <!-- ── Section 7: Closing Insight ── -->
   <div class="cs-section">
     <blockquote class="pull-quote">
-      "UPI Circle is not just a payments feature. It is an answer to a question India's digital payments ecosystem ignored for a long time: what about the people who are trusted — but not account holders? Every design decision is a careful negotiation between inclusion and fraud prevention, autonomy and control, convenience and security. That tension is what makes it one of the most thoughtfully designed features in the UPI ecosystem."
+      "UPI Circle is not just a payments feature. It is an answer to a question India's digital payments ecosystem ignored for a long time: what about the people who are trusted, but not account holders? Every design decision is a careful negotiation between inclusion and fraud prevention, autonomy and control, convenience and security. That tension is what makes it one of the most thoughtfully designed features in the UPI ecosystem."
     </blockquote>
   </div>
 
