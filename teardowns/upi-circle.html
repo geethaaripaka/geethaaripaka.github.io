@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UPI Circle Teardown — Geetha Aripaka</title>
+  <title>UPI Circle — PM Teardown | Geetha Aripaka</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -27,9 +27,6 @@
       color: var(--text);
       font-size: 16px;
       line-height: 1.7;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
     }
 
     /* ── Nav ── */
@@ -50,64 +47,353 @@
       justify-content: space-between;
       height: 52px;
     }
-    .nav-logo {
-      font-weight: 600;
-      font-size: 15px;
-      color: var(--text);
-      text-decoration: none;
-    }
-    .nav-links {
-      display: flex;
-      gap: 28px;
-      list-style: none;
-    }
-    .nav-links a {
-      font-size: 14px;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.15s;
-    }
+    .nav-logo { font-weight: 600; font-size: 15px; color: var(--text); text-decoration: none; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 14px; color: var(--muted); text-decoration: none; transition: color 0.15s; }
     .nav-links a:hover { color: var(--text); }
 
-    /* ── Content ── */
-    main {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 80px 24px;
-    }
+    /* ── Layout ── */
+    main { max-width: var(--max); margin: 0 auto; padding: 0 24px 80px; }
 
-    .coming-soon {
-      text-align: center;
-      max-width: 360px;
-    }
-    .coming-soon-icon {
-      font-size: 40px;
-      margin-bottom: 20px;
-    }
-    .coming-soon h1 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      margin-bottom: 12px;
-    }
-    .coming-soon p {
-      font-size: 15px;
-      color: var(--muted);
-      margin-bottom: 28px;
-    }
+    /* ── Back link ── */
     .back-link {
       display: inline-flex;
       align-items: center;
       gap: 6px;
       font-size: 14px;
-      font-weight: 500;
       color: var(--muted);
       text-decoration: none;
+      margin-top: 36px;
+      margin-bottom: 40px;
       transition: color 0.15s;
     }
     .back-link:hover { color: var(--text); }
+
+    /* ── Hero ── */
+    .cs-hero { margin-bottom: 52px; }
+    .hero-emoji { font-size: 36px; margin-bottom: 14px; display: block; }
+    .hero-label {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: 3px 10px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+    }
+    .cs-title {
+      font-size: clamp(1.75rem, 5vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+    .cs-subtitle {
+      font-size: 17px;
+      color: var(--muted);
+      margin-bottom: 22px;
+      line-height: 1.6;
+    }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag { font-size: 12px; font-weight: 500; padding: 3px 10px; border-radius: 4px; white-space: nowrap; }
+    .tag-blue   { background: #dbeafe; color: #1d4ed8; }
+    .tag-green  { background: #dcfce7; color: #15803d; }
+    .tag-violet { background: #ede9fe; color: #5b21b6; }
+    .tag-amber  { background: #fef3c7; color: #92400e; }
+    .tag-slate  { background: #f1f5f9; color: #475569; }
+
+    /* ── Divider ── */
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0 0 48px; }
+
+    /* ── Section ── */
+    .cs-section { margin-bottom: 52px; }
+    .cs-section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .cs-section-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 18px;
+      line-height: 1.3;
+    }
+    .cs-intro { font-size: 15px; color: var(--text); line-height: 1.75; margin-bottom: 20px; }
+
+    /* ── Persona / problem cards ── */
+    .persona-grid { display: grid; gap: 12px; }
+    .persona-card {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 20px 22px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .persona-icon { font-size: 22px; flex-shrink: 0; margin-top: 1px; }
+    .persona-body { flex: 1; min-width: 0; font-size: 14px; line-height: 1.6; }
+    .persona-body strong { font-weight: 700; font-size: 14px; display: block; margin-bottom: 3px; }
+    .persona-desc { color: var(--text); margin-bottom: 10px; }
+    .persona-workaround {
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .persona-workaround b { font-weight: 600; color: var(--muted); }
+
+    .thread-callout {
+      margin-top: 16px;
+      padding: 16px 20px;
+      background: var(--accent-soft);
+      border: 1px solid #c7d9f9;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    /* ── Feature table ── */
+    .feature-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .feature-table th {
+      background: var(--surface);
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--muted);
+      padding: 10px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    .feature-table td {
+      padding: 13px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.55;
+    }
+    .feature-table tr:last-child td { border-bottom: none; }
+    .feature-table tr:nth-child(odd) td { background: var(--bg); }
+    .feature-table tr:nth-child(even) td { background: var(--surface); }
+    .live-note { margin-top: 12px; font-size: 13px; color: var(--muted); }
+
+    /* ── JTBD ── */
+    .jtbd-framework {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 16px;
+      padding: 14px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      line-height: 1.6;
+    }
+    .jtbd-grid { display: grid; gap: 12px; }
+    .jtbd-card {
+      padding: 20px 22px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .jtbd-persona {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .jtbd-quote {
+      font-size: 15px;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.65;
+      border-left: 3px solid var(--accent);
+      padding-left: 14px;
+    }
+    .insight-box {
+      margin-top: 18px;
+      padding: 18px 22px;
+      background: #fffbeb;
+      border: 1px solid #fcd34d;
+      border-radius: var(--radius);
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--text);
+    }
+
+    /* ── Design decisions ── */
+    .decision-cards { display: grid; gap: 14px; }
+    .decision-card {
+      padding: 22px 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .decision-card-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      line-height: 1.3;
+    }
+    .decision-row {
+      display: grid;
+      grid-template-columns: 82px 1fr;
+      gap: 6px 14px;
+      margin-bottom: 12px;
+      font-size: 14px;
+      line-height: 1.65;
+      align-items: baseline;
+    }
+    .decision-row:last-child { margin-bottom: 0; }
+    .d-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-top: 4px;
+    }
+    .d-value { color: var(--text); }
+    .decision-row.tradeoff .d-label { color: #b45309; }
+    .decision-row.tradeoff .d-value {
+      color: #78350f;
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-size: 13px;
+    }
+
+    /* ── Metrics grid ── */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .metric-card {
+      padding: 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .metric-card-title {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .metric-list { list-style: none; display: grid; gap: 7px; }
+    .metric-list li {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+      display: flex;
+      gap: 8px;
+      align-items: baseline;
+    }
+    .metric-list li::before {
+      content: "·";
+      font-size: 20px;
+      color: var(--border);
+      flex-shrink: 0;
+      line-height: 1;
+    }
+
+    /* ── Gap cards ── */
+    .gap-cards { display: grid; gap: 14px; }
+    .gap-card {
+      padding: 22px 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .gap-card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .gap-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--text);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .gap-card-title { font-size: 15px; font-weight: 700; line-height: 1.3; }
+    .gap-row {
+      display: grid;
+      grid-template-columns: 82px 1fr;
+      gap: 6px 14px;
+      margin-bottom: 12px;
+      font-size: 14px;
+      line-height: 1.65;
+      align-items: baseline;
+    }
+    .gap-row:last-child { margin-bottom: 0; }
+    .g-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-top: 4px;
+    }
+    .g-value { color: var(--text); }
+    .gap-row.outcome .g-label { color: #15803d; }
+    .gap-row.outcome .g-value {
+      color: #166534;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-size: 13px;
+    }
+
+    /* ── Pull quote ── */
+    .pull-quote {
+      padding: 30px 32px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      font-size: 17px;
+      font-style: italic;
+      line-height: 1.8;
+      color: var(--text);
+    }
 
     /* ── Footer ── */
     footer {
@@ -116,6 +402,15 @@
       text-align: center;
       font-size: 12px;
       color: #999;
+    }
+
+    @media (max-width: 600px) {
+      .metrics-grid { grid-template-columns: 1fr; }
+      .decision-row { grid-template-columns: 1fr; gap: 3px 0; }
+      .decision-row.tradeoff .d-value { margin-top: 4px; }
+      .gap-row { grid-template-columns: 1fr; gap: 3px 0; }
+      .gap-row.outcome .g-value { margin-top: 4px; }
+      .pull-quote { padding: 22px 20px; font-size: 15px; }
     }
   </style>
 </head>
@@ -133,12 +428,339 @@
 </nav>
 
 <main>
-  <div class="coming-soon">
-    <div class="coming-soon-icon">💸</div>
-    <h1>UPI Circle Teardown</h1>
-    <p>This teardown is in progress. Check back soon.</p>
-    <a class="back-link" href="/">← Back to portfolio</a>
+
+  <a class="back-link" href="/">← Back</a>
+
+  <!-- ── Hero ── -->
+  <div class="cs-hero">
+    <span class="hero-emoji">💸</span>
+    <span class="hero-label">PM Teardown #1</span>
+    <h1 class="cs-title">UPI Circle — A PM Teardown</h1>
+    <p class="cs-subtitle">How NPCI built digital pocket money for every Indian family — and why every design decision is more deliberate than it looks.</p>
+    <div class="tag-row">
+      <span class="tag tag-blue">UPI</span>
+      <span class="tag tag-slate">NPCI</span>
+      <span class="tag tag-violet">Fintech</span>
+      <span class="tag tag-slate">Product Thinking</span>
+      <span class="tag tag-green">Payments</span>
+      <span class="tag tag-amber">Delegated Payments</span>
+    </div>
   </div>
+
+  <hr class="divider" />
+
+  <!-- ── Section 1: The Problem ── -->
+  <div class="cs-section">
+    <p class="cs-section-label">Problem</p>
+    <h2 class="cs-section-title">The Problem</h2>
+    <p class="cs-intro">Financially dependent individuals — children, elderly parents, caregivers — have no way to transact digitally within a trusted relationship. This forces physical cash handovers, creating control risk for the guardian and loss of autonomy for the dependent.</p>
+
+    <div class="persona-grid">
+
+      <div class="persona-card">
+        <span class="persona-icon">🧒</span>
+        <div class="persona-body">
+          <strong>Child at school</strong>
+          <p class="persona-desc">No bank account. Dependent on cash for food and stationery.</p>
+          <div class="persona-workaround"><b>Workaround:</b> Parent sends cash or transfers money in real time when child calls mid-school day.</div>
+        </div>
+      </div>
+
+      <div class="persona-card">
+        <span class="persona-icon">👵</span>
+        <div class="persona-body">
+          <strong>Elderly parent</strong>
+          <p class="persona-desc">Avoids UPI entirely due to PIN anxiety and fear of mistakes. Defaults to cash even at hospitals and pharmacies.</p>
+          <div class="persona-workaround"><b>Workaround:</b> Family member must be physically present or available on call for every transaction.</div>
+        </div>
+      </div>
+
+      <div class="persona-card">
+        <span class="persona-icon">🏠</span>
+        <div class="persona-body">
+          <strong>Maid / caregiver</strong>
+          <p class="persona-desc">Carries cash on behalf of the family. Zero accountability or spending visibility for the employer.</p>
+          <div class="persona-workaround"><b>Workaround:</b> Ad hoc cash handovers with no tracking of what was spent or why.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="thread-callout">
+      Single thread across all three: "Let my dependent act independently, while I stay in control without being physically present."
+    </div>
+  </div>
+
+  <!-- ── Section 2: What is UPI Circle ── -->
+  <div class="cs-section">
+    <p class="cs-section-label">Feature</p>
+    <h2 class="cs-section-title">What Is UPI Circle</h2>
+    <p class="cs-intro">UPI Circle lets a primary user (account holder) delegate spending power to a secondary user — without giving them full account access. Think of it as digital pocket money, with controls cash never had.</p>
+
+    <table class="feature-table">
+      <thead>
+        <tr>
+          <th>Mode</th>
+          <th>Who transacts</th>
+          <th>Best for</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Full delegation</strong></td>
+          <td>Secondary user transacts within a preset monthly limit</td>
+          <td>Child, elderly parent</td>
+        </tr>
+        <tr>
+          <td><strong>Partial delegation</strong></td>
+          <td>Primary user approves and authorizes each transaction</td>
+          <td>Maid, new staff</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="live-note">Live on GPay, PhonePe, Paytm and BHIM since <strong>August 2024</strong>.</p>
+  </div>
+
+  <!-- ── Section 3: JTBD ── -->
+  <div class="cs-section">
+    <p class="cs-section-label">JTBD</p>
+    <h2 class="cs-section-title">Jobs to Be Done</h2>
+
+    <div class="jtbd-framework">
+      People don't use features — they hire them to do a job. The JTBD framework asks: <em>when [situation], I want to [motivation], so I can [outcome].</em>
+    </div>
+
+    <div class="jtbd-grid">
+
+      <div class="jtbd-card">
+        <div class="jtbd-persona">🧒 Child</div>
+        <p class="jtbd-quote">"When I'm at school and need to buy lunch, I want to pay independently — so my parents don't have to pick up a call mid-meeting."</p>
+      </div>
+
+      <div class="jtbd-card">
+        <div class="jtbd-persona">👵 Elderly parent</div>
+        <p class="jtbd-quote">"When I need to pay at a pharmacy or clinic, I want to scan and pay within a preset limit — without needing to remember a PIN or call my son."</p>
+      </div>
+
+      <div class="jtbd-card">
+        <div class="jtbd-persona">🏠 Maid / caregiver</div>
+        <p class="jtbd-quote">"When I'm out with the child and need to buy something, I want to pay using the primary user's authorization — so I'm never out of pocket for someone else's needs."</p>
+      </div>
+
+    </div>
+
+    <div class="insight-box">
+      <strong>Key insight:</strong> The subject in every JTBD is the guardian, not the dependent — because UPI Circle is set up and controlled by the delegator. The feature's primary user is the person granting trust, not the person receiving it.
+    </div>
+  </div>
+
+  <!-- ── Section 4: Design Decisions ── -->
+  <div class="cs-section">
+    <p class="cs-section-label">Design Decisions</p>
+    <h2 class="cs-section-title">Design Decisions</h2>
+    <p class="cs-intro">Five deliberate decisions — and the tradeoffs behind each one.</p>
+
+    <div class="decision-cards">
+
+      <div class="decision-card">
+        <div class="decision-card-title">🔐 Biometric mandatory for secondary users</div>
+        <div class="decision-row">
+          <span class="d-label">Decision</span>
+          <span class="d-value">Biometric or app password is mandatory for every secondary user before any transaction — not equally enforced for primary users.</span>
+        </div>
+        <div class="decision-row">
+          <span class="d-label">Reason</span>
+          <span class="d-value">Primary users own their device and are trusted by default. Secondary users operate on devices the primary has no control over. Without biometric enforcement, anyone who picks up the secondary user's phone can transact freely — something regular UPI doesn't protect against in a delegated model.</span>
+        </div>
+        <div class="decision-row tradeoff">
+          <span class="d-label">Tradeoff</span>
+          <span class="d-value">Elderly and low-income users — the exact personas UPI Circle is designed to include — are most likely to have older, non-biometric devices. Good security decision. Incomplete inclusivity solution.</span>
+        </div>
+      </div>
+
+      <div class="decision-card">
+        <div class="decision-card-title">💰 ₹15,000/month spending cap</div>
+        <div class="decision-row">
+          <span class="d-label">Decision</span>
+          <span class="d-value">Monthly spending limit for secondary users is capped at ₹15,000, with a per-transaction cap of ₹5,000.</span>
+        </div>
+        <div class="decision-row">
+          <span class="d-label">Reason</span>
+          <span class="d-value">UPI Circle expands one bank account across up to 5 devices. Each additional device is a new attack surface. The cap limits the blast radius — the maximum financial damage possible if a secondary user's device is stolen or compromised.</span>
+        </div>
+        <div class="decision-row tradeoff">
+          <span class="d-label">Tradeoff</span>
+          <span class="d-value">Elderly parents managing medical expenses and full-time caregivers handling household needs regularly exceed ₹15,000/month — forcing a cash fallback for the excess. The cap controls fraud but caps genuine utility.</span>
+        </div>
+      </div>
+
+      <div class="decision-card">
+        <div class="decision-card-title">👤 One primary user per secondary user</div>
+        <div class="decision-row">
+          <span class="d-label">Decision</span>
+          <span class="d-value">Each secondary user can be linked to only one primary user at a time. Primary users can have up to 5 secondary users.</span>
+        </div>
+        <div class="decision-row">
+          <span class="d-label">Reason</span>
+          <span class="d-value">If a secondary user could be added to multiple circles simultaneously, there would be no clean way to determine which account was debited for a given transaction — making dispute resolution and liability assignment impossible.</span>
+        </div>
+        <div class="decision-row tradeoff">
+          <span class="d-label">Tradeoff</span>
+          <span class="d-value">Multi-funder use cases — both parents independently supporting one child — are not natively supported. One parent must transfer money to the other first, adding friction to a legitimate use case.</span>
+        </div>
+      </div>
+
+      <div class="decision-card">
+        <div class="decision-card-title">📋 Two trust gates at setup</div>
+        <div class="decision-row">
+          <span class="d-label">Decision</span>
+          <span class="d-value">Secondary users can only be added via the primary user's contact list or QR scan — never by manually typing a phone number. The primary user must enter their UPI PIN during the setup/linking process itself.</span>
+        </div>
+        <div class="decision-row">
+          <span class="d-label">Reason</span>
+          <span class="d-value">The contact list requirement protects the secondary user — if anyone could type any number, a stranger could unknowingly be enrolled in someone's circle and potentially used as a mule account. The PIN at setup protects the primary user — it confirms the account holder is the one creating the circle, not someone who borrowed or stole their phone.</span>
+        </div>
+        <div class="decision-row tradeoff">
+          <span class="d-label">Tradeoff</span>
+          <span class="d-value">Remote onboarding is impossible. Adding an elderly parent in another city requires them to generate and share a QR code in person — creating friction for the very use case the feature is designed for.</span>
+        </div>
+      </div>
+
+      <div class="decision-card">
+        <div class="decision-card-title">⏰ 24-hour cool-off period</div>
+        <div class="decision-row">
+          <span class="d-label">Decision</span>
+          <span class="d-value">After linking a new secondary user, transactions are capped at ₹5,000 for the first 24 hours regardless of the full delegation limit.</span>
+        </div>
+        <div class="decision-row">
+          <span class="d-label">Reason</span>
+          <span class="d-value">The highest fraud risk in any delegated system is the moment of onboarding — before the primary user has observed the secondary user transact even once. The cool-off period buys time to catch a mistaken or fraudulent addition before it can be exploited at scale.</span>
+        </div>
+        <div class="decision-row tradeoff">
+          <span class="d-label">Tradeoff</span>
+          <span class="d-value">Adding an elderly parent right before a hospital visit means they can only transact ₹5,000 in the first 24 hours — which may be insufficient for medical expenses. Security chosen deliberately over convenience at onboarding.</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── Section 5: Metrics ── -->
+  <div class="cs-section">
+    <p class="cs-section-label">Metrics</p>
+    <h2 class="cs-section-title">How I'd Measure Success as PM</h2>
+
+    <div class="metrics-grid">
+
+      <div class="metric-card">
+        <div class="metric-card-title">📈 Adoption</div>
+        <ul class="metric-list">
+          <li>% of active UPI users with at least one UPI Circle set up — tracked weekly post launch</li>
+        </ul>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-card-title">🔄 Engagement</div>
+        <ul class="metric-list">
+          <li>Avg transactions per secondary user per month</li>
+          <li>% of circles with at least one transaction in last 30 days</li>
+        </ul>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-card-title">🎯 Outcome</div>
+        <ul class="metric-list">
+          <li>Reduction in P2P transfers from primary to secondary after circle setup (proxy for cash displacement)</li>
+          <li>% of secondary users who were previously unbanked</li>
+        </ul>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-card-title">🚨 Guardrail</div>
+        <ul class="metric-list">
+          <li>% of transactions disputed as unauthorized</li>
+          <li>% of circles revoked within 7 days of setup (signals fraud or trust breakdown at onboarding)</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── Section 6: Gaps & Improvements ── -->
+  <div class="cs-section">
+    <p class="cs-section-label">What I'd Build Next</p>
+    <h2 class="cs-section-title">Brilliant feature. Three things would make it complete.</h2>
+
+    <div class="gap-cards">
+
+      <div class="gap-card">
+        <div class="gap-card-header">
+          <span class="gap-num">1</span>
+          <span class="gap-card-title">Biometric-only auth for elderly secondary users</span>
+        </div>
+        <div class="gap-row">
+          <span class="g-label">Gap</span>
+          <span class="g-value">PIN entry was the original barrier keeping elderly users off UPI entirely. Full delegation reintroduces the same friction for the exact persona it was meant to serve.</span>
+        </div>
+        <div class="gap-row">
+          <span class="g-label">Fix</span>
+          <span class="g-value">Replace PIN with face ID or fingerprint authentication for secondary users on biometric-capable devices — making the transaction flow scan-and-pay rather than scan-enter-PIN-pay.</span>
+        </div>
+        <div class="gap-row outcome">
+          <span class="g-label">Outcome</span>
+          <span class="g-value">Higher transaction completion rates among elderly secondary users, reduction in failed or abandoned payments due to PIN anxiety.</span>
+        </div>
+      </div>
+
+      <div class="gap-card">
+        <div class="gap-card-header">
+          <span class="gap-num">2</span>
+          <span class="gap-card-title">Dynamic limits for high-trust relationships</span>
+        </div>
+        <div class="gap-row">
+          <span class="g-label">Gap</span>
+          <span class="g-value">₹15,000/month is insufficient for caregivers managing real household expenses or elderly parents with recurring medical needs — forcing a cash fallback for the excess amount.</span>
+        </div>
+        <div class="gap-row">
+          <span class="g-label">Fix</span>
+          <span class="g-value">A high-trust tier for designated relationship types (parent, spouse) that unlocks higher limits — but only after periodic re-authorization from the primary user via biometric or UPI PIN. Limits auto-revert to the standard cap if re-authorization lapses, protecting against stolen devices and relationship breakdowns.</span>
+        </div>
+        <div class="gap-row outcome">
+          <span class="g-label">Outcome</span>
+          <span class="g-value">Primary users can support dependents with larger genuine expenses entirely through UPI Circle, eliminating cash fallback while keeping fraud exposure controlled through re-authorization.</span>
+        </div>
+      </div>
+
+      <div class="gap-card">
+        <div class="gap-card-header">
+          <span class="gap-num">3</span>
+          <span class="gap-card-title">Extend to bill payments and recharges</span>
+        </div>
+        <div class="gap-row">
+          <span class="g-label">Gap</span>
+          <span class="g-value">Caregivers cannot pay electricity bills or mobile recharges for dependents through UPI Circle — still falling back to cash for these needs, which partially defeats the feature's purpose.</span>
+        </div>
+        <div class="gap-row">
+          <span class="g-label">Fix</span>
+          <span class="g-value">Introduce escrow-style settlement for irreversible payment types — funds held briefly before release — to safely enable bill payments without the fraud risk that comes with instant, irreversible transactions.</span>
+        </div>
+        <div class="gap-row outcome">
+          <span class="g-label">Outcome</span>
+          <span class="g-value">Caregivers can manage the full spectrum of dependent needs digitally, completing the financial inclusion promise of UPI Circle.</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── Section 7: Closing Insight ── -->
+  <div class="cs-section">
+    <blockquote class="pull-quote">
+      "UPI Circle is not just a payments feature. It is an answer to a question India's digital payments ecosystem ignored for a long time: what about the people who are trusted — but not account holders? Every design decision is a careful negotiation between inclusion and fraud prevention, autonomy and control, convenience and security. That tension is what makes it one of the most thoughtfully designed features in the UPI ecosystem."
+    </blockquote>
+  </div>
+
 </main>
 
 <footer>
