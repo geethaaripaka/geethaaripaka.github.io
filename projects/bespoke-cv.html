@@ -401,7 +401,7 @@
     <p class="cs-section-label">Product</p>
     <h2 class="cs-section-title">The Solution</h2>
     <ul class="solution-list">
-      <li>Upload your CV and paste a job URL. Bespoke CV extracts and parses the full job description automatically.</li>
+      <li>Upload your CV as a Word .docx file and paste a job URL. Bespoke CV extracts and parses the full job description automatically.</li>
       <li>Gemini 2.5 Flash identifies only the weak or misaligned bullets, leaving strong ones untouched.</li>
       <li>A side-by-side diff shows every proposed change. You accept or reject each edit individually.</li>
       <li>A live ATS score and JD match score update in real time as you accept changes.</li>
@@ -420,7 +420,7 @@
           <span class="step-num">1</span>
           <span class="step-title">Input your CV and job URL</span>
         </div>
-        <p class="step-desc">Upload a DOCX and paste the job listing URL. BeautifulSoup extracts and parses the JD; pdfplumber extracts your CV text.</p>
+        <p class="step-desc">Upload a DOCX and paste the job listing URL. BeautifulSoup extracts and parses the JD; python-docx extracts your CV text.</p>
         <div class="screenshot">
           <img src="../assets/bespoke/inputfilled.png" alt="Input screen with CV and job URL filled" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
           <div class="screenshot-placeholder" style="display:none;">assets/bespoke/inputfilled.png</div>
@@ -502,7 +502,7 @@
       <div class="decision">
         <div class="decision-dot"></div>
         <div class="decision-body">
-          <strong>temperature=0 for consistency.</strong> Job applications are high-stakes. Randomness in output undermines trust. Users need to know the same CV + JD pair produces the same suggestions every time, so they can compare runs and share results.
+          <strong>temperature=0 for consistency.</strong> Job applications are high-stakes. Randomness in output undermines trust. Users need to know the same CV + JD pair produces the same suggestions every time, so they can trust the output and iterate with confidence.
         </div>
       </div>
       <div class="decision">
@@ -598,7 +598,6 @@
       <span class="chip">Python</span>
       <span class="chip">Streamlit</span>
       <span class="chip">Gemini 2.5 Flash API</span>
-      <span class="chip">pdfplumber</span>
       <span class="chip">python-docx</span>
       <span class="chip">BeautifulSoup</span>
     </div>
@@ -616,6 +615,11 @@
     </ul>
   </div>
 
+  <!-- ── CTA ── -->
+  <div class="cta-block">
+    <p class="cta-text">Built end-to-end by Geetha Aripaka</p>
+    <a class="btn btn-primary" href="https://github.com/geethaaripaka/bespoke-cv" target="_blank" rel="noopener">View on GitHub</a>
+  </div>
 
 </main>
 
