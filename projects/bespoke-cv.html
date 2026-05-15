@@ -444,7 +444,7 @@
           <span class="step-num">3</span>
           <span class="step-title">Score dashboard</span>
         </div>
-        <p class="step-desc">An ATS keyword score and JD match percentage surface immediately. Both update live as you accept or reject suggested edits.</p>
+        <p class="step-desc">An ATS keyword score and JD match percentage surface immediately. Both update live as you accept or reject suggested edits. The JD match score is weighted by bullet-level impact: each bullet is individually scored for impact (1–10) and the overall score reflects the weighted average, not just keyword presence. ATS keywords from the JD are deliberately woven into the rewritten bullets, so the ATS score improves through the rewrites themselves rather than through a separate keyword-stuffing step.</p>
         <div class="screenshot">
           <img src="../assets/bespoke/scores.png" alt="Score dashboard" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
           <div class="screenshot-placeholder" style="display:none;">assets/bespoke/scores.png</div>
@@ -456,7 +456,7 @@
           <span class="step-num">4</span>
           <span class="step-title">Diff View: Accept or Reject each change</span>
         </div>
-        <p class="step-desc">Review every proposed rewrite in a before/after diff. Accept what fits, reject what doesn't. The ATS and JD match scores update with each decision.</p>
+        <p class="step-desc">Review every proposed rewrite in a before/after diff. Accept what fits, reject what doesn't. The ATS and JD match scores update with each decision. Each rewritten bullet includes an explanation of which JD keywords were incorporated and why, so you understand exactly what changed and how it improves your ATS match.</p>
         <div class="screenshot">
           <img src="../assets/bespoke/diffview.png" alt="Diff view" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
           <div class="screenshot-placeholder" style="display:none;">assets/bespoke/diffview.png</div>
@@ -475,6 +475,22 @@
         </div>
       </div>
 
+    </div>
+  </div>
+
+  <!-- ── Demo ── -->
+  <div class="cs-section">
+    <p class="cs-section-label">Demo</p>
+    <h2 class="cs-section-title">See It in Action</h2>
+    <p style="font-size:15px; color:var(--muted); margin-bottom:20px;">Watch Bespoke CV in action — from job URL to tailored CV in under 2 minutes.</p>
+    <div style="
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+    ">
+      <video src="../assets/bespoke/BespokeCV_Demo.mp4" controls width="100%" height="100%" style="display:block;"></video>
     </div>
   </div>
 
@@ -499,6 +515,64 @@
         <div class="decision-dot"></div>
         <div class="decision-body">
           <strong>Word output to preserve formatting.</strong> Recruiters receive and screen CVs in Word. Exporting as <code>.docx</code> via <code>python-docx</code>, with layout reconstructed from the original file, means no reformatting work for the user after download.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PM Decisions ── -->
+  <div class="cs-section">
+    <p class="cs-section-label">Product thinking</p>
+    <h2 class="cs-section-title">PM Decisions</h2>
+    <div class="decisions">
+      <div class="decision">
+        <div class="decision-dot"></div>
+        <div class="decision-body">
+          <strong>Diff view over full rewrite.</strong> Users trust surgical edits more than a black-box rewrite. Seeing exactly what changed builds confidence in the output.
+        </div>
+      </div>
+      <div class="decision">
+        <div class="decision-dot"></div>
+        <div class="decision-body">
+          <strong>User controls every change.</strong> AI suggests, human decides. The tool keeps your voice intact by never forcing an edit.
+        </div>
+      </div>
+      <div class="decision">
+        <div class="decision-dot"></div>
+        <div class="decision-body">
+          <strong>Live score as you tick checkboxes.</strong> Real-time feedback changes how you engage with suggestions. You stop guessing and start optimising.
+        </div>
+      </div>
+      <div class="decision">
+        <div class="decision-dot"></div>
+        <div class="decision-body">
+          <strong>Missing keywords solved inside rewrites.</strong> Surfacing a list of missing keywords without fixing them is anxiety, not a product. Bespoke CV solves the problem, not just names it. ATS keywords are woven into rewrites naturally, not appended as a separate list.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── What I Learned ── -->
+  <div class="cs-section">
+    <p class="cs-section-label">Reflection</p>
+    <h2 class="cs-section-title">What I Learned</h2>
+    <div class="decisions">
+      <div class="decision">
+        <div class="decision-dot"></div>
+        <div class="decision-body">
+          <strong>AI output is only as consistent as your prompt.</strong> temperature=0 alone was not enough. The prompt needed to explicitly evaluate every single bullet, not just the obvious weak ones.
+        </div>
+      </div>
+      <div class="decision">
+        <div class="decision-dot"></div>
+        <div class="decision-body">
+          <strong>Format preservation is a trust problem, not a technical one.</strong> If the output looks different from the input, users assume something went wrong even if the content is perfect.
+        </div>
+      </div>
+      <div class="decision">
+        <div class="decision-dot"></div>
+        <div class="decision-body">
+          <strong>The score means nothing without context.</strong> A match score alone is vanity. Weighted scoring by bullet impact is what makes it actionable.
         </div>
       </div>
     </div>
