@@ -453,7 +453,7 @@
   <div class="cs-section">
     <p class="cs-section-label">Problem</p>
     <h2 class="cs-section-title">The Problem</h2>
-    <p class="cs-intro">I used to book Rapido rides for my parents because they never went digital. I'd pay, they'd travel. It worked, but I was always the middleman, a one-person bridge between their offline life and a digital payment. Separately, I'd sometimes ask my cook to pick up groceries I missed ordering. She'd pay from her own pocket, I'd reimburse her later, and neither of us was comfortable with the arrangement. These are the two exact problems UPI Circle was built to solve. Most teardowns start with the feature. This one starts with the people who needed it before it existed.</p>
+    <p class="cs-intro">I used to book Rapido rides for my parents because they never went digital. I'd pay, they'd travel. It worked, but I was always the middleman, a one-person bridge between their offline life and a digital payment. Separately, I'd sometimes ask my cook to pick up groceries I missed ordering. She'd pay from her own pocket, I'd reimburse her later, and neither of us was comfortable with the arrangement. These are the two exact problems UPI Circle was built to solve. Most teardowns start with the feature. This one starts with the people who needed it before it existed. I work in payments investigations at HSBC. I see what happens when trust breaks down in digital transactions. That context shapes everything in this teardown.</p>
 
     <div class="persona-grid">
 
@@ -775,19 +775,19 @@
       <div class="gap-card">
         <div class="gap-card-header">
           <span class="gap-num">2</span>
-          <span class="gap-card-title">Dynamic limits for high-trust relationships</span>
+          <span class="gap-card-title">Relationship-based dynamic caps</span>
         </div>
         <div class="gap-row">
           <span class="g-label">Gap</span>
-          <span class="g-value">₹15,000/month is insufficient for caregivers managing real household expenses or elderly parents with recurring medical needs, forcing a cash fallback for the excess amount.</span>
+          <span class="g-value">The ₹15,000 monthly cap is a blunt instrument. A parent funding a college student's living expenses has a different trust profile, spending pattern, and risk exposure than an employer authorizing a cook to buy vegetables. One flat ceiling for every relationship type in India is not a product decision. It is an absence of one.</span>
         </div>
         <div class="gap-row">
           <span class="g-label">Fix</span>
-          <span class="g-value">A high-trust tier for designated relationship types (parent, spouse) that unlocks higher limits, but only after periodic re-authorization from the primary user via biometric or UPI PIN. Limits auto-revert to the standard cap if re-authorization lapses, protecting against stolen devices and relationship breakdowns.</span>
+          <span class="g-value">Set the default cap by relationship type at onboarding: higher for immediate family (parent, spouse, child), lower for household staff and friends, with the primary user able to adjust within a band defined by their bank. The cap becomes a starting point calibrated to the relationship, not a universal ceiling imposed on it.</span>
         </div>
         <div class="gap-row outcome">
           <span class="g-label">Outcome</span>
-          <span class="g-value">Primary users can support dependents with larger genuine expenses entirely through UPI Circle, eliminating cash fallback while keeping fraud exposure controlled through re-authorization.</span>
+          <span class="g-value">Primary users can genuinely support dependents with real-world expenses without hitting an arbitrary limit. Fraud exposure stays controlled because the band is set by the bank, not by the user alone.</span>
         </div>
       </div>
 
