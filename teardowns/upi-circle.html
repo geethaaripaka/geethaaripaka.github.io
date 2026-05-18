@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UPI Circle: PM Teardown | Geetha Aripaka</title>
+  <title>UPI Circle x Pocket Money: A PM Teardown | Geetha Aripaka</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -435,8 +435,8 @@
   <div class="cs-hero">
     <span class="hero-emoji">💸</span>
     <span class="hero-label">PM Teardown #1</span>
-    <h1 class="cs-title">UPI Circle: A PM Teardown</h1>
-    <p class="cs-subtitle">How NPCI built digital pocket money for every Indian family, and why every design decision is more deliberate than it looks.</p>
+    <h1 class="cs-title">UPI Circle x Pocket Money: A PM Teardown</h1>
+    <p class="cs-subtitle">NPCI built the rails. GPay built the product. This teardown looks at both, the deliberate design decisions in the infrastructure, and whether Pocket Money actually serves the people UPI Circle was designed for.</p>
     <div class="tag-row">
       <span class="tag tag-blue">UPI</span>
       <span class="tag tag-slate">NPCI</span>
@@ -453,41 +453,41 @@
   <div class="cs-section">
     <p class="cs-section-label">Problem</p>
     <h2 class="cs-section-title">The Problem</h2>
-    <p class="cs-intro">Financially dependent individuals (children, elderly parents, caregivers) have no way to transact digitally within a trusted relationship. This forces physical cash handovers, creating control risk for the guardian and loss of autonomy for the dependent.</p>
+    <p class="cs-intro">I used to book Rapido rides for my parents because they never went digital. I'd pay, they'd travel. It worked, but I was always the middleman, a one-person bridge between their offline life and a digital payment. Separately, I'd sometimes ask my cook to pick up groceries I missed ordering. She'd pay from her own pocket, I'd reimburse her later, and neither of us was comfortable with the arrangement. These are the two exact problems UPI Circle was built to solve. Most teardowns start with the feature. This one starts with the people who needed it before it existed.</p>
 
     <div class="persona-grid">
 
       <div class="persona-card">
-        <span class="persona-icon">🧒</span>
-        <div class="persona-body">
-          <strong>Child at school</strong>
-          <p class="persona-desc">No bank account. Dependent on cash for food and stationery.</p>
-          <div class="persona-workaround"><b>Workaround:</b> Parent sends cash or transfers money in real time when child calls mid-school day.</div>
-        </div>
-      </div>
-
-      <div class="persona-card">
         <span class="persona-icon">👵</span>
         <div class="persona-body">
-          <strong>Elderly parent</strong>
-          <p class="persona-desc">Avoids UPI entirely due to PIN anxiety and fear of mistakes. Defaults to cash even at hospitals and pharmacies.</p>
-          <div class="persona-workaround"><b>Workaround:</b> Family member must be physically present or available on call for every transaction.</div>
+          <strong>The digitally-excluded parent</strong>
+          <p class="persona-desc">Kavitha, 63, retired schoolteacher. Tried UPI once at a pharmacy, entered her PIN wrong twice, panicked, and paid cash. Now she keeps ₹3,000 in her purse at all times. Her son books Rapido for her, pays her medical bills online, and calls the electricity company when there's an issue. She's not incapable, she's anxious about making an irreversible mistake with money.</p>
+          <div class="persona-workaround"><b>Workaround:</b> Her son is the real user of every digital service she consumes. She's a dependent on someone else's digital life.</div>
         </div>
       </div>
 
       <div class="persona-card">
-        <span class="persona-icon">🏠</span>
+        <span class="persona-icon">🍳</span>
         <div class="persona-body">
-          <strong>Maid / caregiver</strong>
-          <p class="persona-desc">Carries cash on behalf of the family. Zero accountability or spending visibility for the employer.</p>
-          <div class="persona-workaround"><b>Workaround:</b> Ad hoc cash handovers with no tracking of what was spent or why.</div>
+          <strong>The trusted household help</strong>
+          <p class="persona-desc">Savitha cooks and cleans for three families in Bangalore. For one of them, she sometimes picks up vegetables or household items from the market on the way. The employer hands her ₹200-300 in the morning, guessing what might be needed. Savitha sometimes pays from her own pocket and gets reimbursed. Sometimes not. There's no accountability either way, the employer doesn't know what was spent, and Savitha isn't always comfortable asking.</p>
+          <div class="persona-workaround"><b>Workaround:</b> Cash handovers based on guesswork. No record, no control, and no dignity in the arrangement.</div>
+        </div>
+      </div>
+
+      <div class="persona-card">
+        <span class="persona-icon">🎓</span>
+        <div class="persona-body">
+          <strong>The college student away from home</strong>
+          <p class="persona-desc">Riya is in her second year of engineering in Pune. Her parents are in Chennai. They transfer money monthly and she manages it herself, sometimes too well, sometimes not. They have no visibility into whether she's eating properly. She won't ask for more money mid-month because she doesn't want them to worry. They can't top her up silently for a specific need without it feeling like a check-in.</p>
+          <div class="persona-workaround"><b>Workaround:</b> Monthly lump-sum transfers. No visibility for parents, no frictionless top-up for genuine needs.</div>
         </div>
       </div>
 
     </div>
 
     <div class="thread-callout">
-      Single thread across all three: "Let my dependent act independently, while I stay in control without being physically present."
+      The same thread runs through all three: I want to enable someone I trust, without handing them full control. I want to help, without becoming the middleman every time.
     </div>
   </div>
 
@@ -522,6 +522,53 @@
     <p class="live-note">Live on GPay, PhonePe, Paytm and BHIM since <strong>August 2024</strong>.</p>
   </div>
 
+  <!-- ── Section 2b: GPay Pocket Money ── -->
+  <div class="cs-section">
+    <p class="cs-section-label">Consumer Layer</p>
+    <h2 class="cs-section-title">GPay's Pocket Money: The Consumer Layer</h2>
+    <p class="cs-intro">NPCI doesn't build consumer products. It publishes a spec and lets apps implement it. GPay was the first to build something consumers actually recognize, they called it Pocket Money, gave it a dedicated UI, and made it feel like a feature rather than a protocol. That distinction matters.</p>
+
+    <div class="decision-cards">
+
+      <div class="decision-card">
+        <div class="decision-card-title">🏷️ Branding: "Pocket Money"</div>
+        <div class="decision-row">
+          <span class="d-label">What GPay added</span>
+          <span class="d-value">A name that lands immediately. "UPI Circle" asks users to understand a protocol. "Pocket Money" asks them to remember a childhood concept. GPay chose to frame the feature around a familiar real-world behavior instead of a technical one.</span>
+        </div>
+        <div class="decision-row tradeoff">
+          <span class="d-label">What it reveals</span>
+          <span class="d-value">Naming is positioning. "Pocket Money" signals this is for families, not enterprises. It narrows the use case but deepens relevance for the mainstream audience GPay is chasing.</span>
+        </div>
+      </div>
+
+      <div class="decision-card">
+        <div class="decision-card-title">🏷️ Relationship tagging</div>
+        <div class="decision-row">
+          <span class="d-label">What GPay added</span>
+          <span class="d-value">GPay asks you to label the secondary user, parent, child, spouse, household help. NPCI's spec doesn't require this. GPay uses it to pre-configure sensible defaults and make the trust relationship legible at a glance in the UI.</span>
+        </div>
+        <div class="decision-row tradeoff">
+          <span class="d-label">What it reveals</span>
+          <span class="d-value">The relationship label is context that makes the product smarter. It's also data. GPay is building a graph of trust relationships at scale, which has obvious value beyond this feature.</span>
+        </div>
+      </div>
+
+      <div class="decision-card">
+        <div class="decision-card-title">🔔 Notification design as the control experience</div>
+        <div class="decision-row">
+          <span class="d-label">What GPay added</span>
+          <span class="d-value">Primary users get a push notification for every secondary user transaction, with the merchant name and amount. This isn't just an alert, it is the control experience. The notification is what turns delegation from "I gave them access" into "I can see exactly what they're doing."</span>
+        </div>
+        <div class="decision-row tradeoff">
+          <span class="d-label">What it reveals</span>
+          <span class="d-value">Visibility is what makes trust scalable. Without notifications, delegation feels like losing control. With them, it feels like extending it. GPay understood that the primary user's confidence is the product's core retention metric.</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <!-- ── Section 3: JTBD ── -->
   <div class="cs-section">
     <p class="cs-section-label">JTBD</p>
@@ -548,10 +595,15 @@
         <p class="jtbd-quote">"When I'm out with the child and need to buy something, I want to pay using the primary user's authorization, so I'm never out of pocket for someone else's needs."</p>
       </div>
 
+      <div class="jtbd-card">
+        <div class="jtbd-persona">🍳 Cook / household help</div>
+        <p class="jtbd-quote">"When my employer asks me to pick up groceries on the way, I want to pay from a pre-authorized amount, so I'm never spending my own money on someone else's needs and never have to ask for reimbursement."</p>
+      </div>
+
     </div>
 
     <div class="insight-box">
-      <strong>Key insight:</strong> The subject in every JTBD is the guardian, not the dependent, because UPI Circle is set up and controlled by the delegator. The feature's primary user is the person granting trust, not the person receiving it.
+      <strong>Key insight:</strong> The subject in the first three JTBDs is the guardian or delegator, because UPI Circle is set up and controlled by the primary user. The 4th flips this: for the household help persona, the job is as much about the secondary user's dignity as it is about the primary user's control. The product solves two different anxieties at once.
     </div>
   </div>
 
@@ -559,7 +611,7 @@
   <div class="cs-section">
     <p class="cs-section-label">Design Decisions</p>
     <h2 class="cs-section-title">Design Decisions</h2>
-    <p class="cs-intro">Five deliberate decisions, and the tradeoffs behind each one.</p>
+    <p class="cs-intro">Five deliberate decisions in the NPCI spec, and one more that GPay made on its own.</p>
 
     <div class="decision-cards">
 
@@ -643,6 +695,22 @@
         </div>
       </div>
 
+      <div class="decision-card">
+        <div class="decision-card-title">🪪 GPay's KYC requirement for secondary users</div>
+        <div class="decision-row">
+          <span class="d-label">Decision</span>
+          <span class="d-value">GPay requires government ID verification (Aadhaar or PAN) for secondary users during Pocket Money setup. NPCI's UPI Circle spec does not mandate this. It is GPay's own fraud mitigation layer on top of the protocol.</span>
+        </div>
+        <div class="decision-row">
+          <span class="d-label">Reason</span>
+          <span class="d-value">Secondary users operate on devices GPay doesn't control. KYC ties the secondary account to a verified real-world identity, reducing the risk of a fraudulent secondary user being added, a scammer posing as household help, or a stranger enrolled without the secondary user's knowledge.</span>
+        </div>
+        <div class="decision-row tradeoff">
+          <span class="d-label">Tradeoff</span>
+          <span class="d-value">This is the most friction-heavy step in the entire setup flow, and it lands on the users least equipped to handle it, elderly parents who may not have their Aadhaar card handy, and household help who may not have a government ID in the required format. GPay's fraud prevention logic is sound. But it partially excludes the exact personas UPI Circle was designed to serve.</span>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -690,7 +758,7 @@
   <!-- ── Section 6: Gaps & Improvements ── -->
   <div class="cs-section">
     <p class="cs-section-label">What I'd Build Next</p>
-    <h2 class="cs-section-title">Brilliant feature. Three things would make it complete.</h2>
+    <h2 class="cs-section-title">Brilliant infrastructure. Pocket Money is a good start. Four things would make it complete.</h2>
 
     <div class="gap-cards">
 
@@ -751,13 +819,32 @@
         </div>
       </div>
 
+      <div class="gap-card">
+        <div class="gap-card-header">
+          <span class="gap-num">4</span>
+          <span class="gap-card-title">Lightweight re-onboarding for elderly users who fail KYC</span>
+        </div>
+        <div class="gap-row">
+          <span class="g-label">Gap</span>
+          <span class="g-value">GPay's KYC step requires government ID verification that elderly users and household help may not have readily available. When setup fails at this step, there is no guided fallback, the user is simply blocked, with no path forward. The feature designed to include them ends up excluding them at setup.</span>
+        </div>
+        <div class="gap-row">
+          <span class="g-label">Fix</span>
+          <span class="g-value">Offer Aadhaar OTP-based verification as an alternative KYC path. Most elderly users have an Aadhaar number even if they don't have a physical card or a PAN. An OTP to their registered mobile number is a lighter, more accessible identity confirmation that still satisfies KYC requirements.</span>
+        </div>
+        <div class="gap-row outcome">
+          <span class="g-label">Outcome</span>
+          <span class="g-value">Pocket Money becomes accessible to the elderly parent and household help personas it was designed for, without compromising GPay's fraud prevention. Aadhaar OTP is still KYC, it's just lower-friction KYC. The feature finally serves the people NPCI built the rails for.</span>
+        </div>
+      </div>
+
     </div>
   </div>
 
   <!-- ── Section 7: Closing Insight ── -->
   <div class="cs-section">
     <blockquote class="pull-quote">
-      "UPI Circle is not just a payments feature. It is an answer to a question India's digital payments ecosystem ignored for a long time: what about the people who are trusted, but not account holders? Every design decision is a careful negotiation between inclusion and fraud prevention, autonomy and control, convenience and security. That tension is what makes it one of the most thoughtfully designed features in the UPI ecosystem."
+      "NPCI built UPI Circle for inclusion. GPay built Pocket Money for mainstream adoption. These are not the same goal, and the gap shows up exactly where it hurts, in the KYC step that blocks the elderly parent, in the UI that assumes a level of digital comfort the target persona doesn't have, in the notification that feels like control to the primary user and surveillance to the secondary one. I book Rapido rides for my parents because they never went digital. UPI Circle is the right answer to that problem. Pocket Money is a good first product on top of it. But the person it was built for is still waiting at the KYC screen."
     </blockquote>
   </div>
 
@@ -769,3 +856,4 @@
 
 </body>
 </html>
+
