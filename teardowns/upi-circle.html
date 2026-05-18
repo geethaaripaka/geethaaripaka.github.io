@@ -739,15 +739,15 @@
         <div class="metric-card-title">🚨 Guardrail</div>
         <ul class="metric-list">
           <li>% of transactions disputed as unauthorized</li>
-          <li>% of circles revoked within 7 days of setup (signals fraud or trust breakdown at onboarding)</li>
-          <li>Avg time to dispute resolution for unauthorized UPI Circle transactions (where user trust breaks down permanently if handled slowly)</li>
-          <li>% of disputed transactions where the secondary user was added within the last 7 days (flags onboarding-stage fraud specifically, the highest-risk window in any delegated payments system)</li>
+          <li>% of circles revoked within 7 days of setup (fraud or trust breakdown at onboarding)</li>
+          <li>Avg time to dispute resolution for unauthorized UPI Circle transactions</li>
+          <li>% of disputed transactions where secondary user was added within last 7 days (onboarding-stage fraud flag)</li>
         </ul>
       </div>
 
-      <div class="metric-card">
+      <div class="metric-card" style="grid-column: 1 / -1;">
         <div class="metric-card-title">💚 Health</div>
-        <ul class="metric-list">
+        <ul class="metric-list" style="display: grid; grid-template-columns: 1fr 1fr; gap: 7px 24px;">
           <li>% of secondary users who complete their first transaction within 7 days of setup (activation rate, a circle that never transacts is a setup that failed its job)</li>
           <li>% of full-delegation circles that switch to partial delegation within 30 days (signals the primary user lost confidence in the secondary user, worth investigating whether this is a product problem or a relationship problem)</li>
         </ul>
