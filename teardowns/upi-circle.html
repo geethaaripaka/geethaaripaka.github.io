@@ -759,32 +759,13 @@
   <!-- ── Section 6: Gaps & Improvements ── -->
   <div class="cs-section">
     <p class="cs-section-label">What I'd Add</p>
-    <h2 class="cs-section-title">Four things to make it a much better product.</h2>
+    <h2 class="cs-section-title">Three things to make it a much better product.</h2>
 
     <div class="gap-cards">
 
       <div class="gap-card">
         <div class="gap-card-header">
           <span class="gap-num">1</span>
-          <span class="gap-card-title">Biometric-only auth for elderly secondary users</span>
-        </div>
-        <div class="gap-row">
-          <span class="g-label">Gap</span>
-          <span class="g-value">PIN entry was the original barrier keeping elderly users off UPI entirely. Full delegation reintroduces the same friction for the exact persona it was meant to serve.</span>
-        </div>
-        <div class="gap-row">
-          <span class="g-label">Fix</span>
-          <span class="g-value">Replace PIN with face ID or fingerprint authentication for secondary users on biometric-capable devices, making the transaction flow scan-and-pay rather than scan-enter-PIN-pay.</span>
-        </div>
-        <div class="gap-row outcome">
-          <span class="g-label">Outcome</span>
-          <span class="g-value">Higher transaction completion rates among elderly secondary users, reduction in failed or abandoned payments due to PIN anxiety.</span>
-        </div>
-      </div>
-
-      <div class="gap-card">
-        <div class="gap-card-header">
-          <span class="gap-num">2</span>
           <span class="gap-card-title">Relationship-based dynamic caps</span>
         </div>
         <div class="gap-row">
@@ -798,6 +779,25 @@
         <div class="gap-row outcome">
           <span class="g-label">Outcome</span>
           <span class="g-value">Primary users can genuinely support dependents with real-world expenses without hitting an arbitrary limit. Fraud exposure stays controlled because the band is set by the bank, not by the user alone.</span>
+        </div>
+      </div>
+
+      <div class="gap-card">
+        <div class="gap-card-header">
+          <span class="gap-num">2</span>
+          <span class="gap-card-title">Lightweight re-onboarding for elderly users who fail KYC</span>
+        </div>
+        <div class="gap-row">
+          <span class="g-label">Gap</span>
+          <span class="g-value">GPay's KYC step requires government ID verification that elderly users and household help may not have readily available. When setup fails at this step, there is no guided fallback, the user is simply blocked, with no path forward. The feature designed to include them ends up excluding them at setup.</span>
+        </div>
+        <div class="gap-row">
+          <span class="g-label">Fix</span>
+          <span class="g-value">Offer Aadhaar OTP-based verification as an alternative KYC path. Most elderly users have an Aadhaar number even if they don't have a physical card or a PAN. An OTP to their registered mobile number is a lighter, more accessible identity confirmation that still satisfies KYC requirements.</span>
+        </div>
+        <div class="gap-row outcome">
+          <span class="g-label">Outcome</span>
+          <span class="g-value">Pocket Money becomes accessible to the elderly parent and household help personas it was designed for, without compromising GPay's fraud prevention. Aadhaar OTP is still KYC, it's just lower-friction KYC. The feature finally serves the people NPCI built the rails for.</span>
         </div>
       </div>
 
@@ -817,25 +817,6 @@
         <div class="gap-row outcome">
           <span class="g-label">Outcome</span>
           <span class="g-value">Caregivers can manage the full spectrum of dependent needs digitally, completing the financial inclusion promise of UPI Circle.</span>
-        </div>
-      </div>
-
-      <div class="gap-card">
-        <div class="gap-card-header">
-          <span class="gap-num">4</span>
-          <span class="gap-card-title">Lightweight re-onboarding for elderly users who fail KYC</span>
-        </div>
-        <div class="gap-row">
-          <span class="g-label">Gap</span>
-          <span class="g-value">GPay's KYC step requires government ID verification that elderly users and household help may not have readily available. When setup fails at this step, there is no guided fallback, the user is simply blocked, with no path forward. The feature designed to include them ends up excluding them at setup.</span>
-        </div>
-        <div class="gap-row">
-          <span class="g-label">Fix</span>
-          <span class="g-value">Offer Aadhaar OTP-based verification as an alternative KYC path. Most elderly users have an Aadhaar number even if they don't have a physical card or a PAN. An OTP to their registered mobile number is a lighter, more accessible identity confirmation that still satisfies KYC requirements.</span>
-        </div>
-        <div class="gap-row outcome">
-          <span class="g-label">Outcome</span>
-          <span class="g-value">Pocket Money becomes accessible to the elderly parent and household help personas it was designed for, without compromising GPay's fraud prevention. Aadhaar OTP is still KYC, it's just lower-friction KYC. The feature finally serves the people NPCI built the rails for.</span>
         </div>
       </div>
 
