@@ -338,6 +338,14 @@
     /* ── Text wrapping: avoid one-word last lines ── */
     p, li, .problem-text, .decision-body { text-wrap: pretty; }
     h1, h2, .cs-subtitle, .step-title { text-wrap: balance; }
+
+    /* ── Mobile header (same as project pages) ── */
+    @media (max-width: 600px) {
+      .nav-links { gap: 16px; }
+    }
+    @media (max-width: 480px) {
+      .nav-inner { flex-wrap: wrap; height: auto; min-height: 52px; padding: 8px 0; column-gap: 24px; row-gap: 2px; }
+    }
   </style>
 </head>
 <body>

@@ -288,6 +288,7 @@
       gap: 12px;
     }
     @media (max-width: 520px) { .contact-grid { grid-template-columns: 1fr; } }
+    @media (min-width: 768px) { .contact-grid { grid-template-columns: repeat(3, 1fr); } }
 
     .contact-link {
       display: flex;
@@ -327,6 +328,14 @@
     @media (max-width: 600px) {
       section { padding: 52px 0; }
       .hero { padding-top: 60px; }
+    }
+
+    /* ── Mobile header (same as project pages) ── */
+    @media (max-width: 600px) {
+      .nav-links { gap: 16px; }
+    }
+    @media (max-width: 480px) {
+      .nav-inner { flex-wrap: wrap; height: auto; min-height: 52px; padding: 8px 0; column-gap: 24px; row-gap: 2px; }
     }
   </style>
 </head>
@@ -409,7 +418,7 @@
         </div>
         <p class="card-metric">Multi-source search → cited answer in seconds · ~60% less retrieval effort</p>
         <p class="card-desc">
-          Grounded RAG assistant for the BA team using hybrid retrieval over Global Payment Investigations guides, with citations,
+          Grounded RAG assistant for BA and technical teams using hybrid retrieval over Global Payment Investigations guides, with citations,
           source preview and a feedback loop.
         </p>
         <div class="card-meta">
