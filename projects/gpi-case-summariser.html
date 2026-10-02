@@ -97,28 +97,16 @@
     .tag-violet { background: #ede9fe; color: #5b21b6; }
     .tag-slate  { background: #f1f5f9; color: #475569; }
 
-    .context-line {
-      font-size: 14px;
-      line-height: 1.65;
-      color: var(--muted);
-      padding: 14px 18px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      margin-bottom: 28px;
-    }
-
     .glance { margin-bottom: 44px; }
     .glance-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
     .glance-tile {
-      padding: 14px 16px;
+      padding: 16px 18px;
       background: var(--accent-soft);
       border: 1px solid var(--accent-line);
       border-radius: var(--radius);
-      font-size: 14px;
-      font-weight: 600;
-      line-height: 1.45;
     }
+    .glance-value { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.25; white-space: nowrap; }
+    .glance-label { font-size: 13px; color: var(--muted); line-height: 1.45; margin-top: 4px; }
 
     .divider { border: none; border-top: 1px solid var(--border); margin: 0 0 48px; }
 
@@ -141,6 +129,8 @@
     .cs-body { font-size: 15px; line-height: 1.75; }
     .cs-body p + p { margin-top: 12px; }
     .cs-intro { font-size: 15px; line-height: 1.75; margin-bottom: 18px; }
+    .users-note { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+    .users-note b { font-weight: 600; color: var(--text); }
 
     .problem-grid { display: grid; gap: 10px; }
     .problem-card {
@@ -264,7 +254,7 @@
       color: var(--accent);
       margin-bottom: 6px;
     }
-    .metric-value { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.3; }
+    .metric-value { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.3; white-space: nowrap; }
     .metric-note { font-size: 13px; color: var(--muted); margin-top: 4px; }
 
     .highlight-box {
@@ -317,6 +307,15 @@
       .callout { padding: 18px 20px; }
       .callout-quote { font-size: 16px; }
     }
+
+    /* ── Text wrapping: avoid one-word last lines ── */
+    p, li, .problem-text, .step-desc { text-wrap: pretty; }
+    h1, h2, .cs-subtitle, .callout-quote, .step-title, .glance-label, .metric-label, .metric-note { text-wrap: balance; }
+    .callout { text-wrap: pretty; } /* balance stops working past ~6 lines */
+
+    @media (max-width: 480px) {
+      .nav-inner { flex-wrap: wrap; height: auto; min-height: 52px; padding: 8px 0; column-gap: 24px; row-gap: 2px; }
+    }
   </style>
 </head>
 <body>
@@ -338,7 +337,7 @@
 
   <div class="cs-hero">
     <h1 class="cs-title">GPI Case Summariser</h1>
-    <p class="cs-subtitle">AI-generated case summaries that remove the hidden cost of every handover: 5–15 minute manual reads to 60-second structured output</p>
+    <p class="cs-subtitle">AI-generated summaries of resolved payment investigation cases, from 15-minute manual reads to 60-second structured output</p>
     <div class="tag-row">
       <span class="tag tag-violet">Platform</span>
       <span class="tag tag-slate">HSBC Technology</span>
@@ -347,14 +346,21 @@
     </div>
   </div>
 
-  <p class="context-line">Part of the GPI AI strategy I drive: identifying AI opportunities across BAs, developers, architects and operations, and scoping them into POCs: Case Summariser, Knowledge Assistant, and a requirements-to-Jira artifact generator.</p>
-
   <div class="glance">
     <p class="cs-section-label">At a glance</p>
     <div class="glance-tiles">
-      <div class="glance-tile">5–15 min → under 60 s per case</div>
-      <div class="glance-tile">~40% less case-review effort</div>
-      <div class="glance-tile">Validated with investigators before investment</div>
+      <div class="glance-tile">
+        <p class="glance-value">&lt;60 s</p>
+        <p class="glance-label">per case, down from 5–15 min</p>
+      </div>
+      <div class="glance-tile">
+        <p class="glance-value">~40%</p>
+        <p class="glance-label">less case-review effort</p>
+      </div>
+      <div class="glance-tile">
+        <p class="glance-value">Validated</p>
+        <p class="glance-label">with investigators before investment</p>
+      </div>
     </div>
   </div>
 
@@ -363,6 +369,7 @@
   <div class="cs-section">
     <p class="cs-section-label">Context</p>
     <h2 class="cs-section-title">The Problem</h2>
+    <p class="users-note"><b>Users:</b> Payment Case Investigators.</p>
     <p class="cs-intro">Cross-border payment investigations were seen as slow, and the assumption was that the investigation itself was the bottleneck.</p>
     <div class="problem-grid">
       <div class="problem-card">
@@ -376,14 +383,14 @@
         <span class="problem-icon">🌍</span>
         <div class="problem-text">
           <strong>No consistent format across markets</strong>
-          Case records from different markets are entered differently, no standard structure, no shared summary format. Comparing or learning from cases across regions is impractical.
+          Case records from different markets are entered differently: no standard structure, no shared summary format. Comparing or learning from cases across regions is impractical.
         </div>
       </div>
       <div class="problem-card">
         <span class="problem-icon">🧠</span>
         <div class="problem-text">
           <strong>Precedent held in individual memory</strong>
-          Resolution logic and similar-case knowledge lives with individual investigators, not in the system. It's lost on rotation and hard to transfer.
+          Resolution logic and similar-case knowledge live with individual investigators, not in the system. It's lost on rotation and hard to transfer.
         </div>
       </div>
     </div>
@@ -434,21 +441,21 @@
         <span class="step-num">1</span>
         <div class="step-body">
           <p class="step-title">Summarise button on the Pega home screen</p>
-          <p class="step-desc">Accessible from the main workspace, no extra navigation, no new screen to learn.</p>
+          <p class="step-desc">Accessible from the main workspace. No extra navigation, no new screen to learn.</p>
         </div>
       </div>
       <div class="step">
         <span class="step-num">2</span>
         <div class="step-body">
           <p class="step-title">Investigator enters a Case ID and clicks Summarise</p>
-          <p class="step-desc">The system retrieves the full case history for that ID, active, resolved, or archived.</p>
+          <p class="step-desc">The system retrieves the full case history for that ID, whether active, resolved or archived.</p>
         </div>
       </div>
       <div class="step">
         <span class="step-num">3</span>
         <div class="step-body">
           <p class="step-title">AI reads unstructured case data</p>
-          <p class="step-desc">Case notes, SWIFT messages, exception fields, attachments and resolution details, processed and returned as structured plain-English output in under 60 seconds.</p>
+          <p class="step-desc">Case notes, SWIFT messages, exception fields, attachments and resolution details are processed and returned as structured plain-English output in under 60 seconds.</p>
         </div>
       </div>
       <div class="step">
@@ -483,7 +490,7 @@
     <div class="useful-grid">
       <div class="problem-card">
         <span class="problem-icon">🔁</span>
-        <div class="problem-text"><strong>Case reopens</strong>Quickly reconstruct what happened without manually reading through unstructured history.</div>
+        <div class="problem-text"><strong>Case reopens</strong>Quickly reconstruct what happened without reading through unstructured history.</div>
       </div>
       <div class="problem-card">
         <span class="problem-icon">🔄</span>
@@ -532,7 +539,7 @@
 
         <rect class="d-node-accent" x="70" y="224" width="220" height="52" rx="8" />
         <text class="d-title" x="180" y="245" text-anchor="middle">LLM</text>
-        <text class="d-sub" x="180" y="263" text-anchor="middle">GPT-5 mini · local model fallback</text>
+        <text class="d-sub" x="180" y="263" text-anchor="middle">GPT-5 · deterministic fallback</text>
         <line class="d-line" x1="180" y1="277" x2="180" y2="302" marker-end="url(#arrow)" />
 
         <rect class="d-node" x="10" y="304" width="340" height="112" rx="8" />
@@ -558,35 +565,35 @@
         <span class="step-num">1</span>
         <div class="step-body">
           <p class="step-title">Investigator opens Pega home screen</p>
-          <p class="step-desc">The Summarise button is present on the home screen, no navigation required. Accessible from the main workspace at any point in the investigator's workflow.</p>
+          <p class="step-desc">The Summarise button sits on the home screen, so no navigation is required. It's accessible at any point in the investigator's workflow.</p>
         </div>
       </div>
       <div class="step">
         <span class="step-num">2</span>
         <div class="step-body">
           <p class="step-title">Enters Case ID and clicks Summarise</p>
-          <p class="step-desc">Single input. Investigator enters the Case ID of any case, active, resolved, or archived, that they want to review or reference.</p>
+          <p class="step-desc">Single input. The investigator enters the Case ID of any case (active, resolved or archived) they want to review or reference.</p>
         </div>
       </div>
       <div class="step">
         <span class="step-num">3</span>
         <div class="step-body">
           <p class="step-title">System retrieves full case history</p>
-          <p class="step-desc">The system pulls the complete case history for that ID, case notes, SWIFT message fields, exception metadata, attachments and resolution details. No manual copy-paste.</p>
+          <p class="step-desc">The system pulls the complete case history for that ID: case notes, SWIFT message fields, exception metadata, attachments and resolution details. No manual copy-paste.</p>
         </div>
       </div>
       <div class="step">
         <span class="step-num">4</span>
         <div class="step-body">
           <p class="step-title">AI generates a structured 7-field summary</p>
-          <p class="step-desc">Output: case overview, parties, exception type, actions taken, resolution, time-to-resolve, and reference numbers, plain English, consistently formatted. Alongside it: a case timeline, relevant attachments and a workflow view.</p>
+          <p class="step-desc">Output: case overview, parties, exception type, actions taken, resolution, time-to-resolve and reference numbers, in plain English and consistently formatted. Alongside it: a case timeline, relevant attachments and a workflow view.</p>
         </div>
       </div>
       <div class="step">
         <span class="step-num">5</span>
         <div class="step-body">
           <p class="step-title">Investigator reviews and acts</p>
-          <p class="step-desc">Summary is advisory; it doesn't override Pega workflow or auto-populate fields. Used for case reopens (reconstruct what happened), finding similar cases (scan precedents fast), or cross-market consistency (same structured format regardless of how the original record was entered).</p>
+          <p class="step-desc">The summary is advisory; it doesn't override Pega workflow or auto-populate fields. It's used for case reopens (reconstruct what happened), finding similar cases (scan precedents fast) and cross-market consistency (the same structured format regardless of how the original record was entered).</p>
         </div>
       </div>
     </div>
@@ -596,7 +603,7 @@
     <p class="cs-section-label">Delivery</p>
     <h2 class="cs-section-title">Taking It to DEV</h2>
     <div class="cs-body">
-      <p>With the validation in hand, I made the case for investment and worked with the engineering team to take it into DEV on HSBC's approved enterprise AI platform using GPT-5 mini. I pushed to keep the local model as a fallback, so investigators wouldn't lose the tool if platform access changed.</p>
+      <p>With the validation in hand, I made the case for investment and worked with the engineering team to take it into DEV on HSBC's approved enterprise AI platform using GPT-5. I pushed for a deterministic fallback, so investigators still get a usable output if the AI platform is unavailable.</p>
     </div>
   </div>
 
@@ -612,9 +619,9 @@
     </div>
     <div class="metric-tiles" style="margin-top:12px;">
       <div class="metric-tile">
-        <p class="metric-label">Per case</p>
-        <p class="metric-value">5–15 min → under 60 seconds</p>
-        <p class="metric-note">Time to understand a case's history</p>
+        <p class="metric-label">Time to understand a case</p>
+        <p class="metric-value">&lt;60 s</p>
+        <p class="metric-note">per case, down from 5–15 min</p>
       </div>
       <div class="metric-tile">
         <p class="metric-label">Overall case-review effort</p>
@@ -628,7 +635,7 @@
     <p class="cs-section-label">Ownership</p>
     <h2 class="cs-section-title">My Role</h2>
     <div class="role-box">
-      Product Manager. I identified the hidden handover cost, validated it with a prototype and investigator testing, defined the output (7-field summary, timeline, attachments, workflow view) and success criteria, and partnered with the engineering team to take it into DEV on the enterprise AI platform.
+      Scoped and drove this as Product Manager, from problem identification and success criteria through prototyping and validation with payment case investigators, then partnered with the engineering team to take it into DEV on HSBC's enterprise AI platform.
     </div>
   </div>
 
@@ -645,8 +652,8 @@
     <div class="chip-grid">
       <span class="chip">Python</span>
       <span class="chip">Flask</span>
-      <span class="chip">GPT-5 mini</span>
-      <span class="chip">Local LLM (fallback)</span>
+      <span class="chip">GPT-5</span>
+      <span class="chip">Deterministic fallback</span>
       <span class="chip">GKE</span>
       <span class="chip">Pega Smart Investigate 25</span>
     </div>
