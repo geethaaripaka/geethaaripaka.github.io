@@ -396,6 +396,11 @@
       text-wrap: balance;
     }
 
+    /* ── Sources ── */
+    .sources { font-size: 13px; color: var(--muted); line-height: 1.7; padding-left: 18px; }
+    .sources a { color: var(--accent); text-decoration: none; }
+    .sources a:hover { text-decoration: underline; }
+
     /* ── Text wrapping: avoid one-word last lines ── */
     p, li, td, .d-value, .g-value, .persona-workaround, .thread-callout, .insight-box { text-wrap: pretty; }
 
@@ -523,7 +528,7 @@
       </tbody>
     </table>
 
-    <p class="live-note">Live on GPay, PhonePe, Paytm and BHIM since <strong>August 2024</strong>.</p>
+    <p class="live-note">Launched by NPCI in August 2024 and rolled out across major UPI apps, including Google Pay.</p>
     <p class="cs-intro" style="margin-top: 16px;">What the spec doesn't capture is why this took so long. UPI has been live since 2016. The delegated payments problem (I want someone I trust to spend from my account without giving them my PIN) has existed since day one. UPI Circle launched in 2024. Eight years of workarounds for a problem that was visible from the start.</p>
   </div>
 
@@ -664,11 +669,11 @@
         <div class="decision-card-title">📋 Two trust gates at setup</div>
         <div class="decision-row">
           <span class="d-label">Decision</span>
-          <span class="d-value">Secondary users can only be added via the primary user's contact list or QR scan, never by manually typing a phone number. The primary user must enter their UPI PIN during the setup/linking process itself.</span>
+          <span class="d-value">Secondary users can't be added by typing a phone number. The primary user links them by scanning their UPI Circle QR code or entering their UPI ID (and, on Google Pay, by picking them from contacts).</span>
         </div>
         <div class="decision-row">
           <span class="d-label">Reason</span>
-          <span class="d-value">The contact list requirement protects the secondary user. If anyone could type any number, a stranger could unknowingly be enrolled in someone's circle and potentially used as a mule account. The PIN at setup protects the primary user. It confirms the account holder is the one creating the circle, not someone who borrowed or stole their phone.</span>
+          <span class="d-value">These linking methods protect the secondary user. If anyone could type any phone number, a stranger could unknowingly be enrolled in someone's circle and potentially used as a mule account. The PIN at setup protects the primary user. It confirms the account holder is the one creating the circle, not someone who borrowed or stole their phone.</span>
         </div>
         <div class="decision-row tradeoff">
           <span class="d-label">Tradeoff</span>
@@ -834,6 +839,17 @@
     <blockquote class="pull-quote">
       NPCI built UPI Circle for inclusion. GPay built Pocket Money for mainstream adoption. The gap between those goals shows up exactly where it hurts: the KYC step that blocks the elderly parent, the in-person QR code needed to add a parent in another city, and the notification that feels like control to one user and surveillance to the other. UPI Circle is the right answer to the problem. But the person it was built for is still waiting at the KYC screen.
     </blockquote>
+  </div>
+
+  <!-- ── Sources ── -->
+  <div class="cs-section">
+    <p class="cs-section-label">Sources</p>
+    <ul class="sources">
+      <li><a href="https://www.business-standard.com/finance/personal-finance/npci-launches-upi-circle-for-secure-delegated-payments-with-trusted-users-124081900536_1.html" target="_blank" rel="noopener">Business Standard: NPCI launches UPI Circle for secure delegated payments (Aug 2024)</a></li>
+      <li><a href="https://support.google.com/pay/india/answer/15128460?hl=en" target="_blank" rel="noopener">Google Pay Help: Pocket Money on UPI Circle</a></li>
+      <li><a href="https://www.business-standard.com/finance/personal-finance/how-to-make-payments-with-google-pay-s-upi-circle-a-complete-guide-124090200230_1.html" target="_blank" rel="noopener">Business Standard: How to make payments with Google Pay's UPI Circle</a></li>
+      <li><a href="https://razorpay.com/blog/what-is-upi-circle/" target="_blank" rel="noopener">Razorpay: What is UPI Circle and how does it work?</a></li>
+    </ul>
   </div>
 
 </main>
