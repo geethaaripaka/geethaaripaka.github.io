@@ -116,7 +116,7 @@
     .thread-callout {
       margin-top: 16px; padding: 16px 20px;
       background: var(--accent-soft); border: 1px solid #c7d9f9;
-      border-radius: var(--radius); font-size: 14px; font-style: italic; line-height: 1.65;
+      border-radius: var(--radius); font-size: 14px; line-height: 1.65;
     }
 
     /* ── Tables ── */
@@ -179,8 +179,8 @@
     .north-hyp { font-size: 13.5px; margin-top: 10px; padding-top: 10px; border-top: 1px solid #c7d9f9; }
     .north-hyp b { color: var(--accent); }
 
-    .assume { margin-top: 14px; }
-    .assume-note { font-size: 12.5px; color: var(--muted); margin-top: 10px; }
+    .assume-lead { font-size: 14px; font-weight: 700; margin-top: 22px; margin-bottom: 4px; }
+    .assume-text { margin-bottom: 0; }
 
     /* ── Compare ── */
     .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -194,7 +194,7 @@
     .pull-quote {
       padding: 30px 32px; background: var(--surface); border: 1px solid var(--border);
       border-left: 4px solid var(--accent); border-radius: 0 var(--radius) var(--radius) 0;
-      font-size: 17px; font-style: italic; line-height: 1.8;
+      font-size: 16px; font-weight: 500; line-height: 1.7; text-wrap: balance;
     }
 
     .sources { font-size: 13px; color: var(--muted); line-height: 1.7; padding-left: 18px; }
@@ -500,19 +500,8 @@
       An opt-in A/B test, starting with the driving route preview because the user is still parked, then the mid-drive voice prompt once safety signals hold steady. Expand only if saved-place visits go up and opt-outs stay flat.
     </div>
 
-    <div class="table-wrap assume">
-      <table class="feature-table">
-        <thead><tr><th>Assumption I'd validate first</th><th>Rough estimate</th></tr></thead>
-        <tbody>
-          <tr><td>Saved places visited within 90 days today</td><td>~10%</td></tr>
-          <tr><td>Drives with a saved place within a 5-min detour (users with 50+ saves)</td><td>~1 in 10</td></tr>
-          <tr><td>Nudges accepted ("Add stop" or a spoken "Yes")</td><td>5 to 10%</td></tr>
-          <tr><td>Added stops actually reached</td><td>70 to 80%</td></tr>
-          <tr><td>Opted-in users who turn it off in the first month</td><td>Under 5% (guardrail)</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="assume-note">These are my own estimates, not published data. They are the first things the A/B test would confirm or correct.</p>
+    <p class="assume-lead">Assumptions to validate first</p>
+    <p class="cs-intro assume-text">This proposal rests on a few untested assumptions: that most saved places go unvisited today, that drives regularly pass near them, that a well-timed nudge is welcome rather than distracting, and that people who accept actually make the stop. The A/B test would check each of these, with opt-out rate as the guardrail: if users switch the feature off, the nudges are wrong, however many visits they drive.</p>
   </div>
 
   <!-- ── Risks ── -->
