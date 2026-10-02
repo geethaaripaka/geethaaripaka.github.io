@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -11,10 +11,12 @@
       --bg: #ffffff;
       --surface: #f7f7f5;
       --border: #e8e8e4;
+      --border-strong: #c5c5c2;
       --text: #1a1a1a;
       --muted: #787774;
       --accent: #2f6feb;
       --accent-soft: #eef3fd;
+      --accent-line: #c7d9f9;
       --radius: 8px;
       --max: 720px;
     }
@@ -70,7 +72,7 @@
     }
     .back-link:hover { color: var(--text); }
 
-    .cs-hero { margin-bottom: 52px; }
+    .cs-hero { margin-bottom: 28px; }
     .cs-title {
       font-size: clamp(1.75rem, 5vw, 2.5rem);
       font-weight: 700;
@@ -95,6 +97,29 @@
     .tag-violet { background: #ede9fe; color: #5b21b6; }
     .tag-slate  { background: #f1f5f9; color: #475569; }
 
+    .context-line {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--muted);
+      padding: 14px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 28px;
+    }
+
+    .glance { margin-bottom: 44px; }
+    .glance-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .glance-tile {
+      padding: 14px 16px;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-line);
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
     .divider { border: none; border-top: 1px solid var(--border); margin: 0 0 48px; }
 
     .cs-section { margin-bottom: 48px; }
@@ -115,6 +140,7 @@
 
     .cs-body { font-size: 15px; line-height: 1.75; }
     .cs-body p + p { margin-top: 12px; }
+    .cs-intro { font-size: 15px; line-height: 1.75; margin-bottom: 18px; }
 
     .problem-grid { display: grid; gap: 10px; }
     .problem-card {
@@ -129,16 +155,6 @@
     .problem-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
     .problem-text { font-size: 14px; line-height: 1.6; }
     .problem-text strong { font-weight: 600; display: block; margin-bottom: 2px; }
-
-    .solution-list { list-style: none; display: grid; gap: 10px; }
-    .solution-list li {
-      display: flex;
-      align-items: baseline;
-      gap: 10px;
-      font-size: 15px;
-      line-height: 1.65;
-    }
-    .solution-list li::before { content: "→"; color: var(--accent); font-weight: 600; flex-shrink: 0; }
 
     .steps { display: grid; gap: 20px; }
     .step {
@@ -164,9 +180,18 @@
       flex-shrink: 0;
       margin-top: 1px;
     }
-    .step-body { flex: 1; }
+    .step-body { flex: 1; min-width: 0; }
     .step-title { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
     .step-desc { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+    .mini-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
 
     .chip-grid { display: flex; flex-wrap: wrap; gap: 8px; }
     .chip {
@@ -179,9 +204,72 @@
       border-radius: 20px;
     }
 
+    .output-box {
+      padding: 18px 20px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 24px;
+    }
+    .output-box .chip-grid + .mini-label { margin-top: 14px; }
+
+    .useful-grid { display: grid; gap: 8px; }
+    .useful-grid .problem-card { padding: 14px 18px; }
+    .useful-grid .problem-icon { font-size: 16px; }
+
+    .callout {
+      padding: 20px 24px;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-line);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      font-size: 15px;
+      line-height: 1.75;
+    }
+    .callout-quote { font-size: 17px; font-style: italic; line-height: 1.7; }
+
+    /* ── Diagram ── */
+    .diagram {
+      padding: 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 24px;
+    }
+    .diagram svg { display: block; width: 100%; max-width: 420px; height: auto; margin: 0 auto; }
+    .diagram text { font-family: inherit; }
+    .d-node { fill: var(--bg); stroke: var(--border-strong); stroke-width: 1; }
+    .d-node-accent { fill: var(--accent-soft); stroke: var(--accent-line); stroke-width: 1; }
+    .d-pill { fill: var(--surface); stroke: var(--border); stroke-width: 1; }
+    .d-pill-accent { fill: var(--accent-soft); stroke: var(--accent-line); stroke-width: 1; }
+    .d-title { fill: var(--text); font-size: 13px; font-weight: 600; }
+    .d-sub { fill: var(--muted); font-size: 11.5px; }
+    .d-pill-text { fill: var(--text); font-size: 11.5px; }
+    .d-line { stroke: var(--muted); stroke-width: 1.25; fill: none; }
+    .d-head { fill: var(--muted); }
+
+    /* ── Metrics ── */
+    .metric-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .metric-tile {
+      padding: 20px 22px;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-line);
+      border-radius: var(--radius);
+    }
+    .metric-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .metric-value { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.3; }
+    .metric-note { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
     .highlight-box {
       background: var(--accent-soft);
-      border: 1px solid #c7d9f9;
+      border: 1px solid var(--accent-line);
       border-radius: var(--radius);
       padding: 20px 24px;
     }
@@ -221,6 +309,14 @@
       font-size: 12px;
       color: #999;
     }
+
+    @media (max-width: 600px) {
+      .nav-links { gap: 16px; }
+      .metric-tiles, .glance-tiles { grid-template-columns: 1fr; }
+      .diagram { padding: 14px 8px; }
+      .callout { padding: 18px 20px; }
+      .callout-quote { font-size: 16px; }
+    }
   </style>
 </head>
 <body>
@@ -242,11 +338,23 @@
 
   <div class="cs-hero">
     <h1 class="cs-title">GPI Case Summariser</h1>
-    <p class="cs-subtitle">AI-generated summaries of resolved payment investigation cases, from 15-minute manual reads to 60-second structured output</p>
+    <p class="cs-subtitle">AI-generated case summaries that remove the hidden cost of every handover: 5–15 minute manual reads to 60-second structured output</p>
     <div class="tag-row">
       <span class="tag tag-violet">Platform</span>
       <span class="tag tag-slate">HSBC Technology</span>
       <span class="tag tag-slate">2025–2026</span>
+      <span class="tag tag-slate">Product Manager</span>
+    </div>
+  </div>
+
+  <p class="context-line">Part of the GPI AI strategy I drive: identifying AI opportunities across BAs, developers, architects and operations, and scoping them into POCs: Case Summariser, Knowledge Assistant, and a requirements-to-Jira artifact generator.</p>
+
+  <div class="glance">
+    <p class="cs-section-label">At a glance</p>
+    <div class="glance-tiles">
+      <div class="glance-tile">5–15 min → under 60 s per case</div>
+      <div class="glance-tile">~40% less case-review effort</div>
+      <div class="glance-tile">Validated with investigators before investment</div>
     </div>
   </div>
 
@@ -255,6 +363,7 @@
   <div class="cs-section">
     <p class="cs-section-label">Context</p>
     <h2 class="cs-section-title">The Problem</h2>
+    <p class="cs-intro">Cross-border payment investigations were seen as slow, and the assumption was that the investigation itself was the bottleneck.</p>
     <div class="problem-grid">
       <div class="problem-card">
         <span class="problem-icon">🗂️</span>
@@ -275,6 +384,43 @@
         <div class="problem-text">
           <strong>Precedent held in individual memory</strong>
           Resolution logic and similar-case knowledge lives with individual investigators, not in the system. It's lost on rotation and hard to transfer.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-section">
+    <p class="cs-section-label">Insight</p>
+    <h2 class="cs-section-title">The Insight</h2>
+    <div class="callout">
+      When I looked closely at the workflow, much of the time went into rebuilding case history. Whenever a case was reopened, reassigned or audited, the investigator had to go through attachments, SWIFT messages, emails, notes and prior communications across different sources before understanding what had already happened. It looked like normal prep work, so nobody treated it as a problem. But it was effectively a tax on every handover.
+    </div>
+  </div>
+
+  <div class="cs-section">
+    <p class="cs-section-label">Discovery</p>
+    <h2 class="cs-section-title">How I Validated It</h2>
+    <p class="cs-intro">Before asking for significant technology investment, I wanted to prove this was worth solving.</p>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">1</span>
+        <div class="step-body">
+          <p class="step-title">Confirmed the pain was recurring</p>
+          <p class="step-desc">Reopens, reassignments and audits repeatedly triggered the same manual reconstruction; it wasn't an occasional inconvenience.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <div class="step-body">
+          <p class="step-title">Built a lightweight prototype</p>
+          <p class="step-desc">I used a local model and local data so an investigator could enter a Case ID and get a structured summary, timeline, relevant attachments and a workflow view, testing the concept without waiting for enterprise infrastructure.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <div class="step-body">
+          <p class="step-title">Tested with real investigators</p>
+          <p class="step-desc">They didn't just say it was helpful; they started asking for more, like how many times a case had been reopened. That was the signal we'd found a genuine workflow problem, not just built an interesting AI demo.</p>
         </div>
       </div>
     </div>
@@ -302,31 +448,54 @@
         <span class="step-num">3</span>
         <div class="step-body">
           <p class="step-title">AI reads unstructured case data</p>
-          <p class="step-desc">Case notes, SWIFT messages, exception fields, and resolution details, processed and returned as a structured 7-field plain-English summary in under 60 seconds.</p>
+          <p class="step-desc">Case notes, SWIFT messages, exception fields, attachments and resolution details, processed and returned as structured plain-English output in under 60 seconds.</p>
         </div>
       </div>
       <div class="step">
         <span class="step-num">4</span>
         <div class="step-body">
-          <p class="step-title">Structured output, 7 fixed fields</p>
-          <p class="step-desc">Case overview · Parties involved · Exception type · Actions taken · Resolution · Time-to-resolve · Reference numbers</p>
+          <p class="step-title">Structured output</p>
+          <p class="step-desc">A 7-field summary in a fixed format, plus a case timeline, relevant attachments and a workflow view.</p>
         </div>
       </div>
     </div>
 
-    <p style="font-size:12px; font-weight:600; letter-spacing:0.07em; text-transform:uppercase; color:var(--muted); margin-bottom:10px;">Useful for</p>
-    <div style="display:grid; gap:8px;">
-      <div class="problem-card" style="padding:14px 18px;">
-        <span class="problem-icon" style="font-size:16px;">🔁</span>
-        <div class="problem-text"><strong>Case reopens</strong>, quickly reconstruct what happened without manually reading through unstructured history.</div>
+    <div class="output-box">
+      <p class="mini-label">Output: 7-field summary</p>
+      <div class="chip-grid">
+        <span class="chip">Case overview</span>
+        <span class="chip">Parties involved</span>
+        <span class="chip">Exception type</span>
+        <span class="chip">Actions taken</span>
+        <span class="chip">Resolution</span>
+        <span class="chip">Time-to-resolve</span>
+        <span class="chip">Reference numbers</span>
       </div>
-      <div class="problem-card" style="padding:14px 18px;">
-        <span class="problem-icon" style="font-size:16px;">🔍</span>
-        <div class="problem-text"><strong>Finding similar cases</strong>, scan precedents at speed instead of reading each one in full.</div>
+      <p class="mini-label">Plus</p>
+      <div class="chip-grid">
+        <span class="chip">Case timeline</span>
+        <span class="chip">Relevant attachments</span>
+        <span class="chip">Workflow view</span>
       </div>
-      <div class="problem-card" style="padding:14px 18px;">
-        <span class="problem-icon" style="font-size:16px;">🌍</span>
-        <div class="problem-text"><strong>Cross-market consistency</strong>, standardised summary format regardless of how the original record was entered.</div>
+    </div>
+
+    <p class="mini-label">Useful for</p>
+    <div class="useful-grid">
+      <div class="problem-card">
+        <span class="problem-icon">🔁</span>
+        <div class="problem-text"><strong>Case reopens</strong>Quickly reconstruct what happened without manually reading through unstructured history.</div>
+      </div>
+      <div class="problem-card">
+        <span class="problem-icon">🔄</span>
+        <div class="problem-text"><strong>Reassignments and audits</strong>Pick up a case someone else worked on without rebuilding its history from scratch.</div>
+      </div>
+      <div class="problem-card">
+        <span class="problem-icon">🔍</span>
+        <div class="problem-text"><strong>Finding similar cases</strong>Scan precedents at speed instead of reading each one in full.</div>
+      </div>
+      <div class="problem-card">
+        <span class="problem-icon">🌍</span>
+        <div class="problem-text"><strong>Cross-market consistency</strong>Standardised summary format regardless of how the original record was entered.</div>
       </div>
     </div>
   </div>
@@ -334,6 +503,56 @@
   <div class="cs-section">
     <p class="cs-section-label">Walkthrough</p>
     <h2 class="cs-section-title">How It Works</h2>
+
+    <div class="diagram">
+      <svg viewBox="0 0 360 504" role="img" aria-labelledby="flow-title">
+        <title id="flow-title">Flow: a Case ID retrieves case history (case notes, SWIFT message fields, exception metadata, attachments), an LLM produces a 7-field summary, timeline, attachments and workflow view, and the investigator reviews it.</title>
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" class="d-head" />
+          </marker>
+        </defs>
+
+        <rect class="d-node" x="70" y="8" width="220" height="48" rx="8" />
+        <text class="d-title" x="180" y="28" text-anchor="middle">Case ID</text>
+        <text class="d-sub" x="180" y="45" text-anchor="middle">entered from the Pega home screen</text>
+        <line class="d-line" x1="180" y1="57" x2="180" y2="82" marker-end="url(#arrow)" />
+
+        <rect class="d-node" x="10" y="84" width="340" height="112" rx="8" />
+        <text class="d-title" x="180" y="106" text-anchor="middle">Retrieve case history</text>
+        <rect class="d-pill" x="26" y="118" width="150" height="28" rx="14" />
+        <text class="d-pill-text" x="101" y="136" text-anchor="middle">Case notes</text>
+        <rect class="d-pill" x="184" y="118" width="150" height="28" rx="14" />
+        <text class="d-pill-text" x="259" y="136" text-anchor="middle">SWIFT message fields</text>
+        <rect class="d-pill" x="26" y="154" width="150" height="28" rx="14" />
+        <text class="d-pill-text" x="101" y="172" text-anchor="middle">Exception metadata</text>
+        <rect class="d-pill" x="184" y="154" width="150" height="28" rx="14" />
+        <text class="d-pill-text" x="259" y="172" text-anchor="middle">Attachments</text>
+        <line class="d-line" x1="180" y1="197" x2="180" y2="222" marker-end="url(#arrow)" />
+
+        <rect class="d-node-accent" x="70" y="224" width="220" height="52" rx="8" />
+        <text class="d-title" x="180" y="245" text-anchor="middle">LLM</text>
+        <text class="d-sub" x="180" y="263" text-anchor="middle">GPT-5 mini · local model fallback</text>
+        <line class="d-line" x1="180" y1="277" x2="180" y2="302" marker-end="url(#arrow)" />
+
+        <rect class="d-node" x="10" y="304" width="340" height="112" rx="8" />
+        <text class="d-title" x="180" y="326" text-anchor="middle">Structured output</text>
+        <rect class="d-pill-accent" x="26" y="338" width="150" height="28" rx="14" />
+        <text class="d-pill-text" x="101" y="356" text-anchor="middle">7-field summary</text>
+        <rect class="d-pill" x="184" y="338" width="150" height="28" rx="14" />
+        <text class="d-pill-text" x="259" y="356" text-anchor="middle">Case timeline</text>
+        <rect class="d-pill" x="26" y="374" width="150" height="28" rx="14" />
+        <text class="d-pill-text" x="101" y="392" text-anchor="middle">Relevant attachments</text>
+        <rect class="d-pill" x="184" y="374" width="150" height="28" rx="14" />
+        <text class="d-pill-text" x="259" y="392" text-anchor="middle">Workflow view</text>
+        <line class="d-line" x1="180" y1="417" x2="180" y2="442" marker-end="url(#arrow)" />
+
+        <rect class="d-node" x="70" y="444" width="220" height="52" rx="8" />
+        <text class="d-title" x="180" y="465" text-anchor="middle">Investigator reviews</text>
+        <text class="d-sub" x="180" y="483" text-anchor="middle">Advisory: never auto-fills fields</text>
+      </svg>
+    </div>
+
     <div class="steps">
       <div class="step">
         <span class="step-num">1</span>
@@ -353,23 +572,70 @@
         <span class="step-num">3</span>
         <div class="step-body">
           <p class="step-title">System retrieves full case history</p>
-          <p class="step-desc">The system pulls the complete case history for that ID, case notes, SWIFT message fields, exception metadata, and resolution details, directly from the archival table. No manual copy-paste.</p>
+          <p class="step-desc">The system pulls the complete case history for that ID, case notes, SWIFT message fields, exception metadata, attachments and resolution details. No manual copy-paste.</p>
         </div>
       </div>
       <div class="step">
         <span class="step-num">4</span>
         <div class="step-body">
           <p class="step-title">AI generates a structured 7-field summary</p>
-          <p class="step-desc">Output: case overview, parties, exception type, actions taken, resolution, time-to-resolve, and reference numbers, plain English, consistently formatted.</p>
+          <p class="step-desc">Output: case overview, parties, exception type, actions taken, resolution, time-to-resolve, and reference numbers, plain English, consistently formatted. Alongside it: a case timeline, relevant attachments and a workflow view.</p>
         </div>
       </div>
       <div class="step">
         <span class="step-num">5</span>
         <div class="step-body">
           <p class="step-title">Investigator reviews and acts</p>
-          <p class="step-desc">Summary is advisory, it doesn't override Pega workflow or auto-populate fields. Used for case reopens (reconstruct what happened), finding similar cases (scan precedents fast), or cross-market consistency (same structured format regardless of how the original record was entered).</p>
+          <p class="step-desc">Summary is advisory; it doesn't override Pega workflow or auto-populate fields. Used for case reopens (reconstruct what happened), finding similar cases (scan precedents fast), or cross-market consistency (same structured format regardless of how the original record was entered).</p>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="cs-section">
+    <p class="cs-section-label">Delivery</p>
+    <h2 class="cs-section-title">Taking It to DEV</h2>
+    <div class="cs-body">
+      <p>With the validation in hand, I made the case for investment and worked with the engineering team to take it into DEV on HSBC's approved enterprise AI platform using GPT-5 mini. I pushed to keep the local model as a fallback, so investigators wouldn't lose the tool if platform access changed.</p>
+    </div>
+  </div>
+
+  <div class="cs-section">
+    <p class="cs-section-label">Impact</p>
+    <h2 class="cs-section-title">Success Criteria → Results</h2>
+    <div class="highlight-box">
+      <ul>
+        <li>Summary generated in under 60 seconds</li>
+        <li>Accuracy rated 4/5 or above by investigators across 15 test cases</li>
+        <li>All 7 output fields present in 90% of summaries</li>
+      </ul>
+    </div>
+    <div class="metric-tiles" style="margin-top:12px;">
+      <div class="metric-tile">
+        <p class="metric-label">Per case</p>
+        <p class="metric-value">5–15 min → under 60 seconds</p>
+        <p class="metric-note">Time to understand a case's history</p>
+      </div>
+      <div class="metric-tile">
+        <p class="metric-label">Overall case-review effort</p>
+        <p class="metric-value">~40% lower</p>
+        <p class="metric-note">Observed in testing</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-section">
+    <p class="cs-section-label">Ownership</p>
+    <h2 class="cs-section-title">My Role</h2>
+    <div class="role-box">
+      Product Manager. I identified the hidden handover cost, validated it with a prototype and investigator testing, defined the output (7-field summary, timeline, attachments, workflow view) and success criteria, and partnered with the engineering team to take it into DEV on the enterprise AI platform.
+    </div>
+  </div>
+
+  <div class="cs-section">
+    <p class="cs-section-label">Lesson</p>
+    <div class="callout callout-quote">
+      The most expensive problems aren't always in the obvious part of a workflow. Sometimes they're in the work around the core task: handovers, rework and repetition.
     </div>
   </div>
 
@@ -378,29 +644,11 @@
     <h2 class="cs-section-title">Tech Stack</h2>
     <div class="chip-grid">
       <span class="chip">Python</span>
-      <span class="chip">pdfplumber</span>
-      <span class="chip">GitHub Copilot</span>
+      <span class="chip">Flask</span>
+      <span class="chip">GPT-5 mini</span>
+      <span class="chip">Local LLM (fallback)</span>
+      <span class="chip">GKE</span>
       <span class="chip">Pega Smart Investigate 25</span>
-    </div>
-  </div>
-
-  <div class="cs-section">
-    <p class="cs-section-label">Validation</p>
-    <h2 class="cs-section-title">Success Criteria</h2>
-    <div class="highlight-box">
-      <ul>
-        <li>Summary generated in under 60 seconds</li>
-        <li>Accuracy rated 4/5 or above by investigators across 15 test cases</li>
-        <li>All 7 output fields present in 90% of summaries</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="cs-section">
-    <p class="cs-section-label">Ownership</p>
-    <h2 class="cs-section-title">My Role</h2>
-    <div class="role-box">
-      Independently scoped and built as Management Trainee PM, from problem identification and success criteria definition through build and investigator validation. No engineering resource assigned; end-to-end ownership of the POC.
     </div>
   </div>
 

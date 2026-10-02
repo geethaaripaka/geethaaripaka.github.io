@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -11,10 +11,12 @@
       --bg: #ffffff;
       --surface: #f7f7f5;
       --border: #e8e8e4;
+      --border-strong: #c5c5c2;
       --text: #1a1a1a;
       --muted: #787774;
       --accent: #2f6feb;
       --accent-soft: #eef3fd;
+      --accent-line: #c7d9f9;
       --radius: 8px;
       --max: 720px;
     }
@@ -70,7 +72,7 @@
     }
     .back-link:hover { color: var(--text); }
 
-    .cs-hero { margin-bottom: 52px; }
+    .cs-hero { margin-bottom: 28px; }
     .cs-title {
       font-size: clamp(1.75rem, 5vw, 2.5rem);
       font-weight: 700;
@@ -95,6 +97,29 @@
     .tag-violet { background: #ede9fe; color: #5b21b6; }
     .tag-slate  { background: #f1f5f9; color: #475569; }
 
+    .context-line {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--muted);
+      padding: 14px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 28px;
+    }
+
+    .glance { margin-bottom: 44px; }
+    .glance-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .glance-tile {
+      padding: 14px 16px;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-line);
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
     .divider { border: none; border-top: 1px solid var(--border); margin: 0 0 48px; }
 
     .cs-section { margin-bottom: 48px; }
@@ -112,6 +137,11 @@
       letter-spacing: -0.01em;
       margin-bottom: 18px;
     }
+
+    .cs-body { font-size: 15px; line-height: 1.75; }
+    .cs-intro { font-size: 15px; line-height: 1.75; margin-bottom: 18px; }
+    .users-note { font-size: 13px; color: var(--muted); margin-top: 12px; }
+    .users-note b { font-weight: 600; color: var(--text); }
 
     .problem-grid { display: grid; gap: 10px; }
     .problem-card {
@@ -136,23 +166,36 @@
       line-height: 1.65;
     }
     .solution-list li::before { content: "→"; color: var(--accent); font-weight: 600; flex-shrink: 0; }
+    .solution-list strong { font-weight: 600; }
 
-    .query-examples {
-      margin-top: 16px;
-      display: grid;
-      gap: 8px;
-    }
-    .query-example {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--accent);
+    .callout {
+      padding: 20px 24px;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-line);
+      border-left: 4px solid var(--accent);
       border-radius: 0 var(--radius) var(--radius) 0;
-      padding: 10px 16px;
-      font-size: 13px;
-      color: var(--muted);
-      font-style: italic;
+      font-size: 15px;
+      line-height: 1.75;
+    }
+    .callout-quote { font-size: 17px; font-style: italic; line-height: 1.7; }
+    .callout-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
     }
 
+    .pipeline-group { margin-top: 28px; }
+    .pipeline-group-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
     .pipeline-steps { display: grid; gap: 0; }
     .pipeline-step {
       display: flex;
@@ -170,8 +213,81 @@
       min-width: 24px;
       padding-top: 2px;
     }
-    .pipeline-text { font-size: 14px; line-height: 1.6; }
+    .pipeline-text { font-size: 14px; line-height: 1.6; min-width: 0; }
     .pipeline-text strong { font-weight: 600; }
+    .pipeline-text ul { margin: 6px 0 0 18px; color: var(--muted); font-size: 13.5px; }
+    .pipeline-text li + li { margin-top: 2px; }
+
+    /* ── Diagram ── */
+    .diagram {
+      padding: 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .diagram svg { display: block; width: 100%; height: auto; margin: 0 auto; }
+    .diagram text { font-family: inherit; }
+    .diagram .diagram-mobile { display: none; }
+    .d-band { fill: none; stroke: var(--border-strong); stroke-width: 1; stroke-dasharray: 4 4; }
+    .d-lane { fill: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; }
+    .d-node { fill: var(--bg); stroke: var(--border-strong); stroke-width: 1; }
+    .d-node-accent { fill: var(--accent-soft); stroke: var(--accent-line); stroke-width: 1; }
+    .d-db { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.25; }
+    .d-title { fill: var(--text); font-size: 12px; font-weight: 600; }
+    .d-sub { fill: var(--muted); font-size: 10.5px; }
+    .d-note { fill: var(--muted); font-size: 10px; font-style: italic; }
+    .d-line { stroke: var(--muted); stroke-width: 1.25; fill: none; }
+    .d-head { fill: var(--muted); }
+
+    /* ── Comparison table ── */
+    .compare-wrap { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 18px; }
+    .compare-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+    .compare-table th {
+      background: var(--surface);
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--muted);
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    .compare-table td { padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.55; }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table td:first-child { font-weight: 600; white-space: nowrap; }
+    .compare-table tr.chosen td { background: var(--accent-soft); }
+    .compare-table tr.chosen td:first-child { color: var(--accent); box-shadow: inset 4px 0 0 var(--accent); }
+
+    /* ── Capabilities ── */
+    .cap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .cap-card {
+      padding: 18px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .cap-title { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+    .cap-list { list-style: none; display: grid; gap: 4px; }
+    .cap-list li { font-size: 13px; color: var(--muted); line-height: 1.5; display: flex; gap: 8px; }
+    .cap-list li::before { content: "·"; color: var(--border-strong); font-weight: 700; flex-shrink: 0; }
+
+    /* ── Metrics ── */
+    .metric-tile {
+      padding: 20px 22px;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-line);
+      border-radius: var(--radius);
+    }
+    .metric-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .metric-value { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.3; }
 
     .chip-grid { display: flex; flex-wrap: wrap; gap: 8px; }
     .chip {
@@ -183,22 +299,6 @@
       padding: 5px 13px;
       border-radius: 20px;
     }
-
-    .highlight-box {
-      background: var(--accent-soft);
-      border: 1px solid #c7d9f9;
-      border-radius: var(--radius);
-      padding: 20px 24px;
-    }
-    .highlight-box ul { list-style: none; display: grid; gap: 8px; }
-    .highlight-box ul li {
-      display: flex;
-      align-items: baseline;
-      gap: 10px;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-    .highlight-box ul li::before { content: "✓"; color: var(--accent); font-weight: 700; flex-shrink: 0; }
 
     .role-box {
       background: var(--surface);
@@ -225,6 +325,35 @@
       font-size: 12px;
       color: #999;
     }
+
+    @media (max-width: 600px) {
+      .nav-links { gap: 16px; }
+      .cap-grid, .glance-tiles { grid-template-columns: 1fr; }
+      .diagram { padding: 14px 8px; }
+      .diagram .diagram-desktop { display: none; }
+      .diagram .diagram-mobile { display: block; max-width: 400px; }
+      .callout { padding: 18px 20px; }
+      .callout-quote { font-size: 16px; }
+
+      /* comparison table stacks into one block per option */
+      .compare-table, .compare-table tbody { display: block; }
+      .compare-table thead { display: none; }
+      .compare-table tr { display: block; border-bottom: 1px solid var(--border); padding: 6px 0; }
+      .compare-table tr:last-child { border-bottom: none; }
+      .compare-table td { display: block; border-bottom: none; padding: 4px 16px; }
+      .compare-table td:first-child { white-space: normal; padding-top: 8px; }
+      .compare-table td[data-label]::before {
+        content: attr(data-label);
+        display: block;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .compare-table tr.chosen { background: var(--accent-soft); border-left: 4px solid var(--accent); }
+      .compare-table tr.chosen td:first-child { box-shadow: none; }
+    }
   </style>
 </head>
 <body>
@@ -246,11 +375,23 @@
 
   <div class="cs-hero">
     <h1 class="cs-title">GPI Knowledge Assistant</h1>
-    <p class="cs-subtitle">RAG-based Q&amp;A over HSBC's internal GPI documentation: institutional knowledge made self-serve</p>
+    <p class="cs-subtitle">A grounded RAG assistant that gives BAs cited answers from GPI documentation in seconds, not multi-system searches</p>
     <div class="tag-row">
       <span class="tag tag-violet">Platform</span>
       <span class="tag tag-slate">HSBC Technology</span>
       <span class="tag tag-slate">2025–2026</span>
+      <span class="tag tag-slate">Product Manager</span>
+    </div>
+  </div>
+
+  <p class="context-line">Part of the GPI AI strategy I drive: identifying AI opportunities across BAs, developers, architects and operations, and scoping them into POCs: Case Summariser, Knowledge Assistant, and a requirements-to-Jira artifact generator.</p>
+
+  <div class="glance">
+    <p class="cs-section-label">At a glance</p>
+    <div class="glance-tiles">
+      <div class="glance-tile">~60% less retrieval effort</div>
+      <div class="glance-tile">Cited, grounded answers only</div>
+      <div class="glance-tile">Hybrid retrieval for exact payment terms</div>
     </div>
   </div>
 
@@ -261,80 +402,367 @@
     <h2 class="cs-section-title">The Problem</h2>
     <div class="problem-grid">
       <div class="problem-card">
-        <span class="problem-icon">📁</span>
+        <span class="problem-icon">🔎</span>
         <div class="problem-text">
-          <strong>Documentation spread across multiple repositories</strong>
-          HSBC-specific GPI rules, procedures, and circulars are stored in disconnected systems. There's no single place to search across all of them.
+          <strong>Answers scattered across sources</strong>
+          BAs had to search operational guides and training documents across multiple places to answer a single question.
         </div>
       </div>
       <div class="problem-card">
-        <span class="problem-icon">🧠</span>
+        <span class="problem-icon">⚠️</span>
         <div class="problem-text">
-          <strong>Resolution logic held in individual memory</strong>
-          Experienced investigators carry corridor-specific rules and escalation paths in their heads. This knowledge is not searchable and not transferable.
+          <strong>Generic AI isn't trustworthy here</strong>
+          In regulated payment operations, an answer must come from our own documentation and be verifiable.
         </div>
       </div>
       <div class="problem-card">
-        <span class="problem-icon">🔄</span>
+        <span class="problem-icon">⏱️</span>
         <div class="problem-text">
-          <strong>Knowledge lost on rotation, slow onboarding</strong>
-          When investigators rotate out, the team loses institutional memory. New investigators spend weeks learning rules that should be instantly accessible.
+          <strong>Slow lookups block delivery</strong>
+          Time spent hunting for procedures, SLA rules and corridor guidance slowed BA work.
         </div>
       </div>
+    </div>
+    <p class="users-note"><b>Users:</b> the Business Analyst (BA) team.</p>
+  </div>
+
+  <div class="cs-section">
+    <p class="cs-section-label">Insight</p>
+    <h2 class="cs-section-title">The Insight</h2>
+    <div class="callout">
+      GPI questions come in two shapes. Some are conceptual ("how do we handle a recall request?"), where users phrase things differently from the docs. Others are exact-reference, where specific message names, identifiers and procedural terms must match precisely. One retrieval method rarely handles both, and that shaped the whole design.
+    </div>
+  </div>
+
+  <div class="cs-section">
+    <p class="cs-section-label">Decision</p>
+    <h2 class="cs-section-title">Key Decision: How to Retrieve</h2>
+    <p class="cs-intro">I defined what the assistant had to get right, both conceptual questions and exact message names and identifiers, and we evaluated four retrieval approaches together.</p>
+
+    <div class="compare-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr><th>Option</th><th>Benefit</th><th>Trade-off</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Semantic-only</td>
+            <td data-label="Benefit">Finds conceptually similar content even when wording differs</td>
+            <td data-label="Trade-off">Can miss exact identifiers, codes and keyword-dependent content</td>
+          </tr>
+          <tr>
+            <td>Lexical-only</td>
+            <td data-label="Benefit">Strong on exact terms, identifiers and known phrases</td>
+            <td data-label="Trade-off">Weak when users phrase questions differently from the docs</td>
+          </tr>
+          <tr class="chosen">
+            <td>Hybrid ✓</td>
+            <td data-label="Benefit">Balances conceptual relevance with exact-term matching</td>
+            <td data-label="Trade-off">More complex to tune, rank and validate</td>
+          </tr>
+          <tr>
+            <td>Whole-document context</td>
+            <td data-label="Benefit">Maximises available context</td>
+            <td data-label="Trade-off">Lower precision and higher token cost</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout">
+      <p class="callout-label">Decision</p>
+      We chose hybrid. I accepted the extra tuning complexity because in payments operations, missing an exact message name produces a confidently wrong answer, and that costs more than engineering effort.
     </div>
   </div>
 
   <div class="cs-section">
     <p class="cs-section-label">Product</p>
     <h2 class="cs-section-title">The Solution</h2>
-    <ul class="solution-list">
-      <li>An AI-powered Q&amp;A interface where investigators ask plain-English questions and receive accurate, cited answers.</li>
-      <li>Answers drawn exclusively from HSBC-specific GPI documentation, procedures, circulars, SLA rules, corridor guidelines.</li>
-      <li>Every answer includes source citations so investigators can verify and trust the output.</li>
-      <li>Out-of-scope questions return a clear not-found response, no hallucination, no guessing.</li>
-    </ul>
+    <p class="cs-body">A grounded assistant that answers only from indexed GPI guides, with citations and a preview of the exact source passage so BAs can verify the guidance themselves.</p>
+  </div>
 
-    <div class="query-examples">
-      <div class="query-example">"What is the SLA for a GPI recall in the USD/INR corridor?"</div>
-      <div class="query-example">"What are the grounds for rejecting a gCov payment at HSBC?"</div>
-      <div class="query-example">"What is HSBC's escalation path if a beneficiary bank doesn't respond within 5 business days?"</div>
+  <div class="cs-section">
+    <p class="cs-section-label">How it works</p>
+    <h2 class="cs-section-title">Architecture</h2>
+
+    <div class="diagram">
+      <!-- Desktop: ingestion lane on top, query lane below, meeting at the knowledge base -->
+      <svg class="diagram-desktop" viewBox="0 0 680 302" role="img" aria-labelledby="arch-title-d">
+        <title id="arch-title-d">Architecture. Ingestion lane: source docs go to a Cloud Storage bucket, then AI-assisted ingestion parses, normalises and chunks them into PostgreSQL indexed chunks. Query lane: the Flask chat app, query rewriting, hybrid retrieval over the PostgreSQL chunks, GPT-4o with a grounded prompt, and an answer with citations, source preview and feedback.</title>
+        <defs>
+          <marker id="arrow-d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" class="d-head" />
+          </marker>
+        </defs>
+
+        <rect class="d-band" x="1" y="2" width="678" height="94" rx="8" />
+        <text class="d-lane" x="12" y="19">INGESTION</text>
+
+        <rect class="d-node" x="6" y="28" width="116" height="58" rx="6" />
+        <text class="d-title" x="64" y="48" text-anchor="middle">Source docs</text>
+        <text class="d-sub" x="64" y="63" text-anchor="middle">Ops guides,</text>
+        <text class="d-sub" x="64" y="77" text-anchor="middle">training docs</text>
+        <line class="d-line" x1="123" y1="57" x2="142" y2="57" marker-end="url(#arrow-d)" />
+
+        <rect class="d-node" x="144" y="28" width="116" height="58" rx="6" />
+        <text class="d-title" x="202" y="48" text-anchor="middle">Cloud Storage</text>
+        <text class="d-sub" x="202" y="63" text-anchor="middle">Source corpus</text>
+        <text class="d-sub" x="202" y="77" text-anchor="middle">bucket</text>
+        <line class="d-line" x1="261" y1="57" x2="280" y2="57" marker-end="url(#arrow-d)" />
+
+        <rect class="d-node" x="282" y="28" width="116" height="58" rx="6" />
+        <text class="d-title" x="340" y="48" text-anchor="middle">Ingestion</text>
+        <text class="d-sub" x="340" y="63" text-anchor="middle">AI-assisted parse,</text>
+        <text class="d-sub" x="340" y="77" text-anchor="middle">normalise, chunk</text>
+        <line class="d-line" x1="340" y1="87" x2="340" y2="106" marker-end="url(#arrow-d)" />
+
+        <path class="d-db" d="M282,116 v52 a58,8 0 0 0 116,0 v-52 a58,8 0 0 0 -116,0 a58,8 0 0 0 116,0" />
+        <text class="d-title" x="340" y="146" text-anchor="middle">PostgreSQL</text>
+        <text class="d-sub" x="340" y="161" text-anchor="middle">Indexed chunks</text>
+        <text class="d-note" x="408" y="146">knowledge base</text>
+
+        <line class="d-line" x1="340" y1="179" x2="340" y2="219" marker-start="url(#arrow-d)" marker-end="url(#arrow-d)" />
+        <text class="d-note" x="350" y="189">top-ranked chunks</text>
+
+        <rect class="d-band" x="1" y="196" width="678" height="104" rx="8" />
+        <text class="d-lane" x="12" y="213">QUERY</text>
+
+        <rect class="d-node" x="6" y="222" width="116" height="66" rx="6" />
+        <text class="d-title" x="64" y="243" text-anchor="middle">Chat app</text>
+        <text class="d-sub" x="64" y="259" text-anchor="middle">Flask: session,</text>
+        <text class="d-sub" x="64" y="273" text-anchor="middle">history, feedback</text>
+        <line class="d-line" x1="123" y1="255" x2="142" y2="255" marker-end="url(#arrow-d)" />
+
+        <rect class="d-node" x="144" y="222" width="116" height="66" rx="6" />
+        <text class="d-title" x="202" y="243" text-anchor="middle">Rewrite</text>
+        <text class="d-sub" x="202" y="259" text-anchor="middle">Follow-up into a</text>
+        <text class="d-sub" x="202" y="273" text-anchor="middle">standalone query</text>
+        <line class="d-line" x1="261" y1="255" x2="280" y2="255" marker-end="url(#arrow-d)" />
+
+        <rect class="d-node-accent" x="282" y="222" width="116" height="66" rx="6" />
+        <text class="d-title" x="340" y="243" text-anchor="middle">Hybrid retrieval</text>
+        <text class="d-sub" x="340" y="259" text-anchor="middle">Semantic + lexical,</text>
+        <text class="d-sub" x="340" y="273" text-anchor="middle">filter and rank</text>
+        <line class="d-line" x1="399" y1="255" x2="418" y2="255" marker-end="url(#arrow-d)" />
+
+        <rect class="d-node" x="420" y="222" width="116" height="66" rx="6" />
+        <text class="d-title" x="478" y="243" text-anchor="middle">GPT-4o</text>
+        <text class="d-sub" x="478" y="259" text-anchor="middle">Grounded prompt,</text>
+        <text class="d-sub" x="478" y="273" text-anchor="middle">evidence only</text>
+        <line class="d-line" x1="537" y1="255" x2="556" y2="255" marker-end="url(#arrow-d)" />
+
+        <rect class="d-node" x="558" y="222" width="116" height="66" rx="6" />
+        <text class="d-title" x="616" y="243" text-anchor="middle">Answer</text>
+        <text class="d-sub" x="616" y="259" text-anchor="middle">Citations, preview,</text>
+        <text class="d-sub" x="616" y="273" text-anchor="middle">feedback</text>
+      </svg>
+
+      <!-- Phone: the two lanes side by side, meeting at the knowledge base -->
+      <svg class="diagram-mobile" viewBox="0 0 340 454" role="img" aria-labelledby="arch-title-m">
+        <title id="arch-title-m">Architecture. Ingestion: source docs, Cloud Storage bucket, AI-assisted ingestion, PostgreSQL indexed chunks. Query: chat app, rewrite, hybrid retrieval over the PostgreSQL chunks, GPT-4o with a grounded prompt, answer with citations, source preview and feedback.</title>
+        <defs>
+          <marker id="arrow-m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" class="d-head" />
+          </marker>
+        </defs>
+
+        <rect class="d-band" x="0.5" y="0.5" width="159" height="310" rx="8" />
+        <text class="d-lane" x="10" y="18">INGESTION</text>
+
+        <rect class="d-node" x="8" y="30" width="144" height="54" rx="6" />
+        <text class="d-title" x="80" y="49" text-anchor="middle">Source docs</text>
+        <text class="d-sub" x="80" y="64" text-anchor="middle">Ops guides and</text>
+        <text class="d-sub" x="80" y="77" text-anchor="middle">training docs</text>
+        <line class="d-line" x1="80" y1="85" x2="80" y2="100" marker-end="url(#arrow-m)" />
+
+        <rect class="d-node" x="8" y="102" width="144" height="54" rx="6" />
+        <text class="d-title" x="80" y="121" text-anchor="middle">Cloud Storage</text>
+        <text class="d-sub" x="80" y="136" text-anchor="middle">Source corpus</text>
+        <text class="d-sub" x="80" y="149" text-anchor="middle">bucket</text>
+        <line class="d-line" x1="80" y1="157" x2="80" y2="172" marker-end="url(#arrow-m)" />
+
+        <rect class="d-node" x="8" y="174" width="144" height="54" rx="6" />
+        <text class="d-title" x="80" y="193" text-anchor="middle">Ingestion</text>
+        <text class="d-sub" x="80" y="208" text-anchor="middle">AI-assisted parse,</text>
+        <text class="d-sub" x="80" y="221" text-anchor="middle">normalise, chunk</text>
+        <line class="d-line" x1="80" y1="229" x2="80" y2="242" marker-end="url(#arrow-m)" />
+
+        <path class="d-db" d="M8,252 v42 a72,8 0 0 0 144,0 v-42 a72,8 0 0 0 -144,0 a72,8 0 0 0 144,0" />
+        <text class="d-title" x="80" y="278" text-anchor="middle">PostgreSQL</text>
+        <text class="d-sub" x="80" y="292" text-anchor="middle">Indexed chunks</text>
+
+        <line class="d-line" x1="154" y1="273" x2="186" y2="273" marker-start="url(#arrow-m)" marker-end="url(#arrow-m)" />
+
+        <rect class="d-band" x="180.5" y="72.5" width="159" height="380" rx="8" />
+        <text class="d-lane" x="190" y="90">QUERY</text>
+
+        <rect class="d-node" x="188" y="102" width="144" height="54" rx="6" />
+        <text class="d-title" x="260" y="121" text-anchor="middle">Chat app</text>
+        <text class="d-sub" x="260" y="136" text-anchor="middle">Flask: session,</text>
+        <text class="d-sub" x="260" y="149" text-anchor="middle">history, feedback</text>
+        <line class="d-line" x1="260" y1="157" x2="260" y2="172" marker-end="url(#arrow-m)" />
+
+        <rect class="d-node" x="188" y="174" width="144" height="54" rx="6" />
+        <text class="d-title" x="260" y="193" text-anchor="middle">Rewrite</text>
+        <text class="d-sub" x="260" y="208" text-anchor="middle">Follow-up into a</text>
+        <text class="d-sub" x="260" y="221" text-anchor="middle">standalone query</text>
+        <line class="d-line" x1="260" y1="229" x2="260" y2="244" marker-end="url(#arrow-m)" />
+
+        <rect class="d-node-accent" x="188" y="246" width="144" height="54" rx="6" />
+        <text class="d-title" x="260" y="265" text-anchor="middle">Hybrid retrieval</text>
+        <text class="d-sub" x="260" y="280" text-anchor="middle">Semantic + lexical,</text>
+        <text class="d-sub" x="260" y="293" text-anchor="middle">filter and rank</text>
+        <line class="d-line" x1="260" y1="301" x2="260" y2="316" marker-end="url(#arrow-m)" />
+
+        <rect class="d-node" x="188" y="318" width="144" height="54" rx="6" />
+        <text class="d-title" x="260" y="337" text-anchor="middle">GPT-4o</text>
+        <text class="d-sub" x="260" y="352" text-anchor="middle">Grounded prompt,</text>
+        <text class="d-sub" x="260" y="365" text-anchor="middle">evidence only</text>
+        <line class="d-line" x1="260" y1="373" x2="260" y2="388" marker-end="url(#arrow-m)" />
+
+        <rect class="d-node" x="188" y="390" width="144" height="54" rx="6" />
+        <text class="d-title" x="260" y="409" text-anchor="middle">Answer</text>
+        <text class="d-sub" x="260" y="424" text-anchor="middle">Citations, source</text>
+        <text class="d-sub" x="260" y="437" text-anchor="middle">preview, feedback</text>
+      </svg>
+    </div>
+
+    <div class="pipeline-group">
+      <p class="pipeline-group-label">Ingestion</p>
+      <div class="pipeline-steps">
+        <div class="pipeline-step">
+          <span class="pipeline-arrow">01</span>
+          <div class="pipeline-text">Operational guides and training documents are uploaded to a <strong>Google Cloud Storage bucket</strong> as the source corpus.</div>
+        </div>
+        <div class="pipeline-step">
+          <span class="pipeline-arrow">02</span>
+          <div class="pipeline-text"><strong>AI-assisted ingestion</strong> parses, normalises and chunks the documents.</div>
+        </div>
+        <div class="pipeline-step">
+          <span class="pipeline-arrow">03</span>
+          <div class="pipeline-text">Chunks are loaded into <strong>PostgreSQL as indexed chunks</strong>: a query-ready knowledge base.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pipeline-group">
+      <p class="pipeline-group-label">Query</p>
+      <div class="pipeline-steps">
+        <div class="pipeline-step">
+          <span class="pipeline-arrow">01</span>
+          <div class="pipeline-text">A BA asks a question in the <strong>Flask-based chat app</strong> (RAG chatbot + APIs), which validates the user session and tracks chat history and feedback.</div>
+        </div>
+        <div class="pipeline-step">
+          <span class="pipeline-arrow">02</span>
+          <div class="pipeline-text">If it's a follow-up, the app <strong>rewrites it into a clear standalone query</strong> using recent conversation context.</div>
+        </div>
+        <div class="pipeline-step">
+          <span class="pipeline-arrow">03</span>
+          <div class="pipeline-text">The query is <strong>converted into a representation suitable for semantic search</strong>.</div>
+        </div>
+        <div class="pipeline-step">
+          <span class="pipeline-arrow">04</span>
+          <div class="pipeline-text">
+            <strong>Hybrid retrieval</strong> runs over the indexed chunks:
+            <ul>
+              <li>semantic matching for meaning-based relevance</li>
+              <li>lexical/text matching for exact terminology (message names, identifiers, procedural terms)</li>
+              <li>filtering and ranking logic to improve precision</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pipeline-step">
+          <span class="pipeline-arrow">05</span>
+          <div class="pipeline-text">The <strong>highest-ranked chunks</strong> are returned as evidence and combined with the question into a grounded prompt.</div>
+        </div>
+        <div class="pipeline-step">
+          <span class="pipeline-arrow">06</span>
+          <div class="pipeline-text"><strong>GPT-4o</strong> generates the answer from that evidence only, with citations linked back to the original sources.</div>
+        </div>
+        <div class="pipeline-step">
+          <span class="pipeline-arrow">07</span>
+          <div class="pipeline-text">The answer is shown with <strong>citations, source preview and feedback options</strong>.</div>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="cs-section">
-    <p class="cs-section-label">Walkthrough</p>
-    <h2 class="cs-section-title">How It Works</h2>
-    <div class="pipeline-steps">
-      <div class="pipeline-step">
-        <span class="pipeline-arrow">01</span>
-        <div class="pipeline-text">
-          <strong>Ingest 40 PDF user guides</strong>, GPI circulars, corridor guidelines, SLA rules, and escalation procedures extracted using pdfplumber.
-        </div>
+    <p class="cs-section-label">Decisions</p>
+    <h2 class="cs-section-title">Product Decisions</h2>
+    <ul class="solution-list">
+      <li><span><strong>Grounded-only answers:</strong> responds from indexed guides, never generic knowledge.</span></li>
+      <li><span><strong>Source preview + feedback loop:</strong> Helpful / Incomplete / Incorrect with an optional comment; builds trust with BAs and turns answer quality into a measurable signal.</span></li>
+      <li><span><strong>Auto-generated workflow diagrams:</strong> many BA questions are about processes, and a flowchart answers faster than paragraphs.</span></li>
+      <li><span><strong>Query rewriting for follow-ups:</strong> BAs ask in conversations, not single questions, so follow-ups need to retrieve as well as the first question.</span></li>
+      <li><span><strong>Export to PDF/Word:</strong> answers need to live in BAs' record-keeping trail, not just on screen.</span></li>
+    </ul>
+  </div>
+
+  <div class="cs-section">
+    <p class="cs-section-label">Scope</p>
+    <h2 class="cs-section-title">Capabilities</h2>
+    <p class="cs-intro">Scoped and prioritised with the BA team; built by the engineering team.</p>
+    <div class="cap-grid">
+      <div class="cap-card">
+        <p class="cap-title">Trust</p>
+        <ul class="cap-list">
+          <li>Grounded Q&amp;A on indexed guides</li>
+          <li>Citations</li>
+          <li>Exact source-passage preview</li>
+          <li>Answer feedback</li>
+        </ul>
       </div>
-      <div class="pipeline-step">
-        <span class="pipeline-arrow">02</span>
-        <div class="pipeline-text">
-          <strong>Build the RAG pipeline</strong>, ingested documents are chunked, embedded, and indexed into a structured knowledge base ready for semantic retrieval.
-        </div>
+      <div class="cap-card">
+        <p class="cap-title">Answer depth</p>
+        <ul class="cap-list">
+          <li>Concise vs detailed responses</li>
+          <li>Workflow diagrams with zoom, reset, print and download</li>
+        </ul>
       </div>
-      <div class="pipeline-step">
-        <span class="pipeline-arrow">03</span>
-        <div class="pipeline-text">
-          <strong>Chatroom opens for Q&amp;A</strong>, once the pipeline is built, investigators interact through a chat interface. Plain-English questions only; no query syntax required.
-        </div>
+      <div class="cap-card">
+        <p class="cap-title">Conversation</p>
+        <ul class="cap-list">
+          <li>Query rewriting for follow-ups</li>
+          <li>Edit and rerun a question</li>
+          <li>Follow-up suggestions</li>
+          <li>Searchable chat history</li>
+          <li>New chat</li>
+          <li>Chat cleanup</li>
+        </ul>
       </div>
-      <div class="pipeline-step">
-        <span class="pipeline-arrow">04</span>
-        <div class="pipeline-text">
-          <strong>Question is matched against the indexed knowledge base</strong>, semantic search retrieves the most relevant chunks across all 40 ingested documents.
-        </div>
+      <div class="cap-card">
+        <p class="cap-title">Adoption &amp; ops</p>
+        <ul class="cap-list">
+          <li>Guided onboarding tutorial</li>
+          <li>Export to PDF/Word</li>
+          <li>Index status monitoring</li>
+        </ul>
       </div>
-      <div class="pipeline-step">
-        <span class="pipeline-arrow">05</span>
-        <div class="pipeline-text">
-          <strong>LLM synthesises a cited answer</strong>, response includes the answer and the source document(s) it was drawn from. No external vendor dependency, no new infrastructure required.
-        </div>
-      </div>
+    </div>
+  </div>
+
+  <div class="cs-section">
+    <p class="cs-section-label">Impact</p>
+    <h2 class="cs-section-title">Results</h2>
+    <div class="metric-tile">
+      <p class="metric-label">Retrieval effort</p>
+      <p class="metric-value">~60% reduction</p>
+    </div>
+  </div>
+
+  <div class="cs-section">
+    <p class="cs-section-label">Ownership</p>
+    <h2 class="cs-section-title">My Role</h2>
+    <div class="role-box">
+      Product Manager. I identified the BA team's retrieval pain, defined the grounded-answer requirement and capability scope, drove the retrieval approach decision with engineering, set up the feedback loop for quality tracking, and completed the AI governance documentation (data details, human oversight, benefits case) for approval. The engineering team built and deployed it.
+    </div>
+  </div>
+
+  <div class="cs-section">
+    <p class="cs-section-label">Lesson</p>
+    <div class="callout callout-quote">
+      In regulated workflows, trust is the product. Citations, source preview and feedback mattered as much as answer quality.
     </div>
   </div>
 
@@ -343,29 +771,13 @@
     <h2 class="cs-section-title">Tech Stack</h2>
     <div class="chip-grid">
       <span class="chip">Python</span>
+      <span class="chip">Flask</span>
+      <span class="chip">Google Cloud Storage</span>
+      <span class="chip">PostgreSQL</span>
+      <span class="chip">Hybrid retrieval (semantic + lexical)</span>
+      <span class="chip">Query rewriting</span>
+      <span class="chip">GPT-4o</span>
       <span class="chip">RAG</span>
-      <span class="chip">pdfplumber</span>
-      <span class="chip">GitHub Copilot</span>
-    </div>
-  </div>
-
-  <div class="cs-section">
-    <p class="cs-section-label">Validation</p>
-    <h2 class="cs-section-title">Success Criteria</h2>
-    <div class="highlight-box">
-      <ul>
-        <li>85% of 20 test questions answered correctly</li>
-        <li>Every answer includes at least one source citation</li>
-        <li>Tool returns a clear not-found response for out-of-scope questions rather than hallucinating</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="cs-section">
-    <p class="cs-section-label">Ownership</p>
-    <h2 class="cs-section-title">My Role</h2>
-    <div class="role-box">
-      Independently scoped and built as Management Trainee PM, knowledge base design, document ingestion pipeline, Q&amp;A accuracy testing, and investigator validation. No engineering resource assigned; end-to-end ownership of the POC.
     </div>
   </div>
 
