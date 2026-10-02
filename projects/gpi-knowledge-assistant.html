@@ -165,7 +165,7 @@
       font-size: 15px;
       line-height: 1.75;
     }
-    .callout-quote { font-size: 17px; font-style: italic; line-height: 1.7; }
+    .callout-lesson { font-weight: 500; }
 
     .pipeline-group { margin-top: 28px; }
     .pipeline-group-label {
@@ -293,12 +293,11 @@
       .diagram .diagram-desktop { display: none; }
       .diagram .diagram-mobile { display: block; max-width: 400px; }
       .callout { padding: 18px 20px; }
-      .callout-quote { font-size: 16px; }
     }
 
     /* ── Text wrapping: avoid one-word last lines ── */
     p, li, .problem-text, .pipeline-text { text-wrap: pretty; }
-    h1, h2, .cs-subtitle, .callout-quote, .pipeline-text li, .glance-label, .metric-label { text-wrap: balance; }
+    h1, h2, .cs-subtitle, .pipeline-text li, .glance-label, .metric-label { text-wrap: balance; }
     .callout { text-wrap: pretty; } /* balance stops working past ~6 lines */
 
     @media (max-width: 480px) {
@@ -683,7 +682,7 @@
 
   <div class="cs-section">
     <p class="cs-section-label">Lesson</p>
-    <div class="callout callout-quote">
+    <div class="callout callout-lesson">
       In regulated workflows, trust is the product. Citations, source preview and feedback mattered as much as answer quality.
     </div>
   </div>

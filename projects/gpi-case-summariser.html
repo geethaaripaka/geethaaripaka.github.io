@@ -216,7 +216,7 @@
       font-size: 15px;
       line-height: 1.75;
     }
-    .callout-quote { font-size: 17px; font-style: italic; line-height: 1.7; }
+    .callout-lesson { font-weight: 500; }
 
     /* ── Diagram ── */
     .diagram {
@@ -305,12 +305,11 @@
       .metric-tiles, .glance-tiles { grid-template-columns: 1fr; }
       .diagram { padding: 14px 8px; }
       .callout { padding: 18px 20px; }
-      .callout-quote { font-size: 16px; }
     }
 
     /* ── Text wrapping: avoid one-word last lines ── */
     p, li, .problem-text, .step-desc { text-wrap: pretty; }
-    h1, h2, .cs-subtitle, .callout-quote, .step-title, .glance-label, .metric-label, .metric-note { text-wrap: balance; }
+    h1, h2, .cs-subtitle, .step-title, .glance-label, .metric-label, .metric-note { text-wrap: balance; }
     .callout { text-wrap: pretty; } /* balance stops working past ~6 lines */
 
     @media (max-width: 480px) {
@@ -641,7 +640,7 @@
 
   <div class="cs-section">
     <p class="cs-section-label">Lesson</p>
-    <div class="callout callout-quote">
+    <div class="callout callout-lesson">
       The most expensive problems aren't always in the obvious part of a workflow. Sometimes they're in the work around the core task: handovers, rework and repetition.
     </div>
   </div>
