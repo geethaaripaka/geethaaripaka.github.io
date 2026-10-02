@@ -3,7 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Along the Way: A Google Maps Feature Case Study | Geetha Aripaka</title>
+  <title>Along the Way: Turning saved places into visits | Geetha Aripaka</title>
+  <meta property="og:title" content="Along the Way: Turning saved places into visits" />
+  <meta property="og:description" content="A feature proposal for nudging people toward places they saved, at the moment they're passing them." />
+  <meta property="og:image" content="https://geethaaripaka.github.io/assets/ask-maps/along-the-way-og.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://geethaaripaka.github.io/teardowns/ask-maps-along-the-way.html" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary_large_image" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -125,14 +133,12 @@
     .feature-table td.gap { color: #92400e; }
     .live-note { margin-top: 12px; font-size: 13px; color: var(--muted); }
 
-    /* ── JTBD ── */
-    .jtbd-grid { display: grid; gap: 12px; }
-    .jtbd-card { padding: 20px 22px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
-    .jtbd-persona {
-      font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 10px;
-      display: flex; align-items: center; gap: 7px; text-transform: uppercase; letter-spacing: 0.05em;
+    /* ── Callouts ── */
+    .stat-callout {
+      margin-bottom: 20px; padding: 20px 24px;
+      background: var(--accent-soft); border: 1px solid #c7d9f9; border-left: 4px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0; font-size: 17px; line-height: 1.55;
     }
-    .jtbd-quote { font-size: 15px; font-style: italic; line-height: 1.65; border-left: 3px solid var(--accent); padding-left: 14px; }
     .insight-box {
       margin-top: 18px; padding: 20px 24px;
       background: var(--accent-soft); border: 1px solid #c7d9f9; border-left: 4px solid var(--accent);
@@ -148,7 +154,7 @@
 
     /* ── Demo video ── */
     .demo { margin-top: 24px; padding: 28px 20px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; text-align: center; }
-    .demo video { display: block; width: 100%; max-width: 340px; margin: 0 auto; border-radius: 12px; background: #f7f7f5; }
+    .demo video { display: block; width: 100%; max-width: 340px; margin: 0 auto; border-radius: 12px; background: #f7f7f5; cursor: pointer; }
     .demo-note { font-size: 12px; color: var(--muted); margin-top: 12px; line-height: 1.5; }
 
     /* ── Decision cards ── */
@@ -158,8 +164,6 @@
     .decision-row { display: grid; grid-template-columns: 82px 1fr; gap: 6px 14px; margin-bottom: 12px; font-size: 14px; line-height: 1.65; align-items: baseline; }
     .decision-row:last-child { margin-bottom: 0; }
     .d-label { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-top: 4px; }
-    .decision-row.tradeoff .d-label { color: #b45309; }
-    .decision-row.tradeoff .d-value { color: #78350f; background: #fffbeb; border: 1px solid #fde68a; border-radius: 6px; padding: 8px 12px; font-size: 13px; }
 
     /* ── Metrics ── */
     .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -204,7 +208,6 @@
       .nav-links { gap: 16px; }
       .metrics-grid, .compare { grid-template-columns: 1fr; }
       .decision-row { grid-template-columns: 1fr; gap: 3px 0; }
-      .decision-row.tradeoff .d-value { margin-top: 4px; }
       .pull-quote { padding: 22px 20px; font-size: 15px; }
     }
   </style>
@@ -230,7 +233,7 @@
   <div class="cs-hero">
     <span class="hero-emoji">🧭</span>
     <span class="hero-label">Case Study #2 · Along the Way Feature Proposal</span>
-    <h1 class="cs-title">Along the Way: Turning Google Maps saves into visits</h1>
+    <h1 class="cs-title">Along the Way: Turning saved places into visits</h1>
     <p class="cs-subtitle">Saving a place takes one tap. Remembering it at the right moment takes luck. This is a feature proposal for Google Maps that brings your saved places back to you when you are already passing them.</p>
     <div class="tag-row">
       <span class="tag tag-blue">Google Maps</span>
@@ -249,7 +252,7 @@
     <h2 class="cs-section-title">Saving is easy. Recall is not.</h2>
     <p class="cs-intro">I save places from reels and friends' messages, then forget them when I'm actually nearby. I started prototyping a fix as a separate app, then realised Maps already owns the saves, the route and my location.</p>
 
-    <p class="cs-intro"><strong>Of the roughly 125 restaurants I've saved, I might have visited around 18 to 20.</strong></p>
+    <p class="stat-callout"><strong>Of the roughly 125 restaurants I've saved, I might have visited around 18 to 20.</strong></p>
     <p class="cs-intro">Maps has made capture almost frictionless: a save button on every place, a default "Want to go" list, and now Gemini reading your screenshots for you. But every one of those features ends at the list. The list then waits for you to open it, at the right time, in the right neighbourhood, with the right amount of free time. That rarely happens.</p>
 
     <div class="persona-grid">
@@ -281,6 +284,11 @@
 
     <div class="thread-callout">
       The same thread runs through all three: the intent was captured, the moment was right, and nothing connected the two.
+    </div>
+
+    <div class="insight-box">
+      <p class="insight-label">Key Insight</p>
+      The best moment to recall a saved place is when you are already passing it. That moment cannot be planned, so the user can never ask for it. Recall has to be pushed, not pulled. That is the one thing a conversational assistant like Ask Maps, by design, does not do.
     </div>
   </div>
 
@@ -351,32 +359,6 @@
     <p class="live-note">Third-party apps already try "notify me near a saved place", but they have to rebuild your list from scratch and run their own background location. Maps already has both.</p>
   </div>
 
-  <!-- ── JTBD ── -->
-  <div class="cs-section">
-    <p class="cs-section-label">JTBD</p>
-    <h2 class="cs-section-title">Jobs to Be Done</h2>
-
-    <div class="jtbd-grid">
-      <div class="jtbd-card">
-        <div class="jtbd-persona">📱 Reel saver</div>
-        <p class="jtbd-quote">"When I am already out and have a little time, I want to be reminded of a place I saved that is close by, so the things I was excited about actually happen instead of piling up."</p>
-      </div>
-      <div class="jtbd-card">
-        <div class="jtbd-persona">🚗 Commuter couple</div>
-        <p class="jtbd-quote">"When we are heading home on our usual route, I want to know if one of our saved places is a small detour away and open right now, so we can decide in seconds without planning anything."</p>
-      </div>
-      <div class="jtbd-card">
-        <div class="jtbd-persona">🧳 Trip planner</div>
-        <p class="jtbd-quote">"When I am walking between sights on a trip, I want my list to tell me when I am close to something on it, so I don't fly home and find out I missed it by one street."</p>
-      </div>
-    </div>
-
-    <div class="insight-box">
-      <p class="insight-label">Key Insight</p>
-      The best moment to recall a saved place is when you are already passing it. That moment cannot be planned, so the user can never ask for it. Recall has to be pushed, not pulled. That is the one thing a conversational assistant like Ask Maps, by design, does not do.
-    </div>
-  </div>
-
   <!-- ── Feature + prototype ── -->
   <div class="cs-section" id="feature">
     <p class="cs-section-label">Feature</p>
@@ -408,12 +390,18 @@
 
     <!-- Demo video -->
     <div class="demo">
-      <video poster="../assets/ask-maps/along-the-way-poster.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="Concept demo of Along the Way: route preview nudge, voice prompt while driving, Ask Maps prompt and trip recap">
+      <video id="demo-video" poster="../assets/ask-maps/along-the-way-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Concept demo of Along the Way: route preview nudge, voice prompt while driving, Ask Maps prompt and trip recap">
         <source src="../assets/ask-maps/along-the-way-demo.webm" type="video/webm" />
         <source src="../assets/ask-maps/along-the-way-demo.mp4" type="video/mp4" />
       </video>
       <p class="demo-note">Sample demo for Along the Way by Geetha Aripaka</p>
     </div>
+    <script>
+      (function () {
+        var v = document.getElementById('demo-video');
+        v.addEventListener('click', function () { v.paused ? v.play() : v.pause(); });
+      })();
+    </script>
   </div>
 
   <!-- ── Design decisions ── -->
@@ -427,37 +415,37 @@
         <div class="decision-card-title">🔔 You choose whether to be nudged</div>
         <div class="decision-row"><span class="d-label">Decision</span><span class="d-value">Off by default. Users turn it on list by list, for example "Want to go" on and "Work" off.</span></div>
         <div class="decision-row"><span class="d-label">Reason</span><span class="d-value">Location-based reminders should never be a surprise. Opting in is what makes "Maps noticed where I am" feel helpful instead of watched.</span></div>
-        <div class="decision-row tradeoff"><span class="d-label">Tradeoff</span><span class="d-value">Opt-in limits reach. The bet is that a smaller, happy audience proves the value first.</span></div>
+        <div class="decision-row"><span class="d-label">Tradeoff</span><span class="d-value">Opt-in limits reach. The bet is that a smaller, happy audience proves the value first.</span></div>
       </div>
       <div class="decision-card">
         <div class="decision-card-title">📅 You choose how often</div>
         <div class="decision-row"><span class="d-label">Decision</span><span class="d-value">1, 3 or 5 nudges a week, or every trip. Default is 3 a week, and never more than one per trip whatever the setting.</span></div>
         <div class="decision-row"><span class="d-label">Reason</span><span class="d-value">Some people want a nudge on every drive, others once a week. A single fixed frequency would annoy one group or bore the other.</span></div>
-        <div class="decision-row tradeoff"><span class="d-label">Tradeoff</span><span class="d-value">Users with long lists will miss some good matches. The trip recap catches the rest.</span></div>
+        <div class="decision-row"><span class="d-label">Tradeoff</span><span class="d-value">Users with long lists will miss some good matches. The trip recap catches the rest.</span></div>
       </div>
       <div class="decision-card">
         <div class="decision-card-title">⏱️ You choose how far</div>
         <div class="decision-row"><span class="d-label">Decision</span><span class="d-value">Maximum detour of 2, 5, 10 or 15 minutes of added travel time. Default is 5 minutes.</span></div>
         <div class="decision-row"><span class="d-label">Reason</span><span class="d-value">A five-minute detour is nothing on a free evening and too much on a school run. Measuring in time, not distance, matches what the user actually spends.</span></div>
-        <div class="decision-row tradeoff"><span class="d-label">Tradeoff</span><span class="d-value">Every trip needs a detour calculation instead of a simple radius check. Worth it, because a wrong "it's close" breaks trust faster than a missed nudge.</span></div>
+        <div class="decision-row"><span class="d-label">Tradeoff</span><span class="d-value">Every trip needs a detour calculation instead of a simple radius check. Worth it, because a wrong "it's close" breaks trust faster than a missed nudge.</span></div>
       </div>
       <div class="decision-card">
         <div class="decision-card-title">🔊 You choose how you hear about it</div>
         <div class="decision-row"><span class="d-label">Decision</span><span class="d-value">While driving: a short voice question, or off. When parked: a push notification, on or off. Pop-ups while the car is moving are never an option.</span></div>
         <div class="decision-row"><span class="d-label">Reason</span><span class="d-value">Voice keeps eyes on the road, and the question only comes when the car is stopped or crawling. Safety is the one thing that is not left to the user.</span></div>
-        <div class="decision-row tradeoff"><span class="d-label">Tradeoff</span><span class="d-value">Some users will ask for on-screen alerts while driving. The answer stays no.</span></div>
+        <div class="decision-row"><span class="d-label">Tradeoff</span><span class="d-value">Some users will ask for on-screen alerts while driving. The answer stays no.</span></div>
       </div>
       <div class="decision-card">
         <div class="decision-card-title">🔁 You choose whether a place comes back</div>
         <div class="decision-row"><span class="d-label">Decision</span><span class="d-value">After "Not now": next trip, after 30 days, or never. Default is 30 days. After three skips, Maps stops suggesting that place, but it stays on the list.</span></div>
         <div class="decision-row"><span class="d-label">Reason</span><span class="d-value">Getting asked about the same café every week after saying no is the fastest way to lose the user. A skip is a signal, not a reset.</span></div>
-        <div class="decision-row tradeoff"><span class="d-label">Tradeoff</span><span class="d-value">A place skipped on a busy day may not come back when the user would have said yes. It still shows in the trip recap.</span></div>
+        <div class="decision-row"><span class="d-label">Tradeoff</span><span class="d-value">A place skipped on a busy day may not come back when the user would have said yes. It still shows in the trip recap.</span></div>
       </div>
       <div class="decision-card">
         <div class="decision-card-title">🟢 Maps only suggests what makes sense now</div>
         <div class="decision-row"><span class="d-label">Decision</span><span class="d-value">No closed places, no breakfast spot at 10 pm, nothing already visited. Every nudge says why it appeared, with a one-tap way to stop it.</span></div>
         <div class="decision-row"><span class="d-label">Reason</span><span class="d-value">Whatever the user chooses, a nudge to a closed café wastes their trust. This is where Maps' knowledge of places earns its keep.</span></div>
-        <div class="decision-row tradeoff"><span class="d-label">Tradeoff</span><span class="d-value">Fewer nudges overall, and opening-hours data is imperfect, so a few wrong ones will still slip through.</span></div>
+        <div class="decision-row"><span class="d-label">Tradeoff</span><span class="d-value">Fewer nudges overall, and opening-hours data is imperfect, so a few wrong ones will still slip through.</span></div>
       </div>
     </div>
   </div>
@@ -537,8 +525,8 @@
         <thead><tr><th>Risk</th><th>Why it matters</th><th>Mitigation</th></tr></thead>
         <tbody>
           <tr><td><strong>Driver distraction</strong></td><td>Any tap-to-act prompt while driving is a safety issue.</td><td>Card only on the route preview; mid-drive is voice only, at a stop or in slow traffic; launch the voice prompt only after the preview proves safe.</td></tr>
-          <tr><td><strong>Notification fatigue</strong></td><td>One annoying week and the user turns off Maps notifications entirely.</td><td>One per trip, a weekly cap, and automatic back-off after repeated "Not now".</td></tr>
-          <tr><td><strong>Feels creepy</strong></td><td>"How did it know I was here?" erodes trust in location features broadly.</td><td>Opt-in per list, "why am I seeing this", clear copy that it only uses your own saves.</td></tr>
+          <tr><td><strong>Notification fatigue</strong></td><td>One annoying week and the user turns off Maps notifications entirely.</td><td>User-set weekly limit, one per trip, and skipped places stay away (see Design Decisions).</td></tr>
+          <tr><td><strong>Feels creepy</strong></td><td>"How did it know I was here?" erodes trust in location features broadly.</td><td>Opt-in per list, and every nudge says why it appeared (see Design Decisions).</td></tr>
           <tr><td><strong>Cold start</strong></td><td>Users with few saves will rarely trigger a nudge.</td><td>Use Screenshot to save as the on-ramp, and prompt saving after Ask Maps answers.</td></tr>
           <tr><td><strong>Looks like an ad</strong></td><td>If sponsored places ever appear here, the whole feature loses credibility.</td><td>Only places the user saved. Never paid placement in this surface.</td></tr>
         </tbody>
