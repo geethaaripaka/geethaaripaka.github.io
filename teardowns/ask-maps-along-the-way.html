@@ -156,6 +156,12 @@
     .demo { margin-top: 24px; padding: 28px 20px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; text-align: center; }
     .demo video { display: block; width: 100%; max-width: 340px; margin: 0 auto; border-radius: 12px; background: #f7f7f5; cursor: pointer; }
     .demo-note { font-size: 12px; color: var(--muted); margin-top: 12px; line-height: 1.5; }
+    .demo-fullscreen {
+      margin-top: 12px; padding: 2px 4px; background: none; border: none; cursor: pointer;
+      font: inherit; font-size: 13px; color: var(--muted); transition: color 0.15s;
+    }
+    .demo-fullscreen:hover { color: var(--text); }
+    .demo-fullscreen + .demo-note { margin-top: 4px; }
 
     /* ── Decision cards ── */
     .decision-cards { display: grid; gap: 14px; }
@@ -201,15 +207,15 @@
 
     footer { border-top: 1px solid var(--border); padding: 2rem 24px; text-align: center; font-size: 12px; color: #999; }
 
+    @media (min-width: 700px) {
+      .stat-callout { font-size: 16px; white-space: nowrap; }
+    }
     @media (max-width: 680px) {
       .surface-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 600px) {
       .nav-links { gap: 16px; }
       .metrics-grid, .compare { grid-template-columns: 1fr; }
-    @media (min-width: 700px) {
-      .stat-callout { font-size: 16px; white-space: nowrap; }
-    }
       .decision-row { grid-template-columns: 1fr; gap: 3px 0; }
       .pull-quote { padding: 22px 20px; font-size: 15px; }
     }
@@ -397,12 +403,27 @@
         <source src="../assets/ask-maps/along-the-way-demo.webm" type="video/webm" />
         <source src="../assets/ask-maps/along-the-way-demo.mp4" type="video/mp4" />
       </video>
+      <button type="button" class="demo-fullscreen" id="demo-fullscreen">⤢ View full screen</button>
       <p class="demo-note">Sample demo for Along the Way by Geetha Aripaka</p>
     </div>
     <script>
       (function () {
         var v = document.getElementById('demo-video');
         v.addEventListener('click', function () { v.paused ? v.play() : v.pause(); });
+
+        document.getElementById('demo-fullscreen').addEventListener('click', function () {
+          var keepPlaying = function () { v.play().catch(function () {}); };
+          if (v.requestFullscreen) {
+            v.requestFullscreen().then(keepPlaying, keepPlaying);
+          } else if (v.webkitRequestFullscreen) {
+            v.webkitRequestFullscreen();
+            keepPlaying();
+          } else if (v.webkitEnterFullscreen) {
+            // iOS Safari: only the video element itself can go full screen
+            v.webkitEnterFullscreen();
+            keepPlaying();
+          }
+        });
       })();
     </script>
   </div>
