@@ -334,6 +334,10 @@
     @media (max-width: 600px) {
       .cta-block { flex-direction: column; align-items: flex-start; }
     }
+
+    /* ── Text wrapping: avoid one-word last lines ── */
+    p, li, .problem-text, .decision-body { text-wrap: pretty; }
+    h1, h2, .cs-subtitle, .step-title { text-wrap: balance; }
   </style>
 </head>
 <body>
@@ -356,7 +360,7 @@
   <!-- ── Hero ── -->
   <div class="cs-hero">
     <h1 class="cs-title">Bespoke CV</h1>
-    <p class="cs-subtitle">Agentic AI tool that rewrites your CV for every job, surgically not generically</p>
+    <p class="cs-subtitle">AI tool that rewrites your CV for every job, surgically, not generically</p>
     <div class="tag-row">
       <span class="tag tag-slate">Python</span>
       <span class="tag tag-slate">Streamlit</span>
@@ -376,7 +380,7 @@
         <span class="problem-icon">⏳</span>
         <div class="problem-text">
           <strong>Manual rewriting is exhausting</strong>
-          Job seekers spend 20-40 minutes per application tailoring their CV to each role. Most of that time is spent on guesswork about what to change.
+          Job seekers spend 20–40 minutes per application tailoring their CV to each role. Most of that time is spent on guesswork about what to change.
         </div>
       </div>
       <div class="problem-card">
@@ -389,7 +393,7 @@
       <div class="problem-card">
         <span class="problem-icon">🚫</span>
         <div class="problem-text">
-          <strong>ATS systems reject missing keywords</strong>
+          <strong>ATS filters reject missing keywords</strong>
           Applicant Tracking Systems silently filter out CVs that don't mirror the exact language of the job description, even when the candidate is qualified.
         </div>
       </div>
@@ -432,7 +436,7 @@
           <span class="step-num">2</span>
           <span class="step-title">Analysis in progress</span>
         </div>
-        <p class="step-desc">Gemini 2.5 Flash reads both documents and identifies which bullets to rewrite, with temperature=0 for deterministic, consistent output every time.</p>
+        <p class="step-desc">Gemini 2.5 Flash reads both documents and identifies which bullets to rewrite. Temperature is set to 0, and the prompt evaluates every bullet explicitly, so the same CV and JD produce consistent suggestions.</p>
         <div class="screenshot">
           <img src="../assets/bespoke/analyzing.png" alt="Analysis in progress" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
           <div class="screenshot-placeholder" style="display:none;">assets/bespoke/analyzing.png</div>
@@ -444,7 +448,7 @@
           <span class="step-num">3</span>
           <span class="step-title">Score dashboard</span>
         </div>
-        <p class="step-desc">An ATS keyword score and JD match percentage surface immediately. Both update live as you accept or reject suggested edits. The JD match score is weighted by bullet-level impact: each bullet is individually scored for impact (1-10) and the overall score reflects the weighted average, not just keyword presence. ATS keywords from the JD are deliberately woven into the rewritten bullets, so the ATS score improves through the rewrites themselves rather than through a separate keyword-stuffing step.</p>
+        <p class="step-desc">An ATS keyword score and JD match percentage surface immediately. Both update live as you accept or reject suggested edits. The JD match score is weighted by bullet-level impact: each bullet is individually scored for impact (1–10) and the overall score reflects the weighted average, not just keyword presence. ATS keywords from the JD are deliberately woven into the rewritten bullets, so the ATS score improves through the rewrites themselves rather than through a separate keyword-stuffing step.</p>
         <div class="screenshot">
           <img src="../assets/bespoke/scores.png" alt="Score dashboard" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
           <div class="screenshot-placeholder" style="display:none;">assets/bespoke/scores.png</div>
@@ -494,65 +498,51 @@
     </div>
   </div>
 
-  <!-- ── Design Decisions ── -->
+  <!-- ── Key Decisions ── -->
   <div class="cs-section">
     <p class="cs-section-label">Thinking</p>
-    <h2 class="cs-section-title">Key Design Decisions</h2>
+    <h2 class="cs-section-title">Key Decisions</h2>
     <div class="decisions">
       <div class="decision">
         <div class="decision-dot"></div>
         <div class="decision-body">
-          <strong>temperature=0 for consistency.</strong> Job applications are high-stakes. Randomness in output undermines trust. Users need to know the same CV + JD pair produces the same suggestions every time, so they can trust the output and iterate with confidence.
+          <strong>Surgical edits, not full rewrites.</strong> The model only touches weak or misaligned bullets. A visible diff builds more trust than a black-box rewrite, and it preserves the user's voice instead of replacing it with AI-sounding language.
         </div>
       </div>
       <div class="decision">
         <div class="decision-dot"></div>
         <div class="decision-body">
-          <strong>Surgical edits, not full rewrites.</strong> The model is explicitly instructed to only touch weak or misaligned bullets, not rewrite the entire CV. This preserves the user's voice and avoids the uncanny-valley problem of AI-sounding language replacing authentic experience.
+          <strong>User controls every change.</strong> AI suggests, the user decides. Nothing is applied without an accept.
         </div>
       </div>
       <div class="decision">
         <div class="decision-dot"></div>
         <div class="decision-body">
-          <strong>Word output to preserve formatting.</strong> Recruiters receive and screen CVs in Word. Exporting as <code>.docx</code> via <code>python-docx</code>, with layout reconstructed from the original file, means no reformatting work for the user after download.
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── PM Decisions ── -->
-  <div class="cs-section">
-    <p class="cs-section-label">Product thinking</p>
-    <h2 class="cs-section-title">PM Decisions</h2>
-    <div class="decisions">
-      <div class="decision">
-        <div class="decision-dot"></div>
-        <div class="decision-body">
-          <strong>Diff view over full rewrite.</strong> Users trust surgical edits more than a black-box rewrite. Seeing exactly what changed builds confidence in the output.
+          <strong>Consistency over creativity.</strong> Job applications are high-stakes, and randomness undermines trust. Temperature 0 plus a prompt that evaluates every bullet means the same CV and JD give the same suggestions, so users can iterate with confidence.
         </div>
       </div>
       <div class="decision">
         <div class="decision-dot"></div>
         <div class="decision-body">
-          <strong>User controls every change.</strong> AI suggests, human decides. The tool keeps your voice intact by never forcing an edit.
+          <strong>Live scores as you accept or reject.</strong> Real-time feedback changes how you engage with suggestions. You stop guessing and start optimising.
         </div>
       </div>
       <div class="decision">
         <div class="decision-dot"></div>
         <div class="decision-body">
-          <strong>Live score as you tick checkboxes.</strong> Real-time feedback changes how you engage with suggestions. You stop guessing and start optimising.
+          <strong>Missing keywords solved inside rewrites.</strong> A list of missing keywords without fixes is anxiety, not a product. ATS keywords are woven into rewrites naturally, not appended as a separate list.
         </div>
       </div>
       <div class="decision">
         <div class="decision-dot"></div>
         <div class="decision-body">
-          <strong>Missing keywords solved inside rewrites.</strong> Surfacing a list of missing keywords without fixing them is anxiety, not a product. Bespoke CV solves the problem, not just names it. ATS keywords are woven into rewrites naturally, not appended as a separate list.
+          <strong>Word output that keeps your formatting.</strong> Recruiters screen CVs in Word, so the download is rebuilt from the original .docx, with no reformatting needed.
         </div>
       </div>
       <div class="decision">
         <div class="decision-dot"></div>
         <div class="decision-body">
-          <strong>Not every job application starts with a URL.</strong> Sometimes you have only the JD text, copied from an email, a PDF, or a company portal. Bespoke CV solves that with a manual JD paste option, so the tool works regardless of how you found the role.
+          <strong>Not every application starts with a URL.</strong> A manual JD paste option covers JDs copied from emails, PDFs or company portals.
         </div>
       </div>
     </div>
@@ -572,7 +562,7 @@
       <div class="decision">
         <div class="decision-dot"></div>
         <div class="decision-body">
-          <strong>Format preservation is not just a trust problem, it is a product completeness problem.</strong> If the output looks different from the input, users assume something went wrong. Worse, they have to reformat manually, which defeats the entire purpose of the tool. The CV should be submission-ready on download, no cleanup needed.
+          <strong>Format preservation is not just a trust problem; it's a product completeness problem.</strong> If the output looks different from the input, users assume something went wrong. Worse, they have to reformat manually, which defeats the entire purpose of the tool. The CV should be submission-ready on download, no cleanup needed.
         </div>
       </div>
       <div class="decision">
