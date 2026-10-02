@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Along the Way: A Google Maps Feature Case Study | Geetha Aripaka</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --surface: #f7f7f5;
+      --border: #e8e8e4;
+      --text: #1a1a1a;
+      --muted: #787774;
+      --accent: #2f6feb;
+      --accent-soft: #eef3fd;
+      --radius: 8px;
+      --max: 720px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: var(--max); margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 52px;
+    }
+    .nav-logo { font-weight: 600; font-size: 15px; color: var(--text); text-decoration: none; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 14px; color: var(--muted); text-decoration: none; transition: color 0.15s; }
+    .nav-links a:hover { color: var(--text); }
+
+    main { max-width: var(--max); margin: 0 auto; padding: 0 24px 80px; }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 14px; color: var(--muted); text-decoration: none;
+      margin-top: 36px; margin-bottom: 40px; transition: color 0.15s;
+    }
+    .back-link:hover { color: var(--text); }
+
+    /* ── Hero ── */
+    .cs-hero { margin-bottom: 52px; }
+    .hero-emoji { font-size: 36px; margin-bottom: 14px; display: block; }
+    .hero-label {
+      display: inline-block; font-size: 12px; font-weight: 600;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      color: var(--accent); background: var(--accent-soft);
+      padding: 3px 10px; border-radius: 4px; margin-bottom: 16px;
+    }
+    .cs-title {
+      font-size: clamp(1.75rem, 5vw, 2.5rem); font-weight: 700;
+      letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 14px;
+    }
+    .cs-subtitle { font-size: 17px; color: var(--muted); margin-bottom: 22px; line-height: 1.6; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag { font-size: 12px; font-weight: 500; padding: 3px 10px; border-radius: 4px; white-space: nowrap; }
+    .tag-blue   { background: #dbeafe; color: #1d4ed8; }
+    .tag-green  { background: #dcfce7; color: #15803d; }
+    .tag-violet { background: #ede9fe; color: #5b21b6; }
+    .tag-amber  { background: #fef3c7; color: #92400e; }
+    .tag-slate  { background: #f1f5f9; color: #475569; }
+
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0 0 48px; }
+
+    /* ── Section ── */
+    .cs-section { margin-bottom: 52px; }
+    .cs-section-label {
+      font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 6px;
+    }
+    .cs-section-title { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 18px; line-height: 1.3; }
+    .cs-intro { font-size: 15px; color: var(--text); line-height: 1.75; margin-bottom: 20px; }
+    .cs-intro a, .live-note a, .sources a { color: var(--accent); text-decoration: none; }
+    .cs-intro a:hover, .live-note a:hover, .sources a:hover { text-decoration: underline; }
+
+    /* ── Persona cards ── */
+    .persona-grid { display: grid; gap: 12px; }
+    .persona-card {
+      display: flex; gap: 16px; align-items: flex-start;
+      padding: 20px 22px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: var(--radius);
+    }
+    .persona-icon { font-size: 22px; flex-shrink: 0; margin-top: 1px; }
+    .persona-body { flex: 1; min-width: 0; font-size: 14px; line-height: 1.6; }
+    .persona-body strong { font-weight: 700; font-size: 14px; display: block; margin-bottom: 3px; }
+    .persona-desc { color: var(--text); margin-bottom: 10px; }
+    .persona-workaround { padding-top: 10px; border-top: 1px solid var(--border); font-size: 13px; color: var(--muted); }
+    .persona-workaround b { font-weight: 600; color: var(--muted); }
+
+    .thread-callout {
+      margin-top: 16px; padding: 16px 20px;
+      background: var(--accent-soft); border: 1px solid #c7d9f9;
+      border-radius: var(--radius); font-size: 14px; font-style: italic; line-height: 1.65;
+    }
+
+    /* ── Tables ── */
+    .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); }
+    .feature-table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 520px; }
+    .feature-table th {
+      background: var(--surface); font-weight: 600; font-size: 11px;
+      text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted);
+      padding: 10px 16px; text-align: left; border-bottom: 1px solid var(--border);
+    }
+    .feature-table td { padding: 13px 16px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.55; }
+    .feature-table tr:last-child td { border-bottom: none; }
+    .feature-table tr:nth-child(even) td { background: var(--surface); }
+    .feature-table td.gap { color: #92400e; }
+    .live-note { margin-top: 12px; font-size: 13px; color: var(--muted); }
+
+    /* ── JTBD ── */
+    .jtbd-grid { display: grid; gap: 12px; }
+    .jtbd-card { padding: 20px 22px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+    .jtbd-persona {
+      font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 10px;
+      display: flex; align-items: center; gap: 7px; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .jtbd-quote { font-size: 15px; font-style: italic; line-height: 1.65; border-left: 3px solid var(--accent); padding-left: 14px; }
+    .insight-box {
+      margin-top: 18px; padding: 20px 24px;
+      background: var(--accent-soft); border: 1px solid #c7d9f9; border-left: 4px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0; font-size: 14px; line-height: 1.65;
+    }
+    .insight-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+
+    /* ── Surfaces ── */
+    .surface-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .surface-card { padding: 18px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); font-size: 13px; line-height: 1.6; }
+    .surface-num { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+    .surface-card strong { display: block; font-size: 14px; margin-bottom: 6px; }
+
+    /* ── Demo video ── */
+    .demo { margin-top: 24px; padding: 28px 20px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; text-align: center; }
+    .demo video { display: block; width: 100%; max-width: 340px; margin: 0 auto; border-radius: 12px; background: #f7f7f5; }
+    .demo-note { font-size: 12px; color: var(--muted); margin-top: 12px; line-height: 1.5; }
+
+    /* ── Decision cards ── */
+    .decision-cards { display: grid; gap: 14px; }
+    .decision-card { padding: 22px 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+    .decision-card-title { font-size: 15px; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; line-height: 1.3; }
+    .decision-row { display: grid; grid-template-columns: 82px 1fr; gap: 6px 14px; margin-bottom: 12px; font-size: 14px; line-height: 1.65; align-items: baseline; }
+    .decision-row:last-child { margin-bottom: 0; }
+    .d-label { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-top: 4px; }
+    .decision-row.tradeoff .d-label { color: #b45309; }
+    .decision-row.tradeoff .d-value { color: #78350f; background: #fffbeb; border: 1px solid #fde68a; border-radius: 6px; padding: 8px 12px; font-size: 13px; }
+
+    /* ── Metrics ── */
+    .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .metric-card { padding: 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+    .metric-card.wide { grid-column: 1 / -1; }
+    .metric-card.north { background: var(--accent-soft); border-color: #c7d9f9; }
+    .metric-card-title { font-size: 14px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 7px; }
+    .metric-list { list-style: none; display: grid; gap: 7px; }
+    .metric-list li { font-size: 13px; color: var(--muted); line-height: 1.5; display: flex; gap: 8px; align-items: baseline; }
+    .metric-list li::before { content: "·"; font-size: 20px; color: #c5c5c2; flex-shrink: 0; line-height: 1; }
+    .north-def { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+    .north-why { font-size: 13px; color: var(--muted); }
+    .north-hyp { font-size: 13.5px; margin-top: 10px; padding-top: 10px; border-top: 1px solid #c7d9f9; }
+    .north-hyp b { color: var(--accent); }
+
+    .assume { margin-top: 14px; }
+    .assume-note { font-size: 12.5px; color: var(--muted); margin-top: 10px; }
+
+    /* ── Compare ── */
+    .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .compare-col { padding: 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+    .compare-col.recall { background: var(--accent-soft); border-color: #c7d9f9; }
+    .compare-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .compare-col.recall .compare-label { color: var(--accent); }
+    .compare-q { font-size: 15px; font-style: italic; margin-bottom: 12px; line-height: 1.5; }
+
+    /* ── Pull quote ── */
+    .pull-quote {
+      padding: 30px 32px; background: var(--surface); border: 1px solid var(--border);
+      border-left: 4px solid var(--accent); border-radius: 0 var(--radius) var(--radius) 0;
+      font-size: 17px; font-style: italic; line-height: 1.8;
+    }
+
+    .sources { font-size: 13px; color: var(--muted); line-height: 1.7; padding-left: 18px; }
+
+    footer { border-top: 1px solid var(--border); padding: 2rem 24px; text-align: center; font-size: 12px; color: #999; }
+
+    @media (max-width: 680px) {
+      .surface-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { gap: 16px; }
+      .metrics-grid, .compare { grid-template-columns: 1fr; }
+      .decision-row { grid-template-columns: 1fr; gap: 3px 0; }
+      .decision-row.tradeoff .d-value { margin-top: 4px; }
+      .pull-quote { padding: 22px 20px; font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="/">Geetha Aripaka</a>
+    <ul class="nav-links">
+      <li><a href="/#projects">Projects</a></li>
+      <li><a href="/#teardowns">Case Studies</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+
+  <a class="back-link" href="/">← Back</a>
+
+  <!-- ── Hero ── -->
+  <div class="cs-hero">
+    <span class="hero-emoji">🧭</span>
+    <span class="hero-label">Case Study #2 · Along the Way Feature Proposal</span>
+    <h1 class="cs-title">Along the Way: Turning Google Maps saves into visits</h1>
+    <p class="cs-subtitle">Saving a place takes one tap. Remembering it at the right moment takes luck. This is a feature proposal for Google Maps that brings your saved places back to you when you are already passing them.</p>
+    <div class="tag-row">
+      <span class="tag tag-blue">Google Maps</span>
+      <span class="tag tag-violet">Ask Maps</span>
+      <span class="tag tag-slate">Consumer Product</span>
+      <span class="tag tag-green">Personalization</span>
+      <span class="tag tag-amber">Proactive UX</span>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- ── Problem ── -->
+  <div class="cs-section">
+    <p class="cs-section-label">Problem</p>
+    <h2 class="cs-section-title">Saving is easy. Recall is not.</h2>
+    <p class="cs-intro">I save places from reels and friends' messages, then forget them when I'm actually nearby. I started prototyping a fix as a separate app, then realised Maps already owns the saves, the route and my location.</p>
+
+    <p class="cs-intro"><strong>Of the roughly 125 restaurants I've saved, I might have visited around 18 to 20.</strong></p>
+    <p class="cs-intro">Maps has made capture almost frictionless: a save button on every place, a default "Want to go" list, and now Gemini reading your screenshots for you. But every one of those features ends at the list. The list then waits for you to open it, at the right time, in the right neighbourhood, with the right amount of free time. That rarely happens.</p>
+
+    <div class="persona-grid">
+      <div class="persona-card">
+        <span class="persona-icon">📱</span>
+        <div class="persona-body">
+          <strong>The reel saver</strong>
+          <p class="persona-desc">Saves five or six places a week from Instagram and friends' recommendations. Her "Want to go" list is long and growing. She has visited very few of them, not because she lost interest, but because she never remembers them when she is nearby.</p>
+          <div class="persona-workaround"><b>Workaround:</b> Scrolls her saved list before a weekend plan, if she remembers to. On a regular weekday, the list is invisible.</div>
+        </div>
+      </div>
+      <div class="persona-card">
+        <span class="persona-icon">🚗</span>
+        <div class="persona-body">
+          <strong>The commuter couple</strong>
+          <p class="persona-desc">Drive the same route home every evening. There is a bakery they both saved months ago, four minutes off that route. They have driven past the turn hundreds of times.</p>
+          <div class="persona-workaround"><b>Workaround:</b> None. The place only comes up again when one of them sees another reel about it.</div>
+        </div>
+      </div>
+      <div class="persona-card">
+        <span class="persona-icon">🧳</span>
+        <div class="persona-body">
+          <strong>The trip planner</strong>
+          <p class="persona-desc">Builds a list of 30 places before a trip. During the trip, she plans each day around the big sights and only realises on the flight home that she walked right past three places on her list.</p>
+          <div class="persona-workaround"><b>Workaround:</b> Keeps the list open on the map and checks the pins manually, which works only when she remembers to look.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="thread-callout">
+      The same thread runs through all three: the intent was captured, the moment was right, and nothing connected the two.
+    </div>
+  </div>
+
+  <!-- ── The Real Gap ── -->
+  <div class="cs-section">
+    <p class="cs-section-label">The Real Gap</p>
+    <h2 class="cs-section-title">The problem everyone is missing: recall, not discovery</h2>
+    <p class="cs-intro">Almost every place product today solves the same problem: <em>where should I go?</em> Pick a neighbourhood, pick a vibe, and get a list of restaurants and cafés. Food apps, city guide pages, Instagram curators and now Ask Maps all compete to suggest the next new place.</p>
+    <p class="cs-intro">But I don't have a shortage of suggestions. I already have a list of places I chose myself, and I never go to them. Nobody is building for that.</p>
+
+    <div class="compare">
+      <div class="compare-col">
+        <p class="compare-label">Discovery (crowded)</p>
+        <p class="compare-q">"Suggest somewhere good near here."</p>
+        <ul class="metric-list">
+          <li>Starts from the whole city</li>
+          <li>User has to ask, every time</li>
+          <li>Every app competes on it</li>
+        </ul>
+      </div>
+      <div class="compare-col recall">
+        <p class="compare-label">Recall (empty)</p>
+        <p class="compare-q">"Remind me of the place I already picked."</p>
+        <ul class="metric-list">
+          <li>Starts from places I already chose</li>
+          <li>Comes to me at the right moment</li>
+          <li>Almost no one is building it</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── What Maps does today ── -->
+  <div class="cs-section">
+    <p class="cs-section-label">Landscape</p>
+    <h2 class="cs-section-title">What Maps already does, and where it stops</h2>
+    <p class="cs-intro">Maps has added a lot here recently, most notably <a href="https://blog.google/products-and-platforms/products/maps/ask-maps-immersive-navigation/" target="_blank" rel="noopener">Ask Maps</a>, a Gemini-powered conversational layer launched in March 2026. Each existing feature is good at its own job. The gap sits between them.</p>
+
+    <div class="table-wrap">
+      <table class="feature-table">
+        <thead>
+          <tr><th>Feature</th><th>What it does well</th><th>Where it stops</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Saved lists</strong><br><span style="color:var(--muted);font-size:13px">Want to go, Favourites, custom</span></td>
+            <td>One-tap save, notes, shared lists. Saved places show as icons on the map.</td>
+            <td class="gap">You only see the icons if you happen to be looking at that part of the map.</td>
+          </tr>
+          <tr>
+            <td><strong>Screenshot to save</strong></td>
+            <td>Gemini finds place names in your screenshots and offers to save them to a list.</td>
+            <td class="gap">Makes capture even easier, which makes the recall problem bigger.</td>
+          </tr>
+          <tr>
+            <td><strong>Ask Maps</strong></td>
+            <td>Answers complex questions conversationally, personalized by places you have searched for or saved. Can suggest stops along a route.</td>
+            <td class="gap">Pull only. It helps when you think to ask, and most people never think to ask about their own list.</td>
+          </tr>
+          <tr>
+            <td><strong>Navigation</strong></td>
+            <td>Knows your route, mode, ETA and when you are stopped or moving.</td>
+            <td class="gap">Doesn't connect any of that to the places you said you wanted to go.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="live-note">Third-party apps already try "notify me near a saved place", but they have to rebuild your list from scratch and run their own background location. Maps already has both.</p>
+  </div>
+
+  <!-- ── JTBD ── -->
+  <div class="cs-section">
+    <p class="cs-section-label">JTBD</p>
+    <h2 class="cs-section-title">Jobs to Be Done</h2>
+
+    <div class="jtbd-grid">
+      <div class="jtbd-card">
+        <div class="jtbd-persona">📱 Reel saver</div>
+        <p class="jtbd-quote">"When I am already out and have a little time, I want to be reminded of a place I saved that is close by, so the things I was excited about actually happen instead of piling up."</p>
+      </div>
+      <div class="jtbd-card">
+        <div class="jtbd-persona">🚗 Commuter couple</div>
+        <p class="jtbd-quote">"When we are heading home on our usual route, I want to know if one of our saved places is a small detour away and open right now, so we can decide in seconds without planning anything."</p>
+      </div>
+      <div class="jtbd-card">
+        <div class="jtbd-persona">🧳 Trip planner</div>
+        <p class="jtbd-quote">"When I am walking between sights on a trip, I want my list to tell me when I am close to something on it, so I don't fly home and find out I missed it by one street."</p>
+      </div>
+    </div>
+
+    <div class="insight-box">
+      <p class="insight-label">Key Insight</p>
+      The best moment to recall a saved place is when you are already passing it. That moment cannot be planned, so the user can never ask for it. Recall has to be pushed, not pulled. That is the one thing a conversational assistant like Ask Maps, by design, does not do.
+    </div>
+  </div>
+
+  <!-- ── Feature + prototype ── -->
+  <div class="cs-section" id="feature">
+    <p class="cs-section-label">Feature</p>
+    <h2 class="cs-section-title">Along the Way: built for the drive</h2>
+    <p class="cs-intro">Along the Way connects two things Maps already knows, your saved places and your current route, and surfaces at most one relevant place at a moment when acting on it is easy.</p>
+
+    <div class="surface-grid">
+      <div class="surface-card">
+        <p class="surface-num">Surface 1</p>
+        <strong>Before you drive: route preview nudge</strong>
+        Before you start, if a saved place is open and within a small detour, the route sheet shows one card with "Add stop". The decision happens while parked.
+      </div>
+      <div class="surface-card">
+        <p class="surface-num">Surface 2</p>
+        <strong>While driving: voice only</strong>
+        At a safe moment, like a red light, Maps asks one short question: "A café you saved is 3 minutes ahead. Want to stop?" Say "Yes" and the stop is added. No buttons, no cards.
+      </div>
+      <div class="surface-card">
+        <p class="surface-num">Surface 3</p>
+        <strong>Ask Maps prompt</strong>
+        A new suggested prompt in Ask Maps: "Anything from my lists on the way?" It answers from your saves first, with context like your own notes.
+      </div>
+      <div class="surface-card">
+        <p class="surface-num">Surface 4</p>
+        <strong>Trip recap</strong>
+        After a trip: "You passed 2 saved places today." Quick actions to keep, remove or plan for next time, which keeps lists fresh.
+      </div>
+    </div>
+
+    <!-- Demo video -->
+    <div class="demo">
+      <video poster="../assets/ask-maps/along-the-way-poster.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="Concept demo of Along the Way: route preview nudge, voice prompt while driving, Ask Maps prompt and trip recap">
+        <source src="../assets/ask-maps/along-the-way-demo.webm" type="video/webm" />
+        <source src="../assets/ask-maps/along-the-way-demo.mp4" type="video/mp4" />
+      </video>
+      <p class="demo-note">Sample demo for Along the Way by Geetha Aripaka</p>
+    </div>
+  </div>
+
+  <!-- ── Design decisions ── -->
+  <div class="cs-section">
+    <p class="cs-section-label">Design Decisions</p>
+    <h2 class="cs-section-title">The user controls every reminder</h2>
+    <p class="cs-intro">How often, how far, how you hear about it, and whether a place comes back are all the user's choice. Maps only sets quiet defaults for people who never open settings.</p>
+
+    <div class="decision-cards">
+      <div class="decision-card">
+        <div class="decision-card-title">🔔 You choose whether to be nudged</div>
+        <div class="decision-row"><span class="d-label">Decision</span><span class="d-value">Off by default. Users turn it on list by list, for example "Want to go" on and "Work" off.</span></div>
+        <div class="decision-row"><span class="d-label">Reason</span><span class="d-value">Location-based reminders should never be a surprise. Opting in is what makes "Maps noticed where I am" feel helpful instead of watched.</span></div>
+        <div class="decision-row tradeoff"><span class="d-label">Tradeoff</span><span class="d-value">Opt-in limits reach. The bet is that a smaller, happy audience proves the value first.</span></div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-card-title">📅 You choose how often</div>
+        <div class="decision-row"><span class="d-label">Decision</span><span class="d-value">1, 3 or 5 nudges a week, or every trip. Default is 3 a week, and never more than one per trip whatever the setting.</span></div>
+        <div class="decision-row"><span class="d-label">Reason</span><span class="d-value">Some people want a nudge on every drive, others once a week. A single fixed frequency would annoy one group or bore the other.</span></div>
+        <div class="decision-row tradeoff"><span class="d-label">Tradeoff</span><span class="d-value">Users with long lists will miss some good matches. The trip recap catches the rest.</span></div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-card-title">⏱️ You choose how far</div>
+        <div class="decision-row"><span class="d-label">Decision</span><span class="d-value">Maximum detour of 2, 5, 10 or 15 minutes of added travel time. Default is 5 minutes.</span></div>
+        <div class="decision-row"><span class="d-label">Reason</span><span class="d-value">A five-minute detour is nothing on a free evening and too much on a school run. Measuring in time, not distance, matches what the user actually spends.</span></div>
+        <div class="decision-row tradeoff"><span class="d-label">Tradeoff</span><span class="d-value">Every trip needs a detour calculation instead of a simple radius check. Worth it, because a wrong "it's close" breaks trust faster than a missed nudge.</span></div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-card-title">🔊 You choose how you hear about it</div>
+        <div class="decision-row"><span class="d-label">Decision</span><span class="d-value">While driving: a short voice question, or off. When parked: a push notification, on or off. Pop-ups while the car is moving are never an option.</span></div>
+        <div class="decision-row"><span class="d-label">Reason</span><span class="d-value">Voice keeps eyes on the road, and the question only comes when the car is stopped or crawling. Safety is the one thing that is not left to the user.</span></div>
+        <div class="decision-row tradeoff"><span class="d-label">Tradeoff</span><span class="d-value">Some users will ask for on-screen alerts while driving. The answer stays no.</span></div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-card-title">🔁 You choose whether a place comes back</div>
+        <div class="decision-row"><span class="d-label">Decision</span><span class="d-value">After "Not now": next trip, after 30 days, or never. Default is 30 days. After three skips, Maps stops suggesting that place, but it stays on the list.</span></div>
+        <div class="decision-row"><span class="d-label">Reason</span><span class="d-value">Getting asked about the same café every week after saying no is the fastest way to lose the user. A skip is a signal, not a reset.</span></div>
+        <div class="decision-row tradeoff"><span class="d-label">Tradeoff</span><span class="d-value">A place skipped on a busy day may not come back when the user would have said yes. It still shows in the trip recap.</span></div>
+      </div>
+      <div class="decision-card">
+        <div class="decision-card-title">🟢 Maps only suggests what makes sense now</div>
+        <div class="decision-row"><span class="d-label">Decision</span><span class="d-value">No closed places, no breakfast spot at 10 pm, nothing already visited. Every nudge says why it appeared, with a one-tap way to stop it.</span></div>
+        <div class="decision-row"><span class="d-label">Reason</span><span class="d-value">Whatever the user chooses, a nudge to a closed café wastes their trust. This is where Maps' knowledge of places earns its keep.</span></div>
+        <div class="decision-row tradeoff"><span class="d-label">Tradeoff</span><span class="d-value">Fewer nudges overall, and opening-hours data is imperfect, so a few wrong ones will still slip through.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Metrics ── -->
+  <div class="cs-section">
+    <p class="cs-section-label">Metrics</p>
+    <h2 class="cs-section-title">How I'd measure success as PM</h2>
+
+    <div class="metrics-grid">
+      <div class="metric-card wide north">
+        <div class="metric-card-title">⭐ North Star</div>
+        <p class="north-def">Saved-place visit rate: % of saved places visited within 90 days of saving</p>
+        <p class="north-why">It measures the exact gap this feature closes: intent captured, intent acted on. Visits are inferred the same way Maps already infers place visits for Timeline, with the user's permission.</p>
+        <p class="north-hyp"><b>Hypothesis:</b> for opted-in users, the 90-day visit rate goes from roughly 10% to 15 to 20%.</p>
+      </div>
+      <div class="metric-card">
+        <div class="metric-card-title">📈 Adoption</div>
+        <ul class="metric-list">
+          <li>% of eligible users who turn it on for at least one list</li>
+          <li>% of users who use the Ask Maps "on the way" prompt</li>
+        </ul>
+      </div>
+      <div class="metric-card">
+        <div class="metric-card-title">🔄 Engagement</div>
+        <ul class="metric-list">
+          <li>Nudge accept rate (added stop or tapped through)</li>
+          <li>Detour completion: added stops that were actually reached</li>
+          <li>Recap actions per week (visited, removed, planned)</li>
+        </ul>
+      </div>
+      <div class="metric-card">
+        <div class="metric-card-title">🎯 Outcome</div>
+        <ul class="metric-list">
+          <li>Reviews and photos added after a nudged visit</li>
+          <li>Save rate going up after users see saves turn into visits</li>
+        </ul>
+      </div>
+      <div class="metric-card">
+        <div class="metric-card-title">🚨 Guardrails</div>
+        <ul class="metric-list">
+          <li>Feature opt-out rate and "Not now" streaks</li>
+          <li>Maps notification opt-outs overall</li>
+          <li>Navigation safety signals: no change in missed turns or rerouting</li>
+          <li>Nudges to places that turned out closed</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="insight-box">
+      <p class="insight-label">How I'd test it</p>
+      An opt-in A/B test, starting with the driving route preview because the user is still parked, then the mid-drive voice prompt once safety signals hold steady. Expand only if saved-place visits go up and opt-outs stay flat.
+    </div>
+
+    <div class="table-wrap assume">
+      <table class="feature-table">
+        <thead><tr><th>Assumption I'd validate first</th><th>Rough estimate</th></tr></thead>
+        <tbody>
+          <tr><td>Saved places visited within 90 days today</td><td>~10%</td></tr>
+          <tr><td>Drives with a saved place within a 5-min detour (users with 50+ saves)</td><td>~1 in 10</td></tr>
+          <tr><td>Nudges accepted ("Add stop" or a spoken "Yes")</td><td>5 to 10%</td></tr>
+          <tr><td>Added stops actually reached</td><td>70 to 80%</td></tr>
+          <tr><td>Opted-in users who turn it off in the first month</td><td>Under 5% (guardrail)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="assume-note">These are my own estimates, not published data. They are the first things the A/B test would confirm or correct.</p>
+  </div>
+
+  <!-- ── Risks ── -->
+  <div class="cs-section">
+    <p class="cs-section-label">Risks</p>
+    <h2 class="cs-section-title">What could go wrong</h2>
+
+    <div class="table-wrap">
+      <table class="feature-table">
+        <thead><tr><th>Risk</th><th>Why it matters</th><th>Mitigation</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Driver distraction</strong></td><td>Any tap-to-act prompt while driving is a safety issue.</td><td>Card only on the route preview; mid-drive is voice only, at a stop or in slow traffic; launch the voice prompt only after the preview proves safe.</td></tr>
+          <tr><td><strong>Notification fatigue</strong></td><td>One annoying week and the user turns off Maps notifications entirely.</td><td>One per trip, a weekly cap, and automatic back-off after repeated "Not now".</td></tr>
+          <tr><td><strong>Feels creepy</strong></td><td>"How did it know I was here?" erodes trust in location features broadly.</td><td>Opt-in per list, "why am I seeing this", clear copy that it only uses your own saves.</td></tr>
+          <tr><td><strong>Cold start</strong></td><td>Users with few saves will rarely trigger a nudge.</td><td>Use Screenshot to save as the on-ramp, and prompt saving after Ask Maps answers.</td></tr>
+          <tr><td><strong>Looks like an ad</strong></td><td>If sponsored places ever appear here, the whole feature loses credibility.</td><td>Only places the user saved. Never paid placement in this surface.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── Closing ── -->
+  <div class="cs-section">
+    <blockquote class="pull-quote">
+      "We keep building better ways to find new places. The bigger gap is helping people go to the ones they already chose."
+    </blockquote>
+  </div>
+
+  <!-- ── Sources ── -->
+  <div class="cs-section">
+    <p class="cs-section-label">Sources</p>
+    <ul class="sources">
+      <li><a href="https://blog.google/products-and-platforms/products/maps/ask-maps-immersive-navigation/" target="_blank" rel="noopener">Google: How we're reimagining Maps with Gemini (Ask Maps launch)</a></li>
+      <li><a href="https://www.techcrunch.com/2026/03/12/google-maps-is-getting-an-ai-ask-maps-feature-and-upgraded-immersive-navigation/" target="_blank" rel="noopener">TechCrunch: Google Maps is getting an AI Ask Maps feature (March 2026)</a></li>
+      <li><a href="https://support.google.com/maps/answer/16278054?hl=en" target="_blank" rel="noopener">Google Maps Help: Save places from screenshots</a></li>
+      <li><a href="https://blog.google/products/maps/keep-track-your-favorite-places-and-share-them-friends/" target="_blank" rel="noopener">Google: Keep track of your favourite places (saved lists)</a></li>
+    </ul>
+  </div>
+
+</main>
+
+<footer>
+  Built by Geetha Aripaka · 2026
+</footer>
+
+</body>
+</html>
