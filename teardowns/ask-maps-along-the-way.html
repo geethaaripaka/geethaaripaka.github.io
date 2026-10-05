@@ -253,7 +253,7 @@
       <span class="tag tag-blue">Google Maps</span>
       <span class="tag tag-violet">Ask Maps</span>
       <span class="tag tag-slate">Consumer Product</span>
-      <span class="tag tag-green">Personalization</span>
+      <span class="tag tag-green">Personalisation</span>
       <span class="tag tag-amber">Proactive UX</span>
     </div>
   </div>
@@ -311,7 +311,7 @@
     <p class="cs-section-label">The Real Gap</p>
     <h2 class="cs-section-title">The problem everyone is missing: recall, not discovery</h2>
     <p class="cs-intro">Almost every place product today solves the same problem: <em>where should I go?</em> Pick a neighbourhood, pick a vibe, and get a list of restaurants and cafés. Food apps, city guide pages, Instagram curators and now Ask Maps all compete to suggest the next new place.</p>
-    <p class="cs-intro">But I don't have a shortage of suggestions. I already have a list of places I chose myself, and I never go to them. Nobody is building for that.</p>
+    <p class="cs-intro">But I don't have a shortage of suggestions. I already have a list of places I chose myself, and I never go to them. Hardly anyone is building for that.</p>
 
     <div class="compare">
       <div class="compare-col">
@@ -359,7 +359,7 @@
           </tr>
           <tr>
             <td><strong>Ask Maps</strong></td>
-            <td>Answers complex questions conversationally, personalized by places you have searched for or saved. Can suggest stops along a route.</td>
+            <td>Answers complex questions conversationally, personalised by places you have searched for or saved. Can suggest stops along a route.</td>
             <td class="gap">Pull only. It helps when you think to ask, and most people never think to ask about their own list.</td>
           </tr>
           <tr>
@@ -476,7 +476,20 @@
         <div class="decision-row"><span class="d-label">Reason</span><span class="d-value">Whatever the user chooses, a nudge to a closed café wastes their trust. This is where Maps' knowledge of places earns its keep.</span></div>
         <div class="decision-row"><span class="d-label">Tradeoff</span><span class="d-value">Fewer nudges overall, and opening-hours data is imperfect, so a few wrong ones will still slip through.</span></div>
       </div>
+      <div class="decision-card">
+        <div class="decision-card-title">🧠 Maps learns which saves you actually care about</div>
+        <div class="decision-row"><span class="d-label">Decision</span><span class="d-value">Match each place to the moment by its category and usual visit length: a bakery fits a quick weekday detour, a bookstore waits for a free weekend. If the user keeps skipping a kind of place, it drops in priority.</span></div>
+        <div class="decision-row"><span class="d-label">Reason</span><span class="d-value">People save places for many reasons: a gift idea, a nice reel, a friend's tip. A save shows interest, not intent. Their own skips and stops show what they actually want, with no extra data needed.</span></div>
+        <div class="decision-row"><span class="d-label">Tradeoff</span><span class="d-value">New users get less tailored nudges at first, and a skipped category may be under-suggested when interest returns. The trip recap still shows every saved place passed.</span></div>
+      </div>
     </div>
+  </div>
+
+  <!-- ── Why build it ── -->
+  <div class="cs-section">
+    <p class="cs-section-label">Why Build It</p>
+    <h2 class="cs-section-title">Why it's worth building</h2>
+    <p class="cs-intro">If saves turn into visits, saving becomes worth doing, so people save more and Maps learns more about what they like. Each nudged visit is a chance for a review or photo, which keeps place data fresh. It gives people a reason to open Maps beyond directions, and it adds the proactive half that Ask Maps is missing. The cost is real: detour checks on every trip, safety review for voice prompts while driving, and the risk of annoying users, all covered under Risks below. The bet is that a small, opt-in audience proves the value before any wider rollout.</p>
   </div>
 
   <!-- ── Metrics ── -->
@@ -489,7 +502,7 @@
         <div class="metric-card-title">⭐ North Star</div>
         <p class="north-def">Saved-place visit rate: % of saved places visited within 90 days of saving</p>
         <p class="north-why">It measures the exact gap this feature closes: intent captured, intent acted on. Visits are inferred the same way Maps already infers place visits for Timeline, with the user's permission.</p>
-        <p class="north-hyp"><b>Hypothesis:</b> for opted-in users, the 90-day visit rate goes from roughly 10% to 15 to 20%.</p>
+        <p class="north-hyp"><b>Hypothesis:</b> on my own list, only about 15% of saves have turned into visits. For opted-in users, I'd expect the 90-day visit rate to reach 20 to 25%.</p>
       </div>
       <div class="metric-card">
         <div class="metric-card-title">📈 Adoption</div>
@@ -542,11 +555,11 @@
       <table class="feature-table">
         <thead><tr><th>Risk</th><th>Why it matters</th><th>Mitigation</th></tr></thead>
         <tbody>
-          <tr><td><strong>Driver distraction</strong></td><td>Any tap-to-act prompt while driving is a safety issue.</td><td>Card only on the route preview; mid-drive is voice only, at a stop or in slow traffic; launch the voice prompt only after the preview proves safe.</td></tr>
-          <tr><td><strong>Notification fatigue</strong></td><td>One annoying week and the user turns off Maps notifications entirely.</td><td>User-set weekly limit, one per trip, and skipped places stay away (see Design Decisions).</td></tr>
-          <tr><td><strong>Feels creepy</strong></td><td>"How did it know I was here?" erodes trust in location features broadly.</td><td>Opt-in per list, and every nudge says why it appeared (see Design Decisions).</td></tr>
-          <tr><td><strong>Cold start</strong></td><td>Users with few saves will rarely trigger a nudge.</td><td>Use Screenshot to save as the on-ramp, and prompt saving after Ask Maps answers.</td></tr>
-          <tr><td><strong>Looks like an ad</strong></td><td>If sponsored places ever appear here, the whole feature loses credibility.</td><td>Only places the user saved. Never paid placement in this surface.</td></tr>
+          <tr><td><strong>Driver Distraction</strong></td><td>Any tap-to-act prompt while driving is a safety issue.</td><td>Card only on the route preview; mid-drive is voice only, at a stop or in slow traffic; launch the voice prompt only after the preview proves safe.</td></tr>
+          <tr><td><strong>Notification Fatigue</strong></td><td>One annoying week and the user turns off Maps notifications entirely.</td><td>User-set weekly limit, one per trip, and skipped places stay away (see Design Decisions).</td></tr>
+          <tr><td><strong>Feels Intrusive</strong></td><td>"How did it know I was here?" erodes trust in location features broadly.</td><td>Opt-in per list, and every nudge says why it appeared (see Design Decisions).</td></tr>
+          <tr><td><strong>Cold Start</strong></td><td>Users with few saves will rarely trigger a nudge.</td><td>Use Screenshot to save as the on-ramp, and prompt saving after Ask Maps answers.</td></tr>
+          <tr><td><strong>Looks Like an Ad</strong></td><td>If sponsored places ever appear here, the whole feature loses credibility.</td><td>Only places the user saved. Never paid placement in this surface.</td></tr>
         </tbody>
       </table>
     </div>
@@ -555,7 +568,7 @@
   <!-- ── Closing ── -->
   <div class="cs-section">
     <blockquote class="pull-quote">
-      "We keep building better ways to find new places. The bigger gap is helping people go to the ones they already chose."
+      We keep building better ways to find new places. The bigger gap is helping people go to the ones they already chose.
     </blockquote>
   </div>
 
